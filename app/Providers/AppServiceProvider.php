@@ -1,0 +1,48 @@
+<?php
+
+namespace Jbb\Providers;
+
+use Illuminate\Support\ServiceProvider;
+
+use Blade;
+
+use DB;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {   
+        //дозволяє присвоїти значення змінній у шаблоні blade
+        //  @set($i,10)
+        Blade::directive('set',function($exp) {
+            
+            list($name,$val) = explode(',',$exp);
+            
+            return "<?php $name = $val ?>";
+            
+        });
+
+
+        // дозволяє бачити sql запити
+        DB::listen(function($query){
+
+            // echo '<p>'.$query->sql.'</p>';
+
+        }); 
+    }
+
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+}

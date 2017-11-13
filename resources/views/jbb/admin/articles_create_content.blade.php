@@ -1,124 +1,93 @@
+{!! Form::open(['url' => (isset($article->id)) ? route('admin.articles.update',['articles'=>$article->alias]) : route('admin.articles.store'),'method'=>'POST','enctype'=>'multipart/form-data','role'=>'form' ]) !!}
+ 	<div class="form-group">	
+		<label>
+			<span class="">Название:</span><br />
+			<span class="label">Заголовок материала</span><br />
+		</label>
 
-
-{!! Form::open(['url' => (isset($article->id)) ? route('admin.articles.update',['articles'=>$article->alias]) : route('admin.articles.store'),'class'=>'contact-form','method'=>'POST','enctype'=>'multipart/form-data']) !!}
-    
-	<ul>
-		<li class="text-field">
-			<label for="name-contact-us">
-				<span class="label">Название:</span>
-				<br />
-				<span class="sublabel">Заголовок материала</span><br />
-			</label>
-			<div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
-			{!! Form::text('title',isset($article->title) ? $article->title  : old('title'), ['placeholder'=>'Введите название страницы']) !!}
-			 </div>
-		 </li>
+		{!! Form::text('title',isset($article->title) ? $article->title  : old('title'), ['placeholder'=>'Введите название страницы','class'=>'form-control']) !!}
+	</div>
 		 
-		 <li class="text-field">
-			<label for="name-contact-us">
-				<span class="label">Ключевые слова:</span>
-				<br />
-				<span class="sublabel">Заголовок материала</span><br />
+			<label>
+				<span class="">Ключевые слова:</span><br />
+				<span class="label">Заголовок материала</span><br />
 			</label>
-			<div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
-			{!! Form::text('keywords', isset($article->keywords) ? $article->keywords  : old('keywords'), ['placeholder'=>'Введите название страницы']) !!}
-			 </div>
-		 </li>
+			
+			{!! Form::text('keywords', isset($article->keywords) ? $article->keywords  : old('keywords'), ['placeholder'=>'Введите название страницы','class'=>'form-control']) !!}	 	 
 		 
-		 <li class="text-field">
-			<label for="name-contact-us">
-				<span class="label">Мета описание:</span>
+			<label>
+				<span class="">Мета описание:</span>
 				<br />
-				<span class="sublabel">Заголовок материала</span><br />
+				<span class="label">Заголовок материала</span><br />
 			</label>
-			<div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
-			{!! Form::text('meta_desc', isset($article->meta_desc) ? $article->meta_desc  : old('meta_desc'), ['placeholder'=>'Введите название страницы']) !!}
-			 </div>
-		 </li>
+			
+			{!! Form::text('meta_desc', isset($article->meta_desc) ? $article->meta_desc  : old('meta_desc'), ['placeholder'=>'Введите название страницы','class'=>'form-control']) !!}		 	 	 
 		 
-		 <li class="text-field">
-			<label for="name-contact-us">
-				<span class="label">Псевдоним:</span>
+			<label>
+				<span class="">Псевдоним:</span>
 				<br />
-				<span class="sublabel">введите псевдоним</span><br />
+				<span class="label">введите псевдоним</span><br />
 			</label>
-			<div class="input-prepend"><span class="add-on"><i class="icon-user"></i></span>
-			{!! Form::text('alias', isset($article->alias) ? $article->alias  : old('alias'), ['placeholder'=>'Введите псевдоним страницы']) !!}
-			 </div>
-		 </li>
-		 
-		 <li class="textarea-field">
-			<label for="message-contact-us">
-				 <span class="label">Краткое описание:</span>
+			
+			{!! Form::text('alias', isset($article->alias) ? $article->alias  : old('alias'), ['placeholder'=>'Введите псевдоним страницы','class'=>'form-control']) !!}	 
+		 	 
+			<label>
+				 <span class="">Краткое описание:</span>
 			</label>
-			<div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
+			
 			{!! Form::textarea('desc', isset($article->desc) ? $article->desc  : old('desc'), ['id'=>'editor','class' => 'form-control','placeholder'=>'Введите текст страницы']) !!}
-			</div>
+			
 			<div class="msg-error"></div>
-		</li>
 		
-		<li class="textarea-field">
-			<label for="message-contact-us">
-				 <span class="label">Описание:</span>
+		
+		
+			<label>
+				 <span class="">Описание:</span>
 			</label>
-			<div class="input-prepend"><span class="add-on"><i class="icon-pencil"></i></span>
+			
 			{!! Form::textarea('text', isset($article->text) ? $article->text  : old('text'), ['id'=>'editor2','class' => 'form-control','placeholder'=>'Введите текст страницы']) !!}
-			</div>
+			
 			<div class="msg-error"></div>
-		</li>
+		
 		
 		@if(isset($article->img->path))
-			<li class="textarea-field">
+			
 				
 				<label>
-					 <span class="label">Изображения материала:</span>
+					 <span class="">Изображения материала:</span>
 				</label>
 				
 				{{ Html::image(asset(config('settings.theme')).'/images/articles/'.$article->img->path,'',['style'=>'width:400px']) }}
 				{!! Form::hidden('old_image',$article->img->path) !!}
 			
-				</li>
+				
 		@endif
 		
 		
-		<li class="text-field">
-			<label for="name-contact-us">
-				<span class="label">Изображение:</span>
-				<br />
-				<span class="sublabel">Изображение материала</span><br />
-			</label>
-			<div class="input-prepend">
-				{!! Form::file('image', ['class' => 'filestyle','data-buttonText'=>'Выберите изображение','data-buttonName'=>"btn-primary",'data-placeholder'=>"Файла нет"]) !!}
-			 </div>
-			 
-		</li>
 		
-		<li class="text-field">
-			<label for="name-contact-us">
-				<span class="label">Категория:</span>
-				<br />
-				<span class="sublabel">Категория материала</span><br />
+			<label>
+				<span class="">Изображение:</span><br />
+				<span class="label">Изображение материала</span><br />
 			</label>
-			<div class="input-prepend">
-				{!! Form::select('category_id', $categories,isset($article->category_id) ? $article->category_id  : '') !!}
-			 </div>
+				{!! Form::file('image', ['id' => 'file']) !!}
 			 
-		</li>	 
+		
+		
+		
+			<label>
+				<span class="">Категория:</span><br />
+				<span class="label">Категория материала</span><br />
+			</label>
+				{!! Form::select('category_id', $categories,isset($article->category_id) ? $article->category_id  : '',['class'=>'form-control']) !!}
+			 
+			 
 		
 		@if(isset($article->id))
 			<input type="hidden" name="_method" value="PUT">		
 		
 		@endif
+		</br>
+			{!! Form::button('Сохранить', ['class' => 'btn btn-success','type'=>'submit']) !!}			
+		
 
-		<li class="submit-button"> 
-			{!! Form::button('Сохранить', ['class' => 'btn btn-the-salmon-dance-3','type'=>'submit']) !!}			
-		</li>
-		 
-	</ul>
-	
-    
-    
-    
-    
 {!! Form::close() !!}
-

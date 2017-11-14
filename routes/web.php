@@ -78,6 +78,20 @@ Route::group(['prefix'=>'admin','middleware' => 'auth', 'as' => 'admin.'],functi
 	Route::get('/',['uses'=>'Admin\IndexController@index','as'=>'adminIndex']);
 	
 	Route::resource('articles','Admin\ArticlesController');
+
+    Route::get('portfolio', function () {
+    return 'portfolio';
+    })->name('portfolio.index');
+    Route::get('menu', function () {
+    return 'menu';
+    })->name('menu.index');
+    Route::get('users', function () {
+    return 'users';
+    })->name('users.index');
+    Route::get('permissions', function () {
+    return 'permissions';
+    })->name('permissions.index');
+
 });
 
 Route::get('/clear-cache', function() {

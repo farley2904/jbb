@@ -18,6 +18,11 @@
         <div class="page">
             
             <header class="page-header">
+                @if (!Auth::guest())
+
+                 <a href="{{ url('admin') }}">В админку --></a>
+
+                @endif
 
                 @yield('navigation')
                 

@@ -12,14 +12,30 @@
 
 
     <link rel="icon" href="{{ asset(env('THEME')) }}/images/favicon.ico" type="image/x-icon">
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <!-- Scripts -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/app.js') }}"></script>
+
+    <link href="{{ asset('css/fileinput.min.css') }}" rel="stylesheet" />
+    <script src="{{ asset('js/fileinput.min.js') }}"></script>
+
+
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
+
+
+        $(document).ready(function(){
+            $("#file").fileinput({
+                showCaption: false,
+                showRemove: false,
+                showUpload: false,
+                showCancel: false,
+                browseLabel: 'Выберите файл...',
+                browseClass: 'btn btn-default'
+            });
+        });
     </script>
 </head>
 <body>
@@ -79,13 +95,12 @@
                 </div>
             </div>
         </nav>
-
+        <div class="container">
         @yield('content')
-        
+        </div>
         @yield('footer')
     </div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    
 </body>
 </html>

@@ -188,6 +188,8 @@ return [
 
         Arrilot\Widgets\ServiceProvider::class,
 
+        Collective\Html\HtmlServiceProvider::class,
+
     ),
 
     /*
@@ -244,6 +246,10 @@ return [
 
         'Widget'       => Arrilot\Widgets\Facade::class,
         'AsyncWidget'  => Arrilot\Widgets\AsyncFacade::class,
+
+         
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

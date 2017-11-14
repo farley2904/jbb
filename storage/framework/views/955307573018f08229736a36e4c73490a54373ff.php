@@ -12,14 +12,30 @@
 
 
     <link rel="icon" href="<?php echo e(asset(env('THEME'))); ?>/images/favicon.ico" type="image/x-icon">
-    <!-- Styles -->
-    <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
 
-    <!-- Scripts -->
+    <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
+    <script src="<?php echo e(asset('js/app.js')); ?>"></script>
+
+    <link href="<?php echo e(asset('css/fileinput.min.css')); ?>" rel="stylesheet" />
+    <script src="<?php echo e(asset('js/fileinput.min.js')); ?>"></script>
+
+
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>;
+
+
+        $(document).ready(function(){
+            $("#file").fileinput({
+                showCaption: false,
+                showRemove: false,
+                showUpload: false,
+                showCancel: false,
+                browseLabel: 'Выберите файл...',
+                browseClass: 'btn btn-default'
+            });
+        });
     </script>
 </head>
 <body>
@@ -81,13 +97,12 @@
                 </div>
             </div>
         </nav>
-
+        <div class="container">
         <?php echo $__env->yieldContent('content'); ?>
-        
+        </div>
         <?php echo $__env->yieldContent('footer'); ?>
     </div>
 
-    <!-- Scripts -->
-    <script src="<?php echo e(asset('js/app.js')); ?>"></script>
+    
 </body>
 </html>

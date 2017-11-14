@@ -18,6 +18,11 @@
         <div class="page">
             
             <header class="page-header">
+                <?php if(!Auth::guest()): ?>
+
+                 <a href="<?php echo e(url('admin')); ?>">В админку --></a>
+
+                <?php endif; ?>
 
                 <?php echo $__env->yieldContent('navigation'); ?>
                 

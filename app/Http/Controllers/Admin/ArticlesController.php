@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Jbb\Http\Controllers\Controller;
 use Jbb\Repositories\ArticlesRepository;
 use Gate;
+use Jbb\Category;
 
 class ArticlesController extends AdminController
 {
@@ -19,11 +20,17 @@ class ArticlesController extends AdminController
     {
         parent::__construct();
 
-        if(Gate::denies('VIEW_ADMIN_ARTICLES')){
-             // abort(403);
+        $this->middleware(function ($request, $next) {
+
+            if(Gate::denies('VIEW_ADMIN_ARTICLES')) {
+                abort(403);
+            }
             
-        }
+            return $next($request);  
+        });
+
         $this->a_rep = $a_rep;
+
         $this->template = env('THEME').'.admin.articles';
     }
 
@@ -33,11 +40,7 @@ class ArticlesController extends AdminController
 
         $articles = $this->getArticles();
 
-        dump($articles);
-
-        $content = view(env('THEME').'.admin.articles_content')->with('articles',$articles)->render();
-
-        $this->vars = array_add($this->vars,'content',$content); 
+        $this->content = view(env('THEME').'.admin.articles_content')->with('articles',$articles)->render(); 
 
         return $this->renderOutput();
 
@@ -60,7 +63,30 @@ class ArticlesController extends AdminController
      */
     public function create()
     {
-        //
+        if(Gate::denies('save', new \Jbb\Article)) {
+        	abort(403);
+        }
+
+        $this->title = 'Добавить новый материал';
+
+        				//в майбутньому створити репозиторій
+        $categories = Category::select(['title','alias','parent_id','id'])->get();
+
+        $lists = array();
+
+        foreach ($categories as $category) {
+        	if($category->parent_id == 0) {
+        		$lists[$category->title] = array();
+        	} else {
+        		$lists[$categories->where('id',$category->parent_id)->first()->title][$category->id] = $category->title;
+        	}
+        }
+
+        // dump($lists);
+
+        $this->content = view(env('THEME').'.admin.articles_create_content')->with('categories', $lists)->render();
+
+        return $this->renderOutput();
     }
 
     /**

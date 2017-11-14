@@ -28,7 +28,7 @@ class AdminController extends \Jbb\Http\Controllers\Controller
     	$navigation = view(env('THEME').'.admin.navigation')->with('menu',$menu)->render();
     	$this->vars = array_add($this->vars,'navigation',$navigation);
     	if($this->content){
-    		$this->vars = array_add($this->vars,'content',$content);
+    		$this->vars = array_add($this->vars,'content',$this->content);
     	}
     	$footer = view(env('THEME').'.admin.footer')->render();
     	$this->vars = array_add($this->vars,'footer',$footer);
@@ -38,12 +38,13 @@ class AdminController extends \Jbb\Http\Controllers\Controller
     public function getMenu()
     {
     	return Menu::make('adminMenu',function($menu){
-
+            $menu->add('На сайт',array('route' => 'home'));//на главную
+            
     		$menu->add('Статьи',array('route' => 'admin.articles.index'));
-			$menu->add('Портфолио',  array('route'  => 'admin.articles.index'));
-			$menu->add('Меню',  array('route'  => 'admin.articles.index'));
-			$menu->add('Пользователи',  array('route'  => 'admin.articles.index'));
-			$menu->add('Привилегии',  array('route'  => 'admin.articles.index'));
+			$menu->add('Портфолио',  array('route'  => 'admin.portfolio.index'));
+			$menu->add('Меню',  array('route'  => 'admin.menu.index'));
+			$menu->add('Пользователи',  array('route'  => 'admin.users.index'));
+			$menu->add('Привилегии',  array('route'  => 'admin.permissions.index'));
 
     	});
     }

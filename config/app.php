@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Jbb',
+    'name' => env('APP_NAME', 'JBB'),
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +78,6 @@ return [
     */
 
     'locale' => 'ru',
-    'locales' => ['ru', 'ua'],
 
     /*
     |--------------------------------------------------------------------------
@@ -186,8 +185,6 @@ return [
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
-        Arrilot\Widgets\ServiceProvider::class,
-
         Collective\Html\HtmlServiceProvider::class,
 
     ),
@@ -242,11 +239,6 @@ return [
         'Menu'       => 'Lavary\Menu\Facade',
 
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-
-
-        'Widget'       => Arrilot\Widgets\Facade::class,
-        'AsyncWidget'  => Arrilot\Widgets\AsyncFacade::class,
-
          
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,

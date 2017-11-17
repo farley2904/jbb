@@ -18,6 +18,7 @@
         <div class="page">
             
             <header class="page-header">
+
                 @if (!Auth::guest())
 
                  <a href="{{ url('admin') }}">В админку --></a>
@@ -26,12 +27,6 @@
 
                 @yield('navigation')
                 
-                <!-- @widget('Languages') -->
-
-                 
-
-
- 
                 <div class="container">
                 @yield('slider')
 

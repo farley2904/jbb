@@ -57,16 +57,6 @@ Route::get('testimonials', function()
 // Auth::routes();
 
 
-Route::get('lang/{locale}', function ($locale) {
-    
-    if (in_array($locale, Config::get('app.locales'))) {
-    	Cookie::queue(Cookie::forever('lang', $locale));
-    }
-
-    return redirect()->back();
-
-});
-
 Route::get('login','Auth\LoginController@showLoginForm');
 Route::post('login',['uses'=>'Auth\LoginController@login','as' => 'login']);
 // Route::get('logout',['uses'=>'Auth\LoginController@logout');
@@ -80,7 +70,7 @@ Route::group(['prefix'=>'admin','middleware' => 'auth', 'as' => 'admin.'],functi
 	Route::resource('articles','Admin\ArticlesController');
 
     Route::get('portfolio', function () {
-    return 'portfolio';
+    return phpinfo();
     })->name('portfolio.index');
     Route::get('menu', function () {
     return 'menu';

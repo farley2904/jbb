@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title or config('app.name', 'Jbb') }}</title>
+    <title>{{ $title or config('app.name', 'JBB') }}</title>
 
 
     <link rel="icon" href="{{ asset(env('THEME')) }}/images/favicon.ico" type="image/x-icon">

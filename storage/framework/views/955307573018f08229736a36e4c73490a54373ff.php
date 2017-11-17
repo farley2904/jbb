@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title><?php echo e(isset($title) ? $title : config('app.name', 'Jbb')); ?></title>
+    <title><?php echo e(isset($title) ? $title : config('app.name', 'JBB')); ?></title>
 
 
     <link rel="icon" href="<?php echo e(asset(env('THEME'))); ?>/images/favicon.ico" type="image/x-icon">

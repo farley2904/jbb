@@ -19,6 +19,8 @@
     <link href="{{ asset('css/fileinput.min.css') }}" rel="stylesheet" />
     <script src="{{ asset('js/fileinput.min.js') }}"></script>
 
+    <script type="text/javascript" src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
+
 
     <script>
         window.Laravel = {!! json_encode([

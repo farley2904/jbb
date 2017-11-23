@@ -91,3 +91,8 @@
 		
 
 {!! Form::close() !!}
+
+ <script>
+	CKEDITOR.replace( 'editor' );
+	CKEDITOR.replace( 'editor2' );
+</script>

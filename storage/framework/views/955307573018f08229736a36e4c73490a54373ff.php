@@ -19,6 +19,8 @@
     <link href="<?php echo e(asset('css/fileinput.min.css')); ?>" rel="stylesheet" />
     <script src="<?php echo e(asset('js/fileinput.min.js')); ?>"></script>
 
+    <script type="text/javascript" src="<?php echo e(asset('js/ckeditor/ckeditor.js')); ?>"></script>
+
 
     <script>
         window.Laravel = <?php echo json_encode([

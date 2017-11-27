@@ -7,6 +7,7 @@ use Jbb\Http\Controllers\Controller;
 use Jbb\Repositories\ArticlesRepository;
 use Gate;
 use Jbb\Category;
+use Jbb\Http\Requests\ArticleRequest;
 
 class ArticlesController extends AdminController
 {
@@ -95,9 +96,18 @@ class ArticlesController extends AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
-        //
+        //dump($request);
+
+        $result = $this->a_rep->AddArticle($request);
+
+        if (is_array($result) && !empty($result['error'])) {
+        	return back()->with($result);
+        }
+
+        return redirect('admin')->with($result);
+
     }
 
     /**

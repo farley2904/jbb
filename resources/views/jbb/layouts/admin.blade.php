@@ -98,6 +98,27 @@
             </div>
         </nav>
         <div class="container">
+
+        @if (count($errors) > 0)
+            <div class="box error-box">
+                @foreach ($errors->all() as $error)
+                    <p style="color:red" >{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
+
+        @if (session('status'))
+            <div class="box success-box">
+                <p style="color:green" >{{ session('status') }}</p>
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="box error-box">
+                {{ session('error') }}
+            </div>
+        @endif
+
         @yield('content')
         </div>
         @yield('footer')

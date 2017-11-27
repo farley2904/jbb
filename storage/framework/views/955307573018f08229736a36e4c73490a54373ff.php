@@ -100,6 +100,28 @@
             </div>
         </nav>
         <div class="container">
+
+        <?php if(count($errors) > 0): ?>
+            <div class="box error-box">
+                <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <p style="color:red" ><?php echo e($error); ?></p>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if(session('status')): ?>
+            <div class="box success-box">
+                <p style="color:green" ><?php echo e(session('status')); ?></p>
+            </div>
+        <?php endif; ?>
+
+        <?php if(session('error')): ?>
+            <div class="box error-box">
+                <?php echo e(session('error')); ?>
+
+            </div>
+        <?php endif; ?>
+
         <?php echo $__env->yieldContent('content'); ?>
         </div>
         <?php echo $__env->yieldContent('footer'); ?>

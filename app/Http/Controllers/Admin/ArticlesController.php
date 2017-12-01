@@ -8,6 +8,7 @@ use Jbb\Repositories\ArticlesRepository;
 use Gate;
 use Jbb\Category;
 use Jbb\Http\Requests\ArticleRequest;
+use Jbb\Article;
 
 class ArticlesController extends AdminController
 {
@@ -100,7 +101,7 @@ class ArticlesController extends AdminController
     {
         //dump($request);
 
-        $result = $this->a_rep->AddArticle($request);
+        $result = $this->a_rep->addArticle($request);
 
         if (is_array($result) && !empty($result['error'])) {
         	return back()->with($result);
@@ -127,9 +128,31 @@ class ArticlesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Article $article) 
     {
-        //
+        //$article = Article::where('alias',$alias);
+
+        if (Gate::denies('edit', new Article)) {
+            abort(403);
+        }
+
+        $categories = Category::select(['title','alias','parent_id','id'])->get();
+
+        $lists = array();
+
+        foreach ($categories as $category) {
+            if($category->parent_id == 0) {
+                $lists[$category->title] = array();
+            } else {
+                $lists[$categories->where('id',$category->parent_id)->first()->title][$category->id] = $category->title;
+            }
+        }
+        // dd($article->img);
+        $this->title = 'Редактирование материала -'.$article->title;
+
+        $this->content = view(env('THEME').'.admin.articles_create_content')->with(['categories' => $lists, 'article' => $article])->render();
+
+        return $this->renderOutput();
     }
 
     /**
@@ -139,9 +162,16 @@ class ArticlesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ArticleRequest $request, Article $article)
     {
-        //
+		$result = $this->a_rep->updateArticle($request, $article);
+
+        if (is_array($result) && !empty($result['error'])) {
+        	return back()->with($result);
+        }
+
+        return redirect('admin')->with($result);
+
     }
 
     /**
@@ -150,8 +180,14 @@ class ArticlesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Article $article)
     {
-        //
+        $result = $this->a_rep->deleteArticle($article);
+
+        if (is_array($result) && !empty($result['error'])) {
+        	return back()->with($result);
+        }
+
+        return redirect('admin')->with($result);
     }
 }

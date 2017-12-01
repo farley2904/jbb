@@ -72,15 +72,16 @@ Route::group(['prefix'=>'admin','middleware' => 'auth', 'as' => 'admin.'],functi
     Route::get('portfolio', function () {
     return phpinfo();
     })->name('portfolio.index');
+
     Route::get('menu', function () {
     return 'menu';
     })->name('menu.index');
+
     Route::get('users', function () {
     return 'users';
     })->name('users.index');
-    Route::get('permissions', function () {
-    return 'permissions';
-    })->name('permissions.index');
+
+    Route::resource('permissions','Admin\PermissionsController');
 
 });
 

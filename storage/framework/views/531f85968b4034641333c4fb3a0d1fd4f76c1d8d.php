@@ -58,16 +58,16 @@
 		</div>
 	</div>		
 		
-	<?php if(isset($article->img->path)): ?>
+	<?php if(isset($article->img)): ?>
 		<div class="row">		
 			<div class="form-group col-md-6">			
 				<label>
 					 <span class="">Изображения материала:</span>
 				</label>
 				
-				<?php echo e(Html::image(asset(config('settings.theme')).'/images/articles/'.$article->img->path,'',['style'=>'width:400px'])); ?>
+				<?php echo e(Html::image(asset(env('THEME')).'/images/articles/'.$article->img,'',['style'=>'width:400px'])); ?>
 
-				<?php echo Form::hidden('old_image',$article->img->path); ?>
+				<?php echo Form::hidden('old_image',$article->img); ?>
 
 			</div>		
 		</div>			

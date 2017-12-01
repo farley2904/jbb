@@ -53,15 +53,15 @@
 		</div>
 	</div>		
 		
-	@if(isset($article->img->path))
+	@if(isset($article->img))
 		<div class="row">		
 			<div class="form-group col-md-6">			
 				<label>
 					 <span class="">Изображения материала:</span>
 				</label>
 				
-				{{ Html::image(asset(config('settings.theme')).'/images/articles/'.$article->img->path,'',['style'=>'width:400px']) }}
-				{!! Form::hidden('old_image',$article->img->path) !!}
+				{{ Html::image(asset(env('THEME')).'/images/articles/'.$article->img,'',['style'=>'width:400px']) }}
+				{!! Form::hidden('old_image',$article->img) !!}
 			</div>		
 		</div>			
 	@endif

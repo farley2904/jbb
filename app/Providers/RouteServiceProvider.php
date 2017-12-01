@@ -29,6 +29,10 @@ class RouteServiceProvider extends ServiceProvider
         // $router->patterns(['id'=>'[0-9]+', 'cat'=>'[A-Za-z]+']);//условия для вызова роутов
 
         parent::boot();
+
+        Route::bind('article', function ($value) {
+            return \Jbb\Article::where('alias', $value)->first();
+        });
     }
 
     /**

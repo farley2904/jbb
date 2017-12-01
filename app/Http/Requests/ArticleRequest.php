@@ -23,6 +23,15 @@ class ArticleRequest extends FormRequest
         
         //проверка валидации поля alias при условии если ф-ция вернет true
         $validator->sometimes('alias','unique:articles|max:255',function($input){
+
+            //получаем доступ к текущему маршруту и проверяем есть ли параметр article //.. в старом варианте articles
+            if($this->route()->hasParameter('article')) {            
+                //получаем значение параметра articles
+                $model = $this->route()->parameter('article');
+
+                return ($model->alias !== $input->alias)  && !empty($input->alias);
+            }
+
             return !empty($input->alias);
         });
 

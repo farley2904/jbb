@@ -187,6 +187,9 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
 
+        //image.intervention.com
+        Intervention\Image\ImageServiceProvider::class,
+
     ),
 
     /*
@@ -242,6 +245,8 @@ return [
          
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        //image.intervention.com
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

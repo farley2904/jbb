@@ -23,6 +23,10 @@ class ArticlesController extends SiteController
 
     	$articles = $this->getArticles();
 
+        // foreach ($articles as $article) {
+        //     $article->category->title;             
+        // }
+
     	$content = view(env('THEME').'.articles_content')->with('articles',$articles)->render();
 
         $this->vars = array_add($this->vars,'content',$content); 
@@ -36,7 +40,7 @@ class ArticlesController extends SiteController
     	$articles = $this->a_rep->get('*',TRUE);
 
     	if($articles) {
-    		$articles->load('user','category','comments');//связаные модели
+    		$articles->load('category');//связаные модели $articles->load('user','category','comments');
     	}
 
     	return $articles;

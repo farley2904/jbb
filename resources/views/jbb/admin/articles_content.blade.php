@@ -14,9 +14,9 @@
 		@if($articles)
 		@foreach($articles as $k=>$article)
 		<tr >
-			<td>{{ $article->id }}</td>
+			<td>{{ $k+1 }}</td>
 			<td>{{ $article->title }}</td>
-			<td>{{ $article->desc }}</td>
+			<td>{!! $article->desc !!}</td>
 			<td>
 					<!-- <img src="{{ asset(env('THEME')) }}/images/articles/{{ $article->img }}" alt="" width="100" height="100"> -->
 					{!! Html::image(asset(env('THEME')).'/images/articles/'.$article->img,'alt',['width'=>'100','height'=>'100']) !!}

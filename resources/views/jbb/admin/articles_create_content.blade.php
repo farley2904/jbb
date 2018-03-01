@@ -72,7 +72,7 @@
 				<span class="">Изображение:</span><br />
 				<span class="label">Изображение материала</span><br />
 			</label>
-				{!! Form::file('image', ['id' => 'file']) !!}
+				{!! Form::file('image', ['class' => 'filestyle']) !!}
 		</div>		 		
 		<div class="form-group col-md-6">	
 			<label>
@@ -95,5 +95,10 @@
  <script>
 	CKEDITOR.replace( 'editor' );
 	CKEDITOR.replace( 'editor2' );
+
+    $(document).ready(function(){
+        $(":file").filestyle();
+    });
+
 </script>
 

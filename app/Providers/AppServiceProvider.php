@@ -28,10 +28,12 @@ class AppServiceProvider extends ServiceProvider
         });
 
 
-        // дозволяє бачити sql запити
+        // дозволяє бачити(слухати) sql запити
         DB::listen(function($query){
 
-            // echo '<p>'.$query->sql.'</p>';
+            //echo '<p style="color:green">'.$query->sql.' - time: '.$query->time.'</p>';
+
+           // dump($query->bindings);
 
         }); 
     }

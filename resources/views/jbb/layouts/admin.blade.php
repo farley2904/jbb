@@ -16,8 +16,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="{{ asset('js/app.js') }}"></script>
 
-    <link href="{{ asset('css/fileinput.min.css') }}" rel="stylesheet" />
-    <script src="{{ asset('js/fileinput.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-filestyle.min.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
 
@@ -26,18 +25,6 @@
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
-
-
-        $(document).ready(function(){
-            $("#file").fileinput({
-                showCaption: false,
-                showRemove: false,
-                showUpload: false,
-                showCancel: false,
-                browseLabel: 'Выберите файл...',
-                browseClass: 'btn btn-default'
-            });
-        });
     </script>
 </head>
 <body>
@@ -55,7 +42,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('admin') }}">
+                    <a class="navbar-brand" href="{{ route('home') }}">
                         {{ config('app.name', 'Jbb') }}
                     </a>
                 </div>

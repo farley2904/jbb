@@ -29,7 +29,9 @@
 								<td><?php echo e($val->name); ?></td>
 									<?php $__currentLoopData = $roles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $role): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 										<td>
-											
+											<?php if($role->hasPermission($val->name)): ?>
+											:)
+											<?php endif; ?>
 										</td>
 									<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 							</tr>

@@ -28,7 +28,9 @@
 								<td>{{ $val->name }}</td>
 									@foreach($roles as $role)
 										<td>
-											
+											@if($role->hasPermission($val->name))
+											:)
+											@endif
 										</td>
 									@endforeach
 							</tr>

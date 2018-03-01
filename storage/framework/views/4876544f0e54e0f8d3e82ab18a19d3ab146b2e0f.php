@@ -21,7 +21,7 @@
 
                 <?php if(!Auth::guest()): ?>
 
-                 <a href="<?php echo e(url('admin')); ?>">В админку --></a>
+                 <a href="<?php echo e(route('admin.')); ?>">В админку --> </a>
 
                 <?php endif; ?>
 

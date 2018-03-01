@@ -16,8 +16,7 @@
     <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
     <script src="<?php echo e(asset('js/app.js')); ?>"></script>
 
-    <link href="<?php echo e(asset('css/fileinput.min.css')); ?>" rel="stylesheet" />
-    <script src="<?php echo e(asset('js/fileinput.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('js/bootstrap-filestyle.min.js')); ?>"></script>
 
     <script type="text/javascript" src="<?php echo e(asset('js/ckeditor/ckeditor.js')); ?>"></script>
 
@@ -26,18 +25,6 @@
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>;
-
-
-        $(document).ready(function(){
-            $("#file").fileinput({
-                showCaption: false,
-                showRemove: false,
-                showUpload: false,
-                showCancel: false,
-                browseLabel: 'Выберите файл...',
-                browseClass: 'btn btn-default'
-            });
-        });
     </script>
 </head>
 <body>
@@ -55,7 +42,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="<?php echo e(url('admin')); ?>">
+                    <a class="navbar-brand" href="<?php echo e(route('home')); ?>">
                         <?php echo e(config('app.name', 'Jbb')); ?>
 
                     </a>

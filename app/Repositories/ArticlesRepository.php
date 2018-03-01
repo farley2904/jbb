@@ -53,8 +53,12 @@ class ArticlesRepository extends Repository {
 			return ['error' => 'Данный псевдоним уже используется'];
 		}
 
+			// dd($request);
+
 		if ($request->hasFile('image')) {
+			
 			$image = $request->file('image');
+
 			if ($image->isValid()) {
 				$str = str_random(8);
 				$obj = new \stdClass; //создаем пустой обьект
@@ -74,6 +78,7 @@ class ArticlesRepository extends Repository {
 			}
 		}
 	}
+
 
 	public function updateArticle($request, $article){
 		//проверка прав на сохранение

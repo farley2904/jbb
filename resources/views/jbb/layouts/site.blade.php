@@ -21,7 +21,7 @@
 
                 @if (!Auth::guest())
 
-                 <a href="{{ url('admin') }}">В админку --></a>
+                 <a href="{{ route('admin.') }}">В админку --> </a>
 
                 @endif
 

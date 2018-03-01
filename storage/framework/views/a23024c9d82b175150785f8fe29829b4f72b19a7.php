@@ -14,9 +14,9 @@
 		<?php if($articles): ?>
 		<?php $__currentLoopData = $articles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $k=>$article): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 		<tr >
-			<td><?php echo e($article->id); ?></td>
+			<td><?php echo e($k+1); ?></td>
 			<td><?php echo e($article->title); ?></td>
-			<td><?php echo e($article->desc); ?></td>
+			<td><?php echo $article->desc; ?></td>
 			<td>
 					<!-- <img src="<?php echo e(asset(env('THEME'))); ?>/images/articles/<?php echo e($article->img); ?>" alt="" width="100" height="100"> -->
 					<?php echo Html::image(asset(env('THEME')).'/images/articles/'.$article->img,'alt',['width'=>'100','height'=>'100']); ?>

@@ -71,7 +71,7 @@ class SiteController extends Controller
     	return view($this->template)->with($this->vars);
     }
 
-    protected function getMenu(){
+    public function getMenu(){
 
         $menu = $this->m_rep->get();
 
@@ -95,7 +95,7 @@ class SiteController extends Controller
 
     }
 
-    protected function getSlider() {
+    public function getSlider() {
 
         $slider = $this->s_rep->get(['img']);
 

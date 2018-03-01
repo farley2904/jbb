@@ -16,7 +16,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'Jbb\Model' => 'Jbb\Policies\ModelPolicy',
-        Article::class => ArticlePolicy::class
+        Article::class => ArticlePolicy::class //политика безопастности для модели Article
     ];
 
     /**
@@ -30,12 +30,18 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('VIEW_ADMIN', function ($user) {
             return $user->canDo('VIEW_ADMIN', FALSE);// canDo возврвщает истину если у пользоветеля есть соответствующее право
-        });
+        });//true/false - все правила либо одно из заданых правил 
         Gate::define('VIEW_ADMIN_ARTICLES', function ($user) {
             return $user->canDo('VIEW_ADMIN_ARTICLES', FALSE);
         });
         Gate::define('EDIT_USERS', function ($user) {
             return $user->canDo('EDIT_USERS', FALSE);
+        });
+        Gate::define('VIEW_ADMIN_MENU', function ($user) {
+            return $user->canDo('VIEW_ADMIN_MENU', FALSE);
+        });
+         Gate::define('VIEW_ADMIN_SERVICES', function ($user) {
+            return $user->canDo('VIEW_ADMIN_SERVICES', FALSE);
         });
     }
 }

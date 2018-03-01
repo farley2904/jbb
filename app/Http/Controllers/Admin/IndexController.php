@@ -16,8 +16,6 @@ class IndexController extends AdminController
 
             if(Gate::denies('VIEW_ADMIN')) {
                 abort(403);
-            }else{
-                dump('yes');
             }
 
             return $next($request);  
@@ -27,7 +25,8 @@ class IndexController extends AdminController
     }
     public function index()
     {   
-    	$this->title = 'Панель Администратора';
-    	return $this->renderOutput();
+    	// $this->title = 'Панель Администратора';
+    	// return $this->renderOutput();
+        return redirect()->route('admin.articles.index');
     }
 }

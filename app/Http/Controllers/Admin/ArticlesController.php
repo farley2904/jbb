@@ -40,7 +40,7 @@ class ArticlesController extends AdminController
     {
         $this->title = 'Менеджер статтей';
 
-        $articles = $this->getArticles();
+        $articles = $this->getArticles()->sortByDesc('id');
 
         $this->content = view(env('THEME').'.admin.articles_content')->with('articles',$articles)->render(); 
 
@@ -52,7 +52,7 @@ class ArticlesController extends AdminController
         $articles = $this->a_rep->get('*',TRUE);
 
         if($articles) {
-            $articles->load('user','category','comments');//связаные модели
+            $articles->load('category');//связаные модели
         }
 
         return $articles;
@@ -65,13 +65,13 @@ class ArticlesController extends AdminController
      */
     public function create()
     {
-        if(Gate::denies('save', new \Jbb\Article)) {
+        if(Gate::denies('save', new Article)) {
         	abort(403);
         }
 
         $this->title = 'Добавить новый материал';
 
-        				//в майбутньому створити репозиторій
+        //в майбутньому створити репозиторій
         $categories = Category::select(['title','alias','parent_id','id'])->get();
 
         $lists = array();
@@ -107,7 +107,7 @@ class ArticlesController extends AdminController
         	return back()->with($result);
         }
 
-        return redirect('admin')->with($result);
+        return redirect('admin/articles')->with($result);
 
     }
 
@@ -170,7 +170,7 @@ class ArticlesController extends AdminController
         	return back()->with($result);
         }
 
-        return redirect('admin')->with($result);
+        return redirect('admin/articles')->with($result);
 
     }
 
@@ -188,6 +188,6 @@ class ArticlesController extends AdminController
         	return back()->with($result);
         }
 
-        return redirect('admin')->with($result);
+        return redirect('admin/articles')->with($result);
     }
 }

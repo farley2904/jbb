@@ -3,6 +3,11 @@
 
 <?php $__env->stopSection(); ?>
 
+<?php $__env->startSection('content'); ?>
+	<?php echo $content; ?>
+
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('footer'); ?>
 	<?php echo $footer; ?>
 

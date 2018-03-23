@@ -18,7 +18,7 @@ Route::match(['get', 'post'], 'about_us', ['uses' => 'AboutusController@index'])
 
 // Route::resource('portfolio', 'PortfolioController', ['parametres' => ['portfolios' => 'alias']]);
 
-Route::get('portfolio/{filter_alias?}', ['uses' => 'PortfolioController@index', 'as' => 'portfoliosFilter']);
+Route::get('portfolio/{filter_alias?}', ['uses' => 'PortfolioController@index', 'as' => 'portfoliosFilter'])->where('filter_alias', '[a-z_]+');
 
 
 
@@ -55,6 +55,13 @@ Route::get('testimonials', function()
 // Route::resource('about_us', 'AboutusController',['only' => ['index']]);
 
 // Auth::routes();
+Route::get('user/{name?}', function ($name = null) {
+  return $name;
+});
+
+// Route::get('user/{name?}', function ($name = 'John') {
+//   return $name;
+// });
 
 
 Route::get('login','Auth\LoginController@showLoginForm');
@@ -63,12 +70,15 @@ Route::post('login',['uses'=>'Auth\LoginController@login','as' => 'login']);
 Route::match(['get', 'post'],'logout',['uses'=>'Auth\LoginController@logout','as'=>'logout']);
 
 
+
+
 //admin
 Route::group(['prefix'=>'admin','middleware' => 'auth','as'=>'admin.'],function(){
 
 	Route::get('/',['uses'=>'Admin\IndexController@index','as'=>'']);
 	
     Route::resource('articles','Admin\ArticlesController');
+
 	Route::resource('services','Admin\ServicesController');
 
     Route::get('portfolio', function () {
@@ -86,6 +96,6 @@ Route::group(['prefix'=>'admin','middleware' => 'auth','as'=>'admin.'],function(
 });
 
 Route::get('/clear-cache', function() {
-    $exitCode = Artisan::call('cache:clear');
+    Artisan::call('cache:clear');
     return redirect()->back();
 });

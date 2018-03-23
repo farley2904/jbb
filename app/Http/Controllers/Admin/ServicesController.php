@@ -41,7 +41,7 @@ class ServicesController extends AdminController
 
         foreach ($categories as $category) {
         	if($category->parent_id == 2) {        	
-        	   echo $category->title .'- <a href = "https://jbb.com.ua/admin/services/'.$category->alias.'">+</a></br>';  
+        	   $lists[] = $category->title .'- <a href = "https://jbb.com.ua/admin/services/'.$category->alias.'">+</a></br>';  
             }
 
             // if($category->articles->isNotEmpty()){  
@@ -52,9 +52,11 @@ class ServicesController extends AdminController
     
         }
 
+        // \Debugbar::info($categories);
+
         //dump($lists);
 
-        $this->content = view(env('THEME').'.admin.articles_create_content')->with('categories', $lists)->render();
+        $this->content = view(env('THEME').'.admin.services_content')->with('categories', $lists)->render();
     	return $this->renderOutput();
 
     }

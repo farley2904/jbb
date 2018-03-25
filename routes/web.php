@@ -14,6 +14,7 @@ Route::resource('/', 'IndexController', ['only' => 'index', 'names' => ['index' 
 
 
 Route::match(['get', 'post'], 'about_us', ['uses' => 'AboutusController@index']);
+Route::match(['get', 'post'], 'services', ['uses' => 'ServicesController@index']);
 
 
 // Route::resource('portfolio', 'PortfolioController', ['parametres' => ['portfolios' => 'alias']]);

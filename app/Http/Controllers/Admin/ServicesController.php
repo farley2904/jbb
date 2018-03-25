@@ -31,8 +31,7 @@ class ServicesController extends AdminController
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {	
-    	//$categories = Category::select(['title','alias','parent_id','id'])->get();
+    {
     	
         $this->title = 'Услуги и цены';
                 $categories = Category::select(['title','alias','parent_id','id'])->get();
@@ -90,7 +89,7 @@ class ServicesController extends AdminController
      */
     public function show($id)
     {
-        //
+        echo $id;
     }
 
     /**

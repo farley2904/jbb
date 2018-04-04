@@ -40,7 +40,7 @@ class ArticlesController extends AdminController
     {
         $this->title = 'Менеджер статтей';
 
-        $articles = $this->getArticles()->sortByDesc('id');
+        $articles = $this->getArticles();
 
         $this->content = view(env('THEME').'.admin.articles_content')->with('articles',$articles)->render(); 
 
@@ -49,7 +49,7 @@ class ArticlesController extends AdminController
     }
 
     public function getArticles($alias = FALSE){
-        $articles = $this->a_rep->get('*',TRUE);
+        $articles = $this->a_rep->get(['id','title','desc','alias','img','category_id'],TRUE);
 
         if($articles) {
             $articles->load('category');//связаные модели
@@ -66,7 +66,7 @@ class ArticlesController extends AdminController
     public function create()
     {
         if(Gate::denies('save', new Article)) {
-        	abort(403);
+            abort(403);
         }
 
         $this->title = 'Добавить новый материал';
@@ -77,11 +77,11 @@ class ArticlesController extends AdminController
         $lists = array();
 
         foreach ($categories as $category) {
-        	if($category->parent_id == 0) {
-        		$lists[$category->title] = array();
-        	} else {
-        		$lists[$categories->where('id',$category->parent_id)->first()->title][$category->id] = $category->title;
-        	}
+            if($category->parent_id == 0) {
+                $lists[$category->title] = array();
+            } else {
+                $lists[$categories->where('id',$category->parent_id)->first()->title][$category->id] = $category->title;
+            }
         }
 
         // dump($lists);
@@ -104,7 +104,7 @@ class ArticlesController extends AdminController
         $result = $this->a_rep->addArticle($request);
 
         if (is_array($result) && !empty($result['error'])) {
-        	return back()->with($result);
+            return back()->with($result);
         }
 
         return redirect('admin/articles')->with($result);
@@ -164,10 +164,10 @@ class ArticlesController extends AdminController
      */
     public function update(ArticleRequest $request, Article $article)
     {
-		$result = $this->a_rep->updateArticle($request, $article);
+        $result = $this->a_rep->updateArticle($request, $article);
 
         if (is_array($result) && !empty($result['error'])) {
-        	return back()->with($result);
+            return back()->with($result);
         }
 
         return redirect('admin/articles')->with($result);
@@ -185,7 +185,7 @@ class ArticlesController extends AdminController
         $result = $this->a_rep->deleteArticle($article);
 
         if (is_array($result) && !empty($result['error'])) {
-        	return back()->with($result);
+            return back()->with($result);
         }
 
         return redirect('admin/articles')->with($result);

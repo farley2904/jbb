@@ -3,6 +3,7 @@
 namespace Jbb\Repositories;
 
 use Config;
+use Request;
 
 abstract class Repository {
 
@@ -10,17 +11,26 @@ abstract class Repository {
 
 	public function get($select = '*', $pagination = FALSE,$where = false) {
 
-		 $builder = $this->model->select($select); //обьект конструктора запроса
+		$builder = $this->model->select($select); //обьект конструктора запроса
 
-		 if($pagination) {
-		 	return $this->check($builder->paginate(Config::get('settings.paginate')));
-		 }
-
-		 if($where) {
+		if($where) {
 		 	
-			$builder->where($where[0],$where[1]);
+		$builder->where($where[0],$where[1]);
 
 		}
+
+		if($pagination){
+
+			$pagination_settings = Config::get('settings.paginate');
+
+			if (Request::is('admin/*')){
+				$pagination_settings = Config::get('settings.admin_paginate');
+			}
+
+			return $this->check($builder->orderByDesc('created_at')->paginate($pagination_settings));
+		}
+
+
 		 
 		return $this->check($builder->get());
 	}

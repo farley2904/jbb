@@ -23,11 +23,9 @@ Route::get('portfolio/{filter_alias?}', ['uses' => 'PortfolioController@index', 
 
 
 
-Route::resource('articles', 'ArticlesController', ['parametres' => ['articles' => 'alias']]);
+Route::get('news', 'ArticlesController@index')->name('news');
 
 Route::resource('school', 'SchoolController', ['parametres' => ['articles' => 'alias']]);
-
-
 
 Route::resource('services', 'ServicesController', ['parametres' => ['services' => 'alias']]);
 // Route::resource('school', 'ServicesController', ['parametres' => ['services' => 'alias']]);
@@ -76,11 +74,11 @@ Route::match(['get', 'post'],'logout',['uses'=>'Auth\LoginController@logout','as
 //admin
 Route::group(['prefix'=>'admin','middleware' => 'auth','as'=>'admin.'],function(){
 
-	Route::get('/',['uses'=>'Admin\IndexController@index','as'=>'']);
-	
+    Route::get('/',['uses'=>'Admin\IndexController@index','as'=>'']);
+    
     Route::resource('articles','Admin\ArticlesController');
 
-	Route::resource('services','Admin\ServicesController');
+    Route::resource('services','Admin\ServicesController');
 
     Route::get('portfolio', function () {
     return phpinfo();

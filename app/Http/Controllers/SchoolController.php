@@ -14,7 +14,7 @@ class SchoolController extends SiteController
             parent::__construct(new \Jbb\Repositories\MenusRepository(new \Jbb\Menu), new \Jbb\Repositories\SliderRepository(new \Jbb\Slider));
             $this->a_rep = $a_rep;
 
-            $this->template =  env('THEME').'.school ';
+            $this->template =  env('THEME').'.school';
         
     } 
     public function index()
@@ -22,10 +22,10 @@ class SchoolController extends SiteController
         //
         
         $this->title = 'Обучение';
-		$this->keywords = 'Обучение';
-		$this->meta_desc = 'Обучение';
-		
-		$school = $this->getArticles();
+        $this->keywords = 'Обучение';
+        $this->meta_desc = 'Обучение';
+        
+        $school = $this->getArticles();
 
         $content = view(env('THEME').'.school_content')->with('school',$school)->render(); 
 
@@ -36,7 +36,10 @@ class SchoolController extends SiteController
         return $this->renderOutput();
     }
        public function getArticles($alias = FALSE){
-        $articles = $this->a_rep->get('*',TRUE);
+
+        $where = ['category_id','4'];
+
+        $articles = $this->a_rep->get('*',TRUE,$where);
 
         if($articles) {
             $articles->load('user','category','comments');//связаные модели

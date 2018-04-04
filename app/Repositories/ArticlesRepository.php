@@ -60,22 +60,30 @@ class ArticlesRepository extends Repository {
 			$image = $request->file('image');
 
 			if ($image->isValid()) {
+
 				$str = str_random(8);
+
 				$obj = new \stdClass; //создаем пустой обьект
+
 				$obj->path = $str.'.jpg';
+
+				// dd($obj);
 
 				$img = Image::make($image);
 
-				$img->fit(Config::get('settings.image')['width'], Config::get('settings.image')['height'])->save(public_path().'/'.env('THEME').'/images/articles/'.$obj->path); // /images/articles тоже лучьше хранить в настройках
+				$img->fit(Config::get('settings.image')['width'], Config::get('settings.image')['height'])->save(public_path().'/'.env('THEME').Config::get('settings.path').$obj->path); // /images/articles тоже лучьше хранить в настройках
 
 				$data['img'] = $obj->path;
 
-				$this->model->fill($data);
-
-				if ($request->user()->articles()->save($this->model)) {
-					return ['status' =>'Материал успешно добавлен'];
-				}
 			}
+		} else {
+			$data['img'] = 'default.png';
+		}
+
+		$this->model->fill($data);
+
+		if ($request->user()->articles()->save($this->model)) {
+			return ['status' =>'Материал успешно добавлен'];
 		}
 	}
 
@@ -121,7 +129,7 @@ class ArticlesRepository extends Repository {
 
 				$img = Image::make($image);
 
-				$img->fit(Config::get('settings.image')['width'], Config::get('settings.image')['height'])->save(public_path().'/'.env('THEME').'/images/articles/'.$obj->path); // /images/articles тоже лучьше хранить в настройках
+				$img->save(public_path().'/'.env('THEME').Config::get('settings.path').$obj->path); // /images/articles тоже лучьше хранить в настройках
 
 				$data['img'] = $obj->path;
 

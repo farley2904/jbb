@@ -4,6 +4,7 @@ namespace Jbb\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Jbb\Repositories\ArticlesRepository;
+use Jbb\Category;
 
 class ArticlesController extends SiteController
 {
@@ -19,15 +20,19 @@ class ArticlesController extends SiteController
     }
 
     public function index() {
+
+        // \Storage::disk('local')->put('file.txt', '1');
+        // echo \Storage::size('file.txt');
+        
         $this->title = 'Новости';
 
-    	$articles = $this->getArticles();
+        $articles = $this->getArticles();
 
         // foreach ($articles as $article) {
         //     $article->category->title;             
         // }
 
-    	$content = view(env('THEME').'.articles_content')->with('articles',$articles)->render();
+        $content = view(env('THEME').'.articles_content')->with('articles',$articles)->render();
 
         $this->vars = array_add($this->vars,'content',$content); 
 
@@ -36,14 +41,21 @@ class ArticlesController extends SiteController
         return $this->renderOutput();
     }
 
-    public function getArticles($alias = FALSE){
-    	$articles = $this->a_rep->get('*',TRUE);
+    public function getArticles(){
 
-    	if($articles) {
-    		$articles->load('category');//связаные модели $articles->load('user','category','comments');
-    	}
+        // $alias='news';
 
-    	return $articles;
+        //    $id = Category::select('id')->where('alias',$alias)->first()->id;
+        
+        $where = ['category_id','3'];
+
+        $articles = $this->a_rep->get('*',TRUE,$where);
+
+        if($articles) {
+            $articles->load('category');//связаные модели $articles->load('user','category','comments');
+        }
+
+        return $articles;
     }
 
     public function show() {

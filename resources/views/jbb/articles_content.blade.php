@@ -25,30 +25,9 @@
 			</div>
 		</article>
 	@endforeach
+				
+{{ $articles->links(env('THEME').'.pagination') }}
 
-	        <section class="pagination">
-	        	@if($articles->lastPage()>1)
-	        	<ul>
-
-	        		@if($articles->currentPage() !==1 )
-	        		<li><a href="{{ $articles->url($articles->currentPage()-1) }}" title="Назад" >&laquo;</a></li>
-	        		@endif
-
-	        		@for($i=1; $i <= $articles->lastPage(); $i++)
-	        			@if( $articles->currentPage() == $i )
-	        			<li><a title="" class="pag-active" >{{ $i }}</a></li>
-	        			@else
-	        			<li><a href="{{ $articles->url($i) }}" title="">{{ $i }}</a></li>
-	        			@endif
-	        		@endfor
-
-	        		@if($articles->currentPage() !== $articles->lastPage() )
-	        		<li><a href="{{ $articles->url($articles->currentPage()+1) }}" title="Вперед">&raquo;</a></li>
-	        		@endif
-                    
-	        	</ul>
-	        	@endif         
-            </section>
  
 @endif
  

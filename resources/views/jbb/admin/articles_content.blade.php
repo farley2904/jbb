@@ -1,3 +1,4 @@
+{!! Html::link(route('admin.articles.create'),'Добавить новый материал',['class' => 'btn btn-success btn-lg pull-right btn-add','type'=>'button']) !!}
 <table class="table table-striped table-bordered table-hover">
 	<thead class="thead-inverse">
 		<tr>
@@ -14,7 +15,7 @@
 		@if($articles)
 		@foreach($articles as $k=>$article)
 		<tr >
-			<td>{{ $k+1 }}</td>
+			<td>{{ $article->id }}</td>
 			<td>{{ $article->title }}</td>
 			<td>{!! $article->desc !!}</td>
 			<td>
@@ -47,6 +48,6 @@
 	
 </table>
 
-{!! Html::link(route('admin.articles.create'),'Добавить новый материал',['class' => 'btn btn-success btn-lg','type'=>'button']) !!}
+{{ $articles->links() }}
 
  

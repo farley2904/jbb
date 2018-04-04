@@ -29,7 +29,9 @@ body{
     text-align: center;
 }
 
-
+.btn-add{
+	margin-bottom: 22px;
+}
 
 .table>tbody>tr>td {
 	vertical-align: middle;

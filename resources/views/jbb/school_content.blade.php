@@ -22,7 +22,7 @@
             <div class="{{ ($k%2==0) ? 'line-right' : 'line-left' }}">
                 <h4>{{ $article->title }}</h4>
                 {!! $article->desc !!}
-                <a href="#{{-- route('articles.show',['alias'=>$article->alias]) --}}" class="btn btn-lg btn-primary wow fadeInUp" data-hover="{{ trans('site.read_more') }}">{{ trans('site.read_more') }}</a>
+                <a href="{{ route('school.show',['alias'=>$article->alias]) }}" class="btn btn-lg btn-primary wow fadeInUp" data-hover="{{ trans('site.read_more') }}">{{ trans('site.read_more') }}</a>
             </div>
         </div>
 

@@ -8,7 +8,6 @@ use Jbb\Category;
 
 class ArticlesController extends SiteController
 {
-    //
      public function __construct(ArticlesRepository $a_rep) {
 
             parent::__construct(new \Jbb\Repositories\MenusRepository(new \Jbb\Menu), new \Jbb\Repositories\SliderRepository(new \Jbb\Slider));
@@ -56,20 +55,6 @@ class ArticlesController extends SiteController
         }
 
         return $articles;
-    }
-
-    public function show() {
-        $this->title = 'Новости';
-
-        $articles = $this->getArticles();
-
-        $content = view(env('THEME').'.articles_content')->with('articles',$articles)->render();
-
-        $this->vars = array_add($this->vars,'content',$content); 
-
-        //$this->vars = array_add($this->vars,'title',$this->title); 
-
-        return $this->renderOutput();
     }
 
 }

@@ -12,6 +12,7 @@ class SchoolController extends SiteController
      public function __construct(ArticlesRepository $a_rep) {
 
             parent::__construct(new \Jbb\Repositories\MenusRepository(new \Jbb\Menu), new \Jbb\Repositories\SliderRepository(new \Jbb\Slider));
+
             $this->a_rep = $a_rep;
 
             $this->template =  env('THEME').'.school';
@@ -46,5 +47,21 @@ class SchoolController extends SiteController
         }
 
         return $articles;
+    }
+    public function show($alias = FALSE) {
+
+        // $this->title = $alias;
+
+        $article = $this->a_rep->one($alias);
+
+        // dd($school);
+
+        $content = view(env('THEME').'.article_content')->with('article',$article)->render();
+
+        $this->vars = array_add($this->vars,'content',$content); 
+
+        //$this->vars = array_add($this->vars,'title',$this->title); 
+
+        return $this->renderOutput();
     }
 }

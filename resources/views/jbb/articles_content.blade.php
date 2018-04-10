@@ -25,9 +25,10 @@
 			</div>
 		</article>
 	@endforeach
-				
-{{ $articles->links(env('THEME').'.pagination') }}
-
+	
+@if($articles instanceof \Illuminate\Pagination\LengthAwarePaginator )			
+	{{ $articles->links(env('THEME').'.pagination') }}
+@endif
  
 @endif
  

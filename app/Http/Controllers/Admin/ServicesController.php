@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Jbb\Http\Controllers\Controller;
 use Gate;
 use Jbb\Category;
+use Jbb\Service;
 
 class ServicesController extends AdminController
 {	
@@ -34,7 +35,11 @@ class ServicesController extends AdminController
     {
     	
         $this->title = 'Услуги и цены';
-                $categories = Category::select(['title','alias','parent_id','id'])->get();
+                
+        $categories = Category::select(['title','alias','parent_id','id'])->get(); 
+
+        $services = Service::select(['id','name','price'])->get();
+        // dump($services);
 
         $lists = array();
 
@@ -55,7 +60,7 @@ class ServicesController extends AdminController
 
         //dump($lists);
 
-        $this->content = view(env('THEME').'.admin.services_content')->with('categories', $lists)->render();
+        $this->content = view(env('THEME').'.admin.services_content')->with(['services'=>$services,'categories'=>$lists])->render();
     	return $this->renderOutput();
 
     }
@@ -68,6 +73,14 @@ class ServicesController extends AdminController
     public function create()
     {
         //
+        //   if(Gate::denies('save', new Article)) {
+        //     abort(403);
+        // }
+		
+        $this->title = 'Добавить новый сервис';
+        $this->content = view(env('THEME').'.admin.services_create_content')->render();
+        return $this->renderOutput();
+
     }
 
     /**
@@ -78,7 +91,26 @@ class ServicesController extends AdminController
      */
     public function store(Request $request)
     {
-        //
+	  // dd($request);
+
+	  // 	if (is_array($result) && !empty($result['error'])) {
+   //         	return back()->with($result);
+   //      }
+    	$services = Service::all();
+
+
+    	$service = new Service;
+
+
+    	$service->id = $services->count()+1;
+    	
+        $service->name = $request->name;
+        $service->price = $request->price;
+        
+
+        $service->save();
+
+        return redirect('admin/services');
     }
 
     /**
@@ -89,7 +121,7 @@ class ServicesController extends AdminController
      */
     public function show($id)
     {
-        echo $id;
+       //echo $id;
     }
 
     /**
@@ -123,6 +155,12 @@ class ServicesController extends AdminController
      */
     public function destroy($id)
     {
-        //
+        $service = Service::find($id);
+
+		$service->delete();
+
+		return redirect('admin/services');
+
+
     }
 }

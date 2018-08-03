@@ -36,31 +36,11 @@ class ServicesController extends AdminController
     	
         $this->title = 'Услуги и цены';
                 
-        $categories = Category::select(['title','alias','parent_id','id'])->get(); 
 
         $services = Service::select(['id','name','price'])->get();
-        // dump($services);
 
-        $lists = array();
 
-        foreach ($categories as $category) {
-        	if($category->parent_id == 2) {        	
-        	   $lists[] = $category->title .'- <a href = "https://jbb.com.ua/admin/services/'.$category->alias.'">+</a></br>';  
-            }
-
-            // if($category->articles->isNotEmpty()){  
-	           //  foreach($category->articles as $articles){
-	           //  	$lists[] = $articles->title;
-	           //  }
-            // }
-    
-        }
-
-        // \Debugbar::info($categories);
-
-        //dump($lists);
-
-        $this->content = view(env('THEME').'.admin.services_content')->with(['services'=>$services,'categories'=>$lists])->render();
+        $this->content = view(env('THEME').'.admin.services_content')->with(['services'=>$services])->render();
     	return $this->renderOutput();
 
     }

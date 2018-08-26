@@ -5,8 +5,9 @@ namespace Jbb\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Jbb\Http\Controllers\Controller;
 use Gate;
-use Jbb\Category;
 use Jbb\Service;
+use Jbb\ServiceCategory;
+// use DB;
 
 class ServicesController extends AdminController
 {	
@@ -37,10 +38,33 @@ class ServicesController extends AdminController
         $this->title = 'Услуги и цены';
                 
 
-        $services = Service::select(['id','name','price'])->get();
+        $services = Service::select(['id','name','price','service_category_id'])->orderBy('id','desc')->get();
+        $categories = ServiceCategory::select(['id','name'])->get();
+        $services->load('serviceCategory');
+
+        // $categories = DB::table('service_categories')->select('id','name')->get();
+
+         // $services->serviceCategory; 
+
+        // foreach ( $categories as $key => $category) {
+        // 	echo 'категория -'.$category->name.'<br>';
+        //     $services = $category->services;
+        //     foreach ($services as $key => $service) {
+        //         echo $service->name.'<br>';
+        //     }
+        	
+        // }
+
+        
+        // 	 // $s;
+        
+        // // $service = Service::find(1);
+        // $cat = ServiceCategory::find(1);
+
+        // dump($cat->services);
 
 
-        $this->content = view(env('THEME').'.admin.services_content')->with(['services'=>$services])->render();
+        $this->content = view(env('THEME').'.admin.services_content')->with(['services'=>$services,'categories'=>$categories])->render();
     	return $this->renderOutput();
 
     }
@@ -58,7 +82,18 @@ class ServicesController extends AdminController
         // }
 		
         $this->title = 'Добавить новый сервис';
-        $this->content = view(env('THEME').'.admin.services_create_content')->render();
+
+        $categories = ServiceCategory::select(['id','name'])->get();
+
+        $lists = array();
+
+        foreach ($categories as $category) {
+                $lists[$category->id] = $category->name;
+        }
+
+
+        // dump($lists);
+        $this->content = view(env('THEME').'.admin.services_create_content')->with('categories',$lists)->render();
         return $this->renderOutput();
 
     }
@@ -86,7 +121,7 @@ class ServicesController extends AdminController
     	
         $service->name = $request->name;
         $service->price = $request->price;
-        
+        $service->service_category_id = $request->service_category;
 
         $service->save();
 

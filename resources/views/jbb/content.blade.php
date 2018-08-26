@@ -3,7 +3,7 @@
 
 <!-- <h1 class="section-head-left">{{ trans('ru.hello') }}</h1> -->
 <div class="row text-sm-left">
-<div class="col-sm-6 inset-1 wow fadeInUp">
+<div class="col-sm-6 wow fadeInUp"> <!-- inset-1 -->
 <div class="content">
 <div class="content__head">
 <span class="line"><!-- More than just a haircut --></span>
@@ -15,7 +15,7 @@
 </div>
 <div class="col-sm-preffix-1 col-sm-5 col-md-4  wow fadeInRight">
 <div class="line-right">
-<h2>{{ trans('site.about') }}</h2>
+{{-- <h2>{{ trans('site.about') }}</h2> --}}
 <p class="wow fadeInUp" data-wow-delay="0.1s">Студия красоты и дизайна бровей Just Be Beautiful рада приветствовать Вас,our princesses! 
 Наша студия стремится к качественным услугам и исключительному обслуживанию клиентов в спокойной дружеской атмосфере.</p>
 <p class="wow fadeInUp" data-wow-delay="0.2s">Приходите и попробуйте! Убедитесь, что Вы находитесь в правильном месте. Не упустите свой шанс выглядеть лучше!</p>

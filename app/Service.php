@@ -8,4 +8,8 @@ class Service extends Model
 {
     //
     public $timestamps = false;
+
+    public function serviceCategory() {
+    	return $this->belongsTo('Jbb\ServiceCategory');
+    }
 }

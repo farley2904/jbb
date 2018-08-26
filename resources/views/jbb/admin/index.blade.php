@@ -1,4 +1,4 @@
-@extends(env('THEME').'.layouts.admin')
+{{-- @extends(env('THEME').'.layouts.admin')
 
 @section('navigation')
 	{!! $navigation !!}
@@ -6,4 +6,4 @@
 
 @section('footer')
 	{!! $footer !!}
-@endsection 
+@endsection  --}}

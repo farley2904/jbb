@@ -3,6 +3,7 @@
 namespace Jbb\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Jbb\ServiceCategory;
 
 class ServicesController extends SiteController
 {
@@ -25,7 +26,18 @@ class ServicesController extends SiteController
 		
 		$services = false;
 
-        $content = view(env('THEME').'.services_content')->with('services',$services)->render(); 
+        $services_cat = ServiceCategory::select(['id','name'])->get();
+        $services_cat->load('services');
+
+        // foreach ($categories as $key => $category) {
+        //     echo $category->name.'<br>';
+        //     $services = $category->services;
+        //     foreach ($services as $key => $service) {
+        //         echo $service->name.'<br>';
+        //     };
+        // }
+
+        $content = view(env('THEME').'.services_content')->with('services_cat',$services_cat)->render(); 
 
         
         $this->vars = array_add($this->vars,'content',$content);

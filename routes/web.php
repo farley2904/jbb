@@ -39,13 +39,11 @@ Route::group(['prefix'=>'admin','middleware' => 'auth','as'=>'admin.'],function(
 
     Route::resource('services','Admin\ServicesController');
 
-    Route::get('portfolio', function () {
-    return phpinfo();
-    })->name('portfolio.index');
+    Route::get('information', function () {
+    echo 'info';
+    })->name('information.index');
 
-    Route::get('users', function () {
-    return 'users';
-    })->name('users.index');
+    Route::resource('users','Admin\UsersController');
 
     Route::resource('permissions','Admin\PermissionsController');
     

@@ -10,6 +10,8 @@ use Jbb\Repositories\SliderRepository;
 
 use Menu;
 
+use Jbb\Service;
+
 // use Slider;
 
 use Jbb\Langs;
@@ -49,7 +51,9 @@ class SiteController extends Controller
 
         $menu = $this->getMenu();
 
-    	$navigation = view(env('THEME').'.navigation')->with('menu',$menu)->render();
+        $services = Service::where('main', 1)->get();
+
+    	$navigation = view(env('THEME').'.navigation')->with(['menu'=>$menu,'services'=>$services])->render();
 
     	$this->vars = array_add($this->vars,'navigation',$navigation);
 

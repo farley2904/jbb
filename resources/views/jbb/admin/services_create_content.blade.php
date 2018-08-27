@@ -19,6 +19,15 @@
 			</label>		
 			{!! Form::select('service_category', $categories, isset($service->service_category) ? $service->service_category  : old('service_category'), ['class'=>'form-control']) !!}	 	 
 		</div>
+
+		<div class="form-group col-md-3">
+			<div class="checkbox">                             
+			<label>
+				{!! Form::checkbox('main', isset($service->main) ? $service->main  : old('main'))!!}
+				<span>Показать в сокращенном списке</span> 
+			</label>		
+			</div>
+		</div>
 	</div>	 
 		
 	@if(isset($service->id))

@@ -1,13 +1,3 @@
-
-@if($categories)
-
-@foreach($categories as $k=>$category)
-
-{{-- {{ $category->name }}<br> --}}
-
-@endforeach
-@endif
-
 <h3 >Услуги</h3>
 
 {!! Html::link(route('admin.services.create'),'Добавить новую услугу',['class' => 'btn btn-success btn-lg pull-right btn-add','type'=>'button']) !!}

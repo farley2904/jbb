@@ -49,7 +49,7 @@ class ArticlesController extends AdminController
     }
 
     public function getArticles($alias = FALSE){
-        $articles = $this->a_rep->get(['id','title','desc','alias','img','category_id'],TRUE);
+        $articles = $this->a_rep->get(['id','title','desc','alias','img','category_id','created_at'],TRUE);
 
         if($articles) {
             $articles->load('category');//связаные модели

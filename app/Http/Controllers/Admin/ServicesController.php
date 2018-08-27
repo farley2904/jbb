@@ -122,6 +122,9 @@ class ServicesController extends AdminController
         $service->name = $request->name;
         $service->price = $request->price;
         $service->service_category_id = $request->service_category;
+        if ($request->main = 'on') {
+            $service->main = true;
+        }
 
         $service->save();
 

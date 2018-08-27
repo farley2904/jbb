@@ -2,11 +2,11 @@
 <table class="table table-striped table-bordered table-hover">
 	<thead class="thead-inverse">
 		<tr>
-			<th>ID</th>
+			<th>№</th>
 			<th>Заголовок</th>
 			<th>Описание</th>
 			<th>Изображение</th>
-			<th>Псевдоним</th>
+			<th>Добавлен</th>
 			<th>Категория</th>
 			<th>Действие</th>
 		</tr>
@@ -15,14 +15,15 @@
 		@if($articles)
 		@foreach($articles as $k=>$article)
 		<tr >
-			<td>{{ $article->id }}</td>
+			<td>{{ count($articles)-$k }}</td>
 			<td>{{ $article->title }}</td>
 			<td>{!! $article->desc !!}</td>
 			<td>
 					<!-- <img src="{{ asset(env('THEME')) }}/images/articles/{{ $article->img }}" alt="" width="100" height="100"> -->
 					{!! Html::image(asset(env('THEME')).'/images/articles/'.$article->img,'alt',['width'=>'100','height'=>'100']) !!}
 			</td>
-			<td>{{$article->alias}}</td>
+			{{-- <td>{{$article->alias}}</td> --}}
+			<td>{{$article->created_at}}</td>
 			<td>{{$article->category->title}}</td>
 			<td>
 				<!-- <button type="button" class="btn btn-warning btn-block center-block">Изменить</button> -->

@@ -12,14 +12,9 @@
 			<li>
 			<h4>Прайс-лист</h4>
 			<div class="pricing-table">
-			<div><span>Моделирование и окрашивание бровей краской</span><span>250</span></div>
-			<div><span>Моделирование и окрашивание бровей хной</span><span>300</span></div>
-			<div><span>Биозавивка ресниц</span><span>500</span></div>
-			<div><span>Ламинирование ресниц</span><span>700</span></div>
-			<div><span>Наращивание ресниц</span><span>350/500/600</span></div>
-			<div><span>Макияж</span><span>250-500</span></div>
-			<div><span>Экспресс укладки</span><span>100-450</span></div>
-			<div><span>Грим</span><span> 400-600</span></div>
+			@foreach($services as $service)
+				<div><span>{{$service->name}}</span><span>{{$service->price}}</span></div>
+			@endforeach
 			</div>
 			</li>
 			<li>

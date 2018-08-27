@@ -1,46 +1,46 @@
 <?php
 
-namespace Jbb\Http\Controllers;
+namespace Jbb\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Jbb\Http\Controllers\Controller;
+use Jbb\Repositories\UsersRepository;
+use Jbb\Repositories\RolesRepository;
+use Gate;
 
-use Mail;
-
-use Jbb\Service;
-
-class IndexController extends SiteController
+class UsersController extends AdminController
 {
+    protected $us_rep;
+    protected $rol_rep;
 
-        public function __construct() {
+    public function __construct(RolesRepository $rol_rep, UsersRepository $us_rep){
 
-            parent::__construct(new \Jbb\Repositories\MenusRepository(new \Jbb\Menu), new \Jbb\Repositories\SliderRepository(new \Jbb\Slider));
+        parent::__construct();
 
+        //проверка прав
 
-            $this->template =  env('THEME').'.index';
-        
+         $this->middleware(function ($request, $next) {
+
+            if(Gate::denies('EDIT_USERS')) {
+                abort(403);
+            }
+
+            return $next($request);  
+        });
+
+        $this->us_rep = $us_rep;
+        $this->rol_rep = $rol_rep;
+
+        $this->template = env('THEME').'.admin.users';
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
-    {   
-        $this->title = 'Главная';
-        $header = view(env('THEME').'.header')->render();
-        $this->vars = array_add($this->vars,'header',$header);
-
-        $services = Service::where('main', 1)->get();
-        
-        $content = view(env('THEME').'.content')->with('services',$services)->render();
-        $this->vars = array_add($this->vars,'content',$content);
-
-        $contact_form = view(env('THEME').'.contact_form')->render();
-        $this->vars = array_add($this->vars,'contact_form',$contact_form);
-
+    {
+        //
+        $users = $this->us_rep->get();
+        $this->content = view(env('THEME').'.admin.users_content')->with(['users'=>$users])->render();
         return $this->renderOutput();
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -59,10 +59,8 @@ class IndexController extends SiteController
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-
-
     {
-
+        //
     }
 
     /**

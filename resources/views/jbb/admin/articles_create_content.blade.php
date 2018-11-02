@@ -96,9 +96,9 @@
 	CKEDITOR.replace( 'editor' );
 	CKEDITOR.replace( 'editor2' );
 
-    $(document).ready(function(){
-        $(":file").filestyle();
-    });
+    // $(document).ready(function(){
+    //     $(":file").filestyle();
+    // });
 
 </script>
 

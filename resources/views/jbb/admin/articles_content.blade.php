@@ -1,8 +1,10 @@
-{!! Html::link(route('admin.articles.create'),'Добавить новый материал',['class' => 'btn btn-success btn-lg pull-right btn-add','type'=>'button']) !!}
-<table class="table table-striped table-bordered table-hover">
-	<thead class="thead-inverse">
+{{-- {!! Html::link(route('admin.articles.create'),'<i class="fa fa-add"></i>',['class' => 'btn btn-success waves-effect waves-light pull-right mb-4']) !!} --}}
+{!! Html::decode(link_to_route('admin.articles.create', '<i class="fa fa-plus"></i>', array(), ['class' => 'btn btn-success waves-effect waves-light pull-right mb-4'])) !!}
+
+<table class="table table-hover table-responsive-sm">
+	<thead class="blue lighten-4">
 		<tr>
-			<th>№</th>
+			<th>#</th>
 			<th>Заголовок</th>
 			<th>Описание</th>
 			<th>Изображение</th>
@@ -15,32 +17,24 @@
 		@if($articles)
 		@foreach($articles as $k=>$article)
 		<tr >
-			<td>{{ count($articles)-$k }}</td>
-			<td>{{ $article->title }}</td>
-			<td>{!! $article->desc !!}</td>
+			<td scope="row">{{ count($articles)-$k }}</td>
 			<td>
-					<!-- <img src="{{ asset(env('THEME')) }}/images/articles/{{ $article->img }}" alt="" width="100" height="100"> -->
-					{!! Html::image(asset(env('THEME')).'/images/articles/'.$article->img,'alt',['width'=>'100','height'=>'100']) !!}
+				{!! Html::link(route('admin.articles.edit',['articles'=>$article->alias,]),$article->title,['class' => 'text-primary']) !!}
 			</td>
-			{{-- <td>{{$article->alias}}</td> --}}
+			{{-- <td>{!!str_limit($article->text,200)!!}</td> --}}
+			<td>{!! $article->desc !!}</td>
+			<td>{!! Html::image(asset(env('THEME')).'/images/articles/'.$article->img,'alt',['width'=>'100','height'=>'100']) !!}</td>
 			<td>{{$article->created_at}}</td>
 			<td>{{$article->category->title}}</td>
 			<td>
-				<!-- <button type="button" class="btn btn-warning btn-block center-block">Изменить</button> -->
-
-				{!! Html::link(route('admin.articles.edit',['articles'=>$article->alias]),'Изменить',['class'=>'btn btn-warning btn-block center-block','type'=>'button']) !!}
-
-				</br>
-
 				{!! Form::open(['url' => route('admin.articles.destroy',['articles'=>$article->alias]),'method'=>'POST']) !!}
 
 				{{ method_field('DELETE') }}
 
-				{!! Form::button('Удалить', ['class' => 'btn btn-danger btn-block center-block','type'=>'submit']) !!}
+				{!! Form::button('<i class="fa fa-remove"></i>', ['class' => 'btn btn-danger waves-effect waves-light','type'=>'submit']) !!}
 
 				{!! Form::close() !!}
-		</td>
-
+			</td>
 		</tr>
 		@endforeach
 		@endif

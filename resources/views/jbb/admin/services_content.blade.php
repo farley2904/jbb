@@ -1,8 +1,8 @@
 <h3 >Услуги</h3>
 
-{!! Html::link(route('admin.services.create'),'Добавить новую услугу',['class' => 'btn btn-success btn-lg pull-right btn-add','type'=>'button']) !!}
+{!! Html::link(route('admin.services.create'),'Добавить новую услугу',['class' => 'btn btn-success btn-lg pull-right btn-add']) !!}
 
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover table-responsive-sm">
 <thead>
 	
 	<th>id</th>
@@ -20,7 +20,7 @@
 	<td>{{ $service->name }}</td>
 	<td>{{ $service->serviceCategory->name }}</td>
 	<td>{{ $service->price }} грн.</td>
-	<td>	{!! Html::link(route('admin.services.edit',['services'=>$service->id]),'Изменить',['class'=>'btn btn-warning btn-block center-block','type'=>'button']) !!}
+	<td>	{!! Html::link(route('admin.services.edit',['services'=>$service->id]),'Изменить',['class'=>'btn btn-warning btn-block center-block']) !!}
 	</td>
 	<td>
 		{!! Form::open(['url' => route('admin.services.destroy',['services'=>$service->id]),'method'=>'POST']) !!}

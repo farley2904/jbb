@@ -1,5 +1,5 @@
 @if($menu)
 	
-		{!! $menu->asUl(['class'=>'nav navbar-nav']) !!}
+		{!! $menu->asUl(['class'=>'navbar-nav mr-auto']) !!}
 	
 @endif

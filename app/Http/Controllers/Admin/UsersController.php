@@ -3,10 +3,15 @@
 namespace Jbb\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+
+use Jbb\Http\Requests\UserRequest;
 use Jbb\Http\Controllers\Controller;
+
 use Jbb\Repositories\UsersRepository;
 use Jbb\Repositories\RolesRepository;
+
 use Gate;
+use Jbb\User;
 
 class UsersController extends AdminController
 {
@@ -17,7 +22,7 @@ class UsersController extends AdminController
 
         parent::__construct();
 
-        //проверка прав
+        //проверка прав.можна создать любое правило, например View_Admin_USERS
 
          $this->middleware(function ($request, $next) {
 
@@ -49,7 +54,21 @@ class UsersController extends AdminController
      */
     public function create()
     {
-        //
+        $this->title =  'Новый пользователь';
+        
+        $roles = $this->getRoles()->reduce(function ($returnRoles, $role) {
+            $returnRoles[$role->id] = $role->name;
+            return $returnRoles;
+        }, []);;
+        
+        $this->content = view(env('THEME').'.admin.users_create_content')->with('roles',$roles)->render();
+        
+        return $this->renderOutput();
+    }
+
+
+    public function getRoles() {
+        return \Jbb\Role::all();
     }
 
     /**
@@ -58,9 +77,13 @@ class UsersController extends AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $result = $this->us_rep->addUser($request);
+        if(is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+        return redirect('admin/users')->with($result);
     }
 
     /**
@@ -80,9 +103,18 @@ class UsersController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $this->title =  'Редактирование пользователя - '. $user->name;
+		
+		$roles = $this->getRoles()->reduce(function ($returnRoles, $role) {
+		    $returnRoles[$role->id] = $role->name;
+		    return $returnRoles;
+		}, []);
+		
+		$this->content = view(env('THEME').'.admin.users_create_content')->with(['roles'=>$roles,'user'=>$user])->render();
+        
+        return $this->renderOutput();
     }
 
     /**
@@ -92,9 +124,13 @@ class UsersController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $result = $this->us_rep->updateUser($request,$user);
+		if(is_array($result) && !empty($result['error'])) {
+			return back()->with($result);
+		}
+		return redirect('admin/users')->with($result);
     }
 
     /**
@@ -103,8 +139,12 @@ class UsersController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $result = $this->us_rep->deleteUser($user);
+		if(is_array($result) && !empty($result['error'])) {
+			return back()->with($result);
+		}
+		return redirect('admin/users')->with($result);
     }
 }

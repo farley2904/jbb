@@ -33,6 +33,9 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('article', function ($value) {
             return \Jbb\Article::where('alias', $value)->first();
         });
+        Route::bind('users', function ($value) {
+            return \Jbb\User::find($value);
+        });
     }
 
     /**

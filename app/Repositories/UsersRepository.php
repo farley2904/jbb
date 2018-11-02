@@ -4,27 +4,24 @@ namespace Jbb\Repositories;
 
 use Jbb\User;
 use Config;
-
 use Gate;
 
 
 class UsersRepository extends Repository
 {
-	
     
 	public function __construct(User $user) {
-		$this->model  = $user;
-		
+		$this->model  = $user;	
 	}
 	
 	public function addUser($request) {
 		
-		
-		if (\Gate::denies('create',$this->model)) {
+		if (Gate::denies('create',$this->model)) {
             abort(403);
         }
 		
 		$data = $request->all();
+		//dd($data);
 		
 		$user = $this->model->create([
             'name' => $data['name'],
@@ -45,11 +42,13 @@ class UsersRepository extends Repository
 	public function updateUser($request, $user) {
 		
 		
-		if (\Gate::denies('edit',$this->model)) {
+		if (Gate::denies('edit',$this->model)) {
             abort(403);
         }
 		
 		$data = $request->all();
+
+		// dd($data);
 		
 		if(isset($data['password'])) {
 			$data['password'] = bcrypt($data['password']);
@@ -75,8 +74,5 @@ class UsersRepository extends Repository
 			return ['status' => 'Пользователь удален'];	
 		}
 	}
-	
-	
-
 	
 }

@@ -5,7 +5,9 @@ namespace Jbb\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Jbb\Article;
+use Jbb\User;
 use Jbb\Policies\ArticlePolicy;
+use Jbb\Policies\UserPolicy;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -16,7 +18,8 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'Jbb\Model' => 'Jbb\Policies\ModelPolicy',
-        Article::class => ArticlePolicy::class //политика безопастности для модели Article
+        Article::class => ArticlePolicy::class, //политика безопастности для модели Article
+        User::class => UserPolicy::class //политика безопастности для модели Article
     ];
 
     /**

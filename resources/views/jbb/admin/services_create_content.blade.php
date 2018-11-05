@@ -17,7 +17,7 @@
 			<label>
 				<span class="">Категория:</span>
 			</label>		
-			{!! Form::select('service_category', $categories, isset($service->service_category) ? $service->service_category  : old('service_category'), ['class'=>'form-control']) !!}	 	 
+			{!! Form::select('service_category_id', $categories, isset($service->service_category_id) ? $service->service_category_id  : old('service_category_id'), ['class'=>'form-control']) !!}	 	 
 		</div>
 
 		<div class="form-group col-md-3">

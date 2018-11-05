@@ -43,7 +43,7 @@ class AdminController extends \Jbb\Http\Controllers\Controller
             
             $menu->add('Статьи',array('route' => 'admin.articles.index', 'class' => 'nav-item'))->link->attr(['class' => 'nav-link']);
             $menu->add('Услуги и цены',array('route' => 'admin.services.index', 'class' => 'nav-item'))->link->attr(['class' => 'nav-link']);
-            $menu->add('Информация',array('route' => 'admin.information.index', 'class' => 'nav-item'))->link->attr(['class' => 'nav-link']);
+            // $menu->add('Информация',array('route' => 'admin.information.index', 'class' => 'nav-item'))->link->attr(['class' => 'nav-link']);
             // $menu->add('Портфолио',  array('route'  => 'admin.portfolio.index'));
             // $menu->add('Меню',  array('route'  => 'admin.menus.index'));
             $menu->add('Пользователи',  array('route'  => 'admin.users.index', 'class' => 'nav-item'))->link->attr(['class' => 'nav-link']);

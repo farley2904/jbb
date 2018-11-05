@@ -7,7 +7,7 @@
 		<a href="{{ $item->url() }}">{{ $item->title }}</a>
 		
 
-		@if( $item->id == 1 )
+		@if( $item->id == 1 && isset($services))
 			<ul class="rd-navbar-megamenu">
 			<li>
 			<h4>Прайс-лист</h4>

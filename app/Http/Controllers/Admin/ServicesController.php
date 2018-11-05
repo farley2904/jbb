@@ -7,6 +7,7 @@ use Jbb\Http\Controllers\Controller;
 use Gate;
 use Jbb\Service;
 use Jbb\ServiceCategory;
+use Jbb\Http\Requests\ServiceRequest;
 // use DB;
 
 class ServicesController extends AdminController
@@ -41,29 +42,6 @@ class ServicesController extends AdminController
         $services = Service::select(['id','name','price','service_category_id'])->orderBy('id','desc')->get();
         $categories = ServiceCategory::select(['id','name'])->get();
         $services->load('serviceCategory');
-
-        // $categories = DB::table('service_categories')->select('id','name')->get();
-
-         // $services->serviceCategory; 
-
-        // foreach ( $categories as $key => $category) {
-        // 	echo 'категория -'.$category->name.'<br>';
-        //     $services = $category->services;
-        //     foreach ($services as $key => $service) {
-        //         echo $service->name.'<br>';
-        //     }
-        	
-        // }
-
-        
-        // 	 // $s;
-        
-        // // $service = Service::find(1);
-        // $cat = ServiceCategory::find(1);
-
-        // dump($cat->services);
-
-
         $this->content = view(env('THEME').'.admin.services_content')->with(['services'=>$services,'categories'=>$categories])->render();
     	return $this->renderOutput();
 
@@ -91,8 +69,6 @@ class ServicesController extends AdminController
                 $lists[$category->id] = $category->name;
         }
 
-
-        // dump($lists);
         $this->content = view(env('THEME').'.admin.services_create_content')->with('categories',$lists)->render();
         return $this->renderOutput();
 
@@ -148,9 +124,21 @@ class ServicesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit(Service $service)
+    {	
+    	$categories = ServiceCategory::select(['id','name'])->get();
+
+        $lists = array();
+
+        foreach ($categories as $category) {
+            $lists[$category->id] = $category->name;
+        }
+
+		$this->title = 'Редактирование материала -'.$service->name;
+
+		$this->content = view(env('THEME').'.admin.services_create_content')->with(['categories'=>$lists, 'service'=>$service ])->render();
+
+        return $this->renderOutput();
     }
 
     /**
@@ -160,9 +148,20 @@ class ServicesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ServiceRequest $request, Service $service)
     {
-        //
+        $result = $request->all();
+
+        $service->fill($result);
+
+        if ($service->update()) {
+         $result['status']='Материал успешно обновлен';
+        }
+
+        if(is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+        return redirect('admin/services')->with($result);
     }
 
     /**

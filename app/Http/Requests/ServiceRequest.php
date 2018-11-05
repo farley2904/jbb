@@ -13,7 +13,7 @@ class ServiceRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return \Auth::user()->canDo('ADD_ARTICLES');
     }
 
     /**
@@ -24,8 +24,8 @@ class ServiceRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'='required|max:255',
-            'price'='required|max:40',
+            'name'=>'required|max:255',
+            'price'=>'required|max:40',
             'service_category_id'=>'required|integer'
         ];
     }

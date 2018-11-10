@@ -9,6 +9,8 @@
 						<div class="row text-sm-left">
 							<div class="col-sm-preffix-1 col-sm-6 wow fadeInUp">	
 								<h4>{{$service->name}}</h4>	
+
+								<!-- {{dump($service->id)}} -->
 							</div>
 							<div class="col-sm-preffix-2 col-sm-5 col-md-2 wow fadeInRight">
 								<div class="line-right">

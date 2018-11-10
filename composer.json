@@ -9,12 +9,14 @@
         "barryvdh/laravel-debugbar": "^2.3",
         "barryvdh/laravel-ide-helper": "^2.3",
         "caouecs/laravel-lang": "~3.0",
+        "intervention/image": "2.*",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
+        "laravelcollective/html": "^5.4.0",
         "lavary/laravel-menu": "^1.6",
         "nesbot/carbon": "^1.22",
-        "laravelcollective/html":"^5.4.0",
-        "intervention/image":"2.*"
+        "dimsav/laravel-translatable":"7.*"
+
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

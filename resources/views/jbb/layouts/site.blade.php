@@ -13,8 +13,20 @@
             <header class="page-header">
 
                 @if (!Auth::guest())
+                <div>
 
-                 <a href="{{ route('admin.') }}">В админку --> </a>
+                    <a href="<?= route('setlocale', ['lang' => 'ru']) ?>"<?= \Jbb\Http\Middleware\LocaleMiddleware::getLocale() === null ? 'class="active-lang"' : '' ?>>RU</a>
+                    <a href="<?= route('setlocale', ['lang' => 'ua']) ?>"<?= \Jbb\Http\Middleware\LocaleMiddleware::getLocale() === 'ua' ? 'class="active-lang"' : '' ?>>UA</a>
+                    
+                </div>
+
+                 <a href="{{ route('admin.') }}">@lang('site.in_admin')</a>
+
+                @endif
+
+                @if (!Auth::guest())
+
+
 
                 @endif
 

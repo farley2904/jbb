@@ -9,7 +9,7 @@
 				 
 				 
 				<div class="rd-navbar-brand wow fadeInUp">
-					<a href="{{ url('/') }}" class="rd-navbar-brand__name heading-2">{{ config('app.name', 'Jbb') }}</a>
+					<a href="{{ url(Jbb\Http\Middleware\LocaleMiddleware::getLocale() . '/') }}" class="rd-navbar-brand__name heading-2">{{ config('app.name', 'Jbb') }}</a>
 				</div>
 			 
 			</div>

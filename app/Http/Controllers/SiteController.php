@@ -8,7 +8,8 @@ use Jbb\Repositories\MenusRepository;
 
 use Jbb\Repositories\SliderRepository;
 
-use Menu;
+use Menu;  //фасад Menu
+use App;  
 
 use Jbb\Service;
 
@@ -38,13 +39,6 @@ class SiteController extends Controller
     public function __construct(MenusRepository $m_rep, SliderRepository $s_rep) {
         $this->m_rep = $m_rep;
         $this->s_rep = $s_rep;
-
-        // $locale = config('app.locale');
-
-        // $langs = Langs::all();
-
-        // dump($langs->locale);
-
     }
 
     protected function renderOutput(){
@@ -78,12 +72,21 @@ class SiteController extends Controller
     public function getMenu(){
 
         $menu = $this->m_rep->get();
+         // dump(App::getLocale());
 
         $mBuilder = Menu::make('MainNav',function($m) use ($menu) {
 
             foreach ($menu as $item) {
+
+                $lang = \Jbb\Http\Middleware\LocaleMiddleware::getLocale();
+                if ($lang) {
+                    $path = $lang.'/'.$item->path;
+                }else{
+                    $path = $item->path;
+                }
+
                 if($item->parent == 0){
-                    $m->add($item->title,$item->path)->id($item->id);
+                    $m->add($item->title,$path)->id($item->id);
                 }else{
                     if($m->find($item->parent)){
                         $m->find($item->parent)->add($item->title,$item->path)->id($item->id);

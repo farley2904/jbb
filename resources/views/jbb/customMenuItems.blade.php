@@ -1,5 +1,3 @@
-
-
 @foreach($items as $item)
 
 

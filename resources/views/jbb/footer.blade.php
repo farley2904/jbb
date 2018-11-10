@@ -5,3 +5,7 @@ Just Be Beautiful •
 <span id="copyright-year"></span> 
 </p>
 </div>
+
+{{-- {!! $MyNavBar->asUl() !!} --}}
+
+

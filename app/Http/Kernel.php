@@ -18,6 +18,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \Jbb\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        \Jbb\Http\Middleware\LocaleMiddleware::class,
     ];
 
     /**
@@ -35,6 +36,7 @@ class Kernel extends HttpKernel
             \Jbb\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Jbb\Http\Middleware\DebugBarMiddleware::class,
+            // \Jbb\Http\Middleware\GenerateMenus::class,
         ],
 
         'api' => [

@@ -15694,3 +15694,7 @@ img.mfp-img
 #instagram:hover{
 	background: url('../images/instagram-hover.png');
 }
+
+.active-lang{
+	font-weight: 400;
+}

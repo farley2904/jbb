@@ -189,6 +189,8 @@ return [
 
         //image.intervention.com
         Intervention\Image\ImageServiceProvider::class,
+        //Laravel-Translatable
+        Dimsav\Translatable\TranslatableServiceProvider::class,
 
     ),
 

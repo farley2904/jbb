@@ -6,6 +6,15 @@
 				<span class="">Имя сервиса:</span>
 			</label>
 			{!! Form::text('name',isset($service->name) ? $service->name  : old('name'), ['placeholder'=>'Введите имя сервиса','class'=>'form-control ']) !!}
+			<br>
+			{{\App::setLocale('ua')}}
+			{!! Form::text('name_ua',isset($service->name) ? $service->name  : old('name_ua'), ['placeholder'=>'Введіть імʼя сервісу','class'=>'form-control ']) !!}
+			{{\App::setLocale('ru')}}
+			<!-- Для получения переданного ввода из предыдущего запроса используйте метод old() на экземпляре Request. 
+			Метод old() получит переданные ранее данные ввода из сессии.
+			В Laravel есть глобальная вспомогательная функция old().
+			Когда вы выводите старый ввод в шаблоне Blade, удобнее использовать эту функцию old. 
+			Если для данного поля нет старого ввода, вернётся null. -->
 		</div>
 		<div class="form-group col-md-3">
 			<label>
@@ -23,7 +32,7 @@
 		<div class="form-group col-md-3">
 			<div class="checkbox">                             
 			<label>
-				{!! Form::checkbox('main', isset($service->main) ? $service->main  : old('main'))!!}
+				{!! Form::checkbox('main', isset($service->main) ? $service->main  : old('main'),isset($service->main)&&$service->main==1)!!}
 				<span>Показать в сокращенном списке</span> 
 			</label>		
 			</div>

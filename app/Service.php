@@ -5,13 +5,13 @@ namespace Jbb;
 use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
-{   
+{
     use \Dimsav\Translatable\Translatable;
 
     public $timestamps = false;
 
     protected $fillable = [
-       'id', 'name', 'price', 'service_category_id', 'main',
+       'id', 'price', 'service_category_id', 'main',
     ];
 
     public $translatedAttributes = ['name'];
@@ -26,6 +26,5 @@ class Service extends Model
     public function serviceCategory() {
     	return $this->belongsTo('Jbb\ServiceCategory');
     }
-
 
 }

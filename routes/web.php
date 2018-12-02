@@ -30,6 +30,18 @@ Route::group(['prefix' => Jbb\Http\Middleware\LocaleMiddleware::getLocale()], fu
     Route::post('login',['uses'=>'Auth\LoginController@login','as' => 'login']);
     Route::match(['get', 'post'],'logout',['uses'=>'Auth\LoginController@logout','as'=>'logout']);
 
+    Route::get('create', function() {
+        // $services = Jbb\Service::all();
+        // foreach ($services as $service) {
+        //     $service_tr = new Jbb\ServiceTranslation;
+        //     $service_tr->id = $service->id;
+        //     $service_tr->name = $service->name;
+        //     $service_tr->locale = 'ru';
+        //     $service_tr->service_id = $service->id;
+        //     $service_tr->save();
+        // }
+    });
+
 });
 //admin
 Route::group(['prefix'=>'admin','middleware' => 'auth','as'=>'admin.'],function(){
@@ -88,15 +100,3 @@ Route::get('setlocale/{lang}', function ($lang) {
 
 })->name('setlocale');
 
-    // Route::get('create', function() {
-
-    //     // Jbb\Service::first();
-    //     // $translation = $germany->translate();
-    //     $article = Jbb\Service::first();
-
-    //     echo App::getLocale();
-    //     echo '<br>' . $article->translate('ua')->name;
-    //     $service = Jbb\Service::where('id', '18')->first();
-    //     $translation = $service->translateOrNew('ua');
-    //     // dump($article);
-    // });

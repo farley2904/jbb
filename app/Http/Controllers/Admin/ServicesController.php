@@ -39,7 +39,7 @@ class ServicesController extends AdminController
         $this->title = 'Услуги и цены';
                 
 
-        $services = Service::select(['id','name','price','service_category_id'])->orderBy('id','desc')->get();
+        $services = Service::select(['id','price','service_category_id'])->orderBy('id','desc')->get();
         $categories = ServiceCategory::select(['id','name'])->get();
         $services->load('serviceCategory');
         $this->content = view(env('THEME').'.admin.services_content')->with(['services'=>$services,'categories'=>$categories])->render();
@@ -80,31 +80,31 @@ class ServicesController extends AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ServiceRequest $request)
     {
-	  // dd($request);
-
-	  // 	if (is_array($result) && !empty($result['error'])) {
-   //         	return back()->with($result);
-   //      }
     	$services = Service::all();
 
-
     	$service = new Service;
-
 
     	$service->id = $services->count()+1;
     	
         $service->name = $request->name;
+
+        \App::setLocale('ua');
+        $service->name = $request->name_ua;
+        \App::setLocale('ru');
+
         $service->price = $request->price;
-        $service->service_category_id = $request->service_category;
+
+        $service->service_category_id = $request->service_category_id;
+
         if ($request->main = 'on') {
             $service->main = true;
         }
 
         $service->save();
 
-        return redirect('admin/services');
+        return redirect('admin/services')->with(['status'=>'Сервис успешно добавлен']);
     }
 
     /**
@@ -150,18 +150,26 @@ class ServicesController extends AdminController
      */
     public function update(ServiceRequest $request, Service $service)
     {
-        $result = $request->all();
+        $service->name = $request->name;
 
-        $service->fill($result);
+        \App::setLocale('ua');
+        $service->name = $request->name_ua;
+        \App::setLocale('ru');
 
-        if ($service->update()) {
-         $result['status']='Материал успешно обновлен';
+        $service->price = $request->price;
+
+        $service->service_category_id = $request->service_category_id;
+
+
+        if ($request->main !=null) {
+            $service->main = true;
+        }else{
+            $service->main = false;
         }
 
-        if(is_array($result) && !empty($result['error'])) {
-            return back()->with($result);
-        }
-        return redirect('admin/services')->with($result);
+        $service->save();
+
+        return redirect('admin/services')->with(['status'=>'Сервис успешно обновлен']);
     }
 
     /**
@@ -176,7 +184,7 @@ class ServicesController extends AdminController
 
 		$service->delete();
 
-		return redirect('admin/services');
+		return redirect('admin/services')->with(['status' => 'Сервис успешно удален']);
 
 
     }

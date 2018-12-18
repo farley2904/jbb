@@ -21,6 +21,8 @@
 	<!-- Your custom styles (optional) -->
 	<link href="{{ asset('mdb/css/style.css') }}" rel="stylesheet">
 
+	<script type="text/javascript" src="{{ asset('mdb/js/jquery-3.3.1.min.js') }}"></script>
+
 	<script type="text/javascript" src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>   
 
     <script>
@@ -90,17 +92,16 @@
 		        </div>
 		    @endif
 
-			<div class="card mb-4 wow fadeIn">
+			<section class="card mb-4 wow fadeIn">
 				<div class="card-body">
 					@yield('content')
 				</div>
-			</div>
+			</section>
 		</div>
 	</main>
 
     @yield('footer')
 
-	<script type="text/javascript" src="{{ asset('mdb/js/jquery-3.3.1.min.js') }}"></script>
 	<!-- Bootstrap tooltips -->
 	<script type="text/javascript" src="{{ asset('mdb/js/popper.min.js') }}"></script>
 	<!-- Bootstrap core JavaScript -->
@@ -109,11 +110,6 @@
 	<script type="text/javascript" src="{{ asset('mdb/js/mdb.min.js') }}"></script>
 
 	<script src="{{ asset('js/bootstrap-filestyle.min.js') }}"></script>
-	<script type="text/javascript">
-		    $(document).ready(function(){
-        $(":file").filestyle();
-    });
-	</script>
 
 </body>
 </html>

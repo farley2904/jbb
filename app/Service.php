@@ -11,7 +11,7 @@ class Service extends Model
     public $timestamps = false;
 
     protected $fillable = [
-       'id', 'price', 'service_category_id', 'main',
+       'id', 'price', 'service_category_id', 'main'
     ];
 
     public $translatedAttributes = ['name'];

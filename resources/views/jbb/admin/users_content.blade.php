@@ -1,7 +1,7 @@
 
 <h3>Пользователи</h3>
-{!! Html::link(route('admin.users.create'),'Добавить  пользователя',['class' => 'btn btn-success btn-lg pull-right btn-add','type'=>'button']) !!}
-<table class="table table-striped table-hover">
+{!! Html::link(route('admin.users.create'),'Добавить пользователя',['class' => 'btn btn-success btn-lg pull-right btn-add']) !!}
+<table class="table table-striped table-hover table-responsive-sm">
 <thead>
 	<th>ID</th>
 	<th>Имя</th>
@@ -15,7 +15,7 @@
 		<tbody>
 			<tr>
 				<td>{{ $user->id }}</td>
-				<td>{!! Html::link(route('admin.users.edit',['users' => $user->id]),$user->name) !!}</td>
+				<td>{!! Html::link(route('admin.users.edit',['users' => $user->id]),$user->name,['class' => 'text-primary']) !!}</td>
 				<td>{{ $user->email }}</td>
 				<td>{{ $user->login }}</td>
 				<td>{{ $user->roles->implode('name', ', ') }}</td>

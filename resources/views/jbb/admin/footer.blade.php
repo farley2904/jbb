@@ -1,5 +1,9 @@
-<div id="footer">
-      <div class="container">
-        <p class="text-muted">{{ config('app.name', 'Jbb') }}</p>
-      </div>
-</div>
+<!-- Footer -->
+<footer class="page-footer">
+	<!-- Copyright -->
+	<div class="footer-copyright text-center py-3">
+		{{ config('app.name', 'Jbb') }}
+	</div>
+	<!-- Copyright -->
+</footer>
+<!-- Footer -->

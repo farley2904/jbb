@@ -29,7 +29,7 @@
 									@foreach($roles as $role)
 										<td>
 											@if($role->hasPermission($val->name))
-											:)
+											*
 											@endif
 										</td>
 									@endforeach
@@ -46,7 +46,7 @@
 			
 		</div>
 		
-		<input class="btn btn-the-salmon-dance-3" type="submit" value="Обновить" />
+		<input class="btn btn-success btn-add" type="submit" value="Обновить" />
 
 		
 	</form>

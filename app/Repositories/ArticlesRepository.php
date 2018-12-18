@@ -150,7 +150,7 @@ class ArticlesRepository extends Repository {
 			abort(403);
 		}
 
-		// $article->commennts()->delete(); //удаление привязаных коментариев
+		$article->comments()->delete(); //удаление привязаных коментариев
 
 		if ($article->delete()) {
 			return ['status' => 'Материал успешно удален'];

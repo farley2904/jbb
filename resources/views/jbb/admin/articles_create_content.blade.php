@@ -55,12 +55,8 @@
 		
 	@if(isset($article->img))
 		<div class="row">		
-			<div class="form-group col-md-6">			
-				<label>
-					 <span class="">Изображения материала:</span>
-				</label>
-				
-				{{ Html::image(asset(env('THEME')).'/images/articles/'.$article->img,'',['style'=>'width:400px']) }}
+			<div class="form-group col-md-6">
+				{{ Html::image(asset(env('THEME')).'/images/articles/'.$article->img,'',['class'=>'img-fluid z-depth-1','style'=>'width:400px']) }}
 				{!! Form::hidden('old_image',$article->img) !!}
 			</div>		
 		</div>			
@@ -68,10 +64,10 @@
 		
 	<div class="row">		
 		<div class="form-group col-md-6">	
-			<label>
+			<!-- <label>
 				<span class="">Изображение:</span><br />
 				<span class="label">Изображение материала</span><br />
-			</label>
+			</label> -->
 				{!! Form::file('image', ['class' => 'filestyle']) !!}
 		</div>		 		
 		<div class="form-group col-md-6">	
@@ -96,9 +92,8 @@
 	CKEDITOR.replace( 'editor' );
 	CKEDITOR.replace( 'editor2' );
 
-    // $(document).ready(function(){
-    //     $(":file").filestyle();
-    // });
-
+    $(document).ready(function(){
+        $(":file").filestyle({input: false,buttonText:"Загрузить изображение"});
+    });
 </script>
 

@@ -192,6 +192,9 @@ return [
         //Laravel-Translatable
         Dimsav\Translatable\TranslatableServiceProvider::class,
 
+        //Invisible reCAPTCHA
+        AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
+
     ),
 
     /*

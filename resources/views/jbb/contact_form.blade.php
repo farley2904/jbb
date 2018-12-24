@@ -1,20 +1,8 @@
-<section class="well-md text-center" id="contact" data-type="anchor">
+<section class="well-md text-center" data-type="anchor">
 <div class="container">
 
 
-@if (count($errors) > 0)
-    <div class="box error-box">
-            @foreach ($errors->all() as $error)
-                <p style="color:red" >{{ $error }}</p>
-            @endforeach
-    </div>
-@endif
 
-@if (session('status'))
-    <div class="box success-box">
-        <p style="color:green" >{{ session('status') }}</p>
-    </div>
-@endif
 
 <!-- <h1 class="section-head-left">Напишите нам</h1> -->
 <div class="row text-sm-left">
@@ -41,7 +29,7 @@
 </div>
 
 
-<div class="col-sm-preffix-1 col-sm-5 col-md-4 inset-1 wow fadeInRight">
+<div class="col-sm-preffix-1 col-sm-5 col-md-4 inset-1 wow fadeInRight"  id="contact">
 <div class="line-right">
 <h4>Заполните контактную форму:</h4>
  
@@ -54,7 +42,10 @@
 <input type="text" name="name" placeholder="Имя" data-constraints="@NotEmpty @LettersOnly"/>
 </label>
 <label data-add-placeholder>
-<input type="text" name="email" placeholder="Email" data-constraints="@NotEmpty @Email"/>
+<input type="text" name="email" placeholder="Почта" data-constraints="@NotEmpty @Email"/>
+</label>
+<label data-add-placeholder>
+<input type="text" name="phone" placeholder="Телефон" data-constraints="@NotEmpty @Phone"/>
 </label>
 <label data-add-placeholder>
 <textarea name="text" placeholder="Текст" data-constraints="@NotEmpty"></textarea>
@@ -64,6 +55,7 @@
 </div>
 <div class="mfInfo"></div>
 </fieldset>
+{!! app('captcha')->render($lang = 'ru'); !!}
 {{ csrf_field() }}
 </form>
 

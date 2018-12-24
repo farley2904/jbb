@@ -9,6 +9,7 @@
 | Эти маршруты загружаются в группе RouteServiceProvider, которая содержит  промежуточную группу "веб". 
 |
 */
+
 Route::group(['prefix' => Jbb\Http\Middleware\LocaleMiddleware::getLocale()], function(){
 
     Route::resource('/', 'IndexController', ['only' => 'index', 'names' => ['index' => 'home']]);
@@ -25,24 +26,25 @@ Route::group(['prefix' => Jbb\Http\Middleware\LocaleMiddleware::getLocale()], fu
 
     Route::match(['get', 'post'], 'contacts', ['uses' => 'ContactsController@index', 'as' => 'contacts']);
 
-
-    Route::get('login','Auth\LoginController@showLoginForm');
-    Route::post('login',['uses'=>'Auth\LoginController@login','as' => 'login']);
-    Route::match(['get', 'post'],'logout',['uses'=>'Auth\LoginController@logout','as'=>'logout']);
-
-    Route::get('create', function() {
-        // $services = Jbb\Service::all();
-        // foreach ($services as $service) {
-        //     $service_tr = new Jbb\ServiceTranslation;
-        //     $service_tr->id = $service->id;
-        //     $service_tr->name = $service->name;
-        //     $service_tr->locale = 'ru';
-        //     $service_tr->service_id = $service->id;
-        //     $service_tr->save();
-        // }
-    });
-
 });
+
+// auth
+Route::get('login','Auth\LoginController@showLoginForm');
+Route::post('login',['uses'=>'Auth\LoginController@login','as' => 'login']);
+Route::match(['get', 'post'],'logout',['uses'=>'Auth\LoginController@logout','as'=>'logout']);
+
+Route::get('create', function() {
+    // $services = Jbb\Service::all();
+    // foreach ($services as $service) {
+    //     $service_tr = new Jbb\ServiceTranslation;
+    //     $service_tr->id = $service->id;
+    //     $service_tr->name = $service->name;
+    //     $service_tr->locale = 'ru';
+    //     $service_tr->service_id = $service->id;
+    //     $service_tr->save();
+    // }
+});
+
 //admin
 Route::group(['prefix'=>'admin','middleware' => 'auth','as'=>'admin.'],function(){
 
@@ -62,10 +64,6 @@ Route::group(['prefix'=>'admin','middleware' => 'auth','as'=>'admin.'],function(
 
 });
 
-Route::get('clear-cache', function() {
-    Artisan::call('cache:clear');
-    return redirect()->back();
-});
 
 //Переключение языков
 Route::get('setlocale/{lang}', function ($lang) {
@@ -97,4 +95,9 @@ Route::get('setlocale/{lang}', function ($lang) {
     return redirect($url); //Перенаправляем назад на ту же страницу                            
 
 })->name('setlocale');
+
+Route::get('clear-cache', function() {
+    Artisan::call('cache:clear');
+    return redirect()->back();
+});
 

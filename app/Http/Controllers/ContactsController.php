@@ -27,9 +27,11 @@ class ContactsController extends SiteController
         if ($request->isMethod('post')) {
 
              $this->validate($request, [
-                'name' => 'required|max:255',
+                'name' => 'max:255',
                 'email' => 'required|email',
-                'text' => 'required'
+                'phone' => 'nullable|numeric',
+                'text' => 'required',
+                'g-recaptcha-response' => 'required|captcha'
             ]);
 
              
@@ -39,6 +41,7 @@ class ContactsController extends SiteController
             // dd($data);
             
             Mail::send(env('THEME').'.email', ['data' => $data], function ($messages) use ($data) {
+
                 $mail_admin = env('MAIL_ADMIN');
 
                 $messages->to($mail_admin, 'Jbb')->subject('Вопрос из Jbb');

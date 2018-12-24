@@ -4,11 +4,6 @@
 	{!! $navigation !!}
 @endsection
 
-
-@section ('slider')
-	{!! $slider !!}
-@endsection
-
 @section ('header')
 	{!! $header !!}
 @endsection

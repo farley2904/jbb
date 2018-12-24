@@ -7573,7 +7573,7 @@ h2,.heading-2
 	{
 		font-size: 44px;
 		line-height: 1.25;
-		 padding-top: 50px;
+		padding-top: 0px;
 	}
 }
 h3,.heading-3
@@ -7658,7 +7658,7 @@ p+p
 {
 	*+.rd-navbar-brand
 	{
-		margin-top: 30px;
+		margin-top: 25px;
 	}
 }
 *+.btn

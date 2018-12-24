@@ -31,6 +31,20 @@
                 @endif
 
                 @yield('navigation')
+
+                                @if (count($errors) > 0)
+                    <div class="box error-box">
+                            @foreach ($errors->all() as $error)
+                                <p style="color:red" >{{ $error }}</p>
+                            @endforeach
+                    </div>
+                @endif
+
+                @if (session('status'))
+                    <div class="box success-box">
+                        <p style="color:green" >{{ session('status') }}</p>
+                    </div>
+                @endif
                 
                 <div class="container">
                 @yield('slider')
@@ -39,8 +53,10 @@
          
                 </div>
             </header>
+
  
             <main class="page-content">
+
                 @yield('content')
             </main>
  

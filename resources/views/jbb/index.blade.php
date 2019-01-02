@@ -4,17 +4,19 @@
 	{!! $navigation !!}
 @endsection
 
-@section ('slider')
-	{!! $slider !!}
-@endsection
-
 @section ('header')
+	{!! $logo !!}
 	{!! $header !!}
 @endsection
 
 @section ('content')
 	{!! $content !!}
+
 	{!! $contact_form !!}
+
+	@if (!Auth::guest())
+	{!! $slider !!}
+	@endif
 @endsection
 
 @section ('footer')

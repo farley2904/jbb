@@ -1,12 +1,12 @@
+
+
 <section class="well-md text-center">
 <div class="container">
-
-<!-- <h1 class="section-head-left">{{ trans('ru.hello') }}</h1> -->
 <div class="row text-sm-left">
 <div class="col-sm-6 wow fadeInUp"> <!-- inset-1 -->
 <div class="content">
 <div class="content__head">
-<span class="line"><!-- More than just a haircut --></span>
+<span class="line"></span>
 </div>
 <div class="image-wrap shadow-right">
 <img src="{{ asset(env('THEME')) }}/images/lg_image-jbb.jpg" data-srcset-base="{{ asset(env('THEME')) }}/images/" data-srcset-ext="_image-jbb.jpg" data-srcset="sm 1101w, md 1369w, lg 1400w" alt="" width="570" height="570">
@@ -94,8 +94,6 @@
  
 <section class="well-md text-center">
 <div class="container">
-
-<!-- <h1 class="section-head-right">Prices</h1> -->
 <div class="row text-sm-left">
 <div class="col-sm-6 col-sm-preffix-1 col-sm-push-2 wow fadeInUp">
 <div class="content">

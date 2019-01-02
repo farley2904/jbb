@@ -55,8 +55,9 @@ class ContactsController extends SiteController
 
     	$this->title = 'Контакты';
 
-        $header = view(env('THEME').'.header')->render();
-        $this->vars = array_add($this->vars,'header',$header); 
+        // $header = view(env('THEME').'.header')->render();
+        
+        // $this->vars = array_add($this->vars,'header',$header); 
 
 
         $hours = view(env('THEME').'.hours')->render();

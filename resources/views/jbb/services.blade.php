@@ -4,14 +4,8 @@
 	{!! $navigation !!}
 @endsection
 
-@section ('slider')
-	{!! $slider !!}
-@endsection
-
-@section ('content')
-	
+@section ('content')	
 	{!! $content !!}
-
 @endsection
 
 @section ('footer')

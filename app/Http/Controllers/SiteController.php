@@ -27,7 +27,7 @@ class SiteController extends Controller
 
 
     protected $keywords;
-    protected $meta_desc;
+    protected $meta_desc = '';
     protected $title = '';
 
     protected $template;
@@ -49,14 +49,23 @@ class SiteController extends Controller
 
     	$navigation = view(env('THEME').'.navigation')->with(['menu'=>$menu,'services'=>$services])->render();
 
-    	$this->vars = array_add($this->vars,'navigation',$navigation);
+        $this->vars = array_add($this->vars,'navigation',$navigation);
+
+        $logo_img = 'logo_pink.png';
+
+        $logo = view(env('THEME').'.logo')->with('logo_img',$logo_img)->render();
+
+        $this->vars = array_add($this->vars,'logo',$logo);
+
+
+        $header = view(env('THEME').'.header')->with('logo',$logo)->render();
+    	$this->vars = array_add($this->vars,'header',$header);
 
         $this->vars = array_add($this->vars,'keywords',$this->keywords);
         $this->vars = array_add($this->vars,'meta_desc',$this->meta_desc);
         $this->vars = array_add($this->vars,'title',$this->title);
 
         $sliderItem = $this->getSlider();
-        // dd($sliderItem);
 
         $slider = view(env('THEME').'.slider')->with('slider',$sliderItem)->render();
         $this->vars = array_add($this->vars,'slider',$slider);

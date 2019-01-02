@@ -3,24 +3,11 @@
 </div>
 <h4 class="card-title">{{$title}}</h4>
 <div class="row">
-	<div class="col-md-5 ">
-		<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-		<a href="#" class="btn btn-primary">Button</a>
-	</div>
-	<div class="col-md-7">
+	<div class="col-md-12 ">
 		<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 		<a href="#" class="btn btn-primary">Button</a>
 	</div>
 </div>
-
-<div class="row mt-4">
-    <div class="col col-example grey lightern-3">Column</div>
-    <div class="col col-example blue lightern-3">Column</div>
-    <div class="w-100"></div>
-    <div class="col col-example blue lightern-3">Column</div>
-    <div class="col col-example grey lightern-3">Column</div>
-  </div>
-
 
 <div class="row mt-4">
     <div class="col-md-4 blue lightern-3">

@@ -35,7 +35,7 @@
 	<header>
 		<nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
 			<div class="container-fluid">
-				<a href="{{ route('home') }}" class="navbar-brand waves-effect" target="_blank">
+				<a href="{{ route('home') }}" class="navbar-brand waves-effect">
 					<strong class="blue-text">{{ config('app.name', 'Jbb') }}</strong>
 				</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expended="false" aria-label="Toggle navigation">

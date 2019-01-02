@@ -4,14 +4,13 @@
 	{!! $navigation !!}
 @endsection
 
-@section ('slider')
-	{!! $slider !!}
+@section ('header')
+	{!! $logo !!}
 @endsection
 
 @section ('content')
 	{!! $content !!}
 @endsection
-
 
 @section ('footer')
 	{!! $footer !!}

@@ -152,7 +152,8 @@ html.boxed .page
 }
 html.lt-ie10 *+[class*='col-'],html.lt-ie10 *+.row,*+[class*='col-'],*+.row
 {
-	margin-top: 30px;
+	/*margin-top: 30px;*/
+	margin-top: 0px;
 }
 html.lt-ie10 .row-no-gutter,.row-no-gutter
 {
@@ -13431,6 +13432,7 @@ html.rd-navbar-fixed-linked body
 	position: absolute;
 	right: 0;
 	top: 0;
+	opacity: 0.6;
 }
 .rd-navbar-fixed .rd-navbar-toggle
 {

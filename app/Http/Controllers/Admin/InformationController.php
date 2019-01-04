@@ -51,7 +51,10 @@ class InformationController extends AdminController
      */
     public function store(Request $request)
     {
-        //
+        $path = $request->file('image')->store('uploads','public');
+        $this->title = 'Информация';
+        $this->content = view(env('THEME').'.admin.information_content')->with(['title'=>$this->title,'path'=>$path])->render(); 
+        return $this->renderOutput();
     }
 
     /**

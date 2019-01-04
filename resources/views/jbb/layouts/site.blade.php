@@ -4,7 +4,7 @@
 <title>{{ $title or config('app.name', 'Jbb') }}</title>
 <meta name="format-detection" content="telephone=no"/>
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0"/>
-<meta name="description" content="{{ $meta_desc }}"/>
+<meta name="description" content="@isset($meta_desc) $meta_desc @endisset"/>
 <link rel="icon" href="{{ asset(env('THEME')) }}/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="{{ asset(env('THEME')) }}/css/style.css" />
 <link rel="stylesheet" href="{{ asset(env('THEME')) }}/css/slider.css" />
@@ -30,19 +30,7 @@
 
                 @yield('navigation')
 
-                @if (count($errors) > 0)
-                    <div class="box error-box">
-                            @foreach ($errors->all() as $error)
-                                <p style="color:red" >{{ $error }}</p>
-                            @endforeach
-                    </div>
-                @endif
-
-                @if (session('status'))
-                    <div class="box success-box">
-                        <p style="color:green" >{{ session('status') }}</p>
-                    </div>
-                @endif
+               
                 
                 <div class="container">
                     @yield('header')      

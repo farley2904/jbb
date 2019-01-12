@@ -27,7 +27,7 @@ class SiteController extends Controller
 
 
     protected $keywords;
-    protected $meta_desc;
+    protected $meta_desc = '';
     protected $title = '';
 
     protected $template;

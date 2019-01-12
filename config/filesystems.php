@@ -42,6 +42,11 @@ return [
     */
 
     'disks' => [
+         //add disk 'images' for elfinder
+        'images' => [
+          'driver' => 'local',
+          'root'   => public_path(env('THEME').'/images'), // previously storage_path();
+        ],
 
         'local' => [
             'driver' => 'local',

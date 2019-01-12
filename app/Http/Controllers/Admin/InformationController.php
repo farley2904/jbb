@@ -29,6 +29,11 @@ class InformationController extends AdminController
     public function index()
     {   
         $this->title = 'Информация';
+
+        $environment = \App::environment();
+
+        //dump($environment);
+
         $this->content = view(env('THEME').'.admin.information_content')->with('title',$this->title)->render(); 
         return $this->renderOutput();
     }
@@ -50,7 +55,8 @@ class InformationController extends AdminController
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+        if($request->hasFile('image')){}
         $path = $request->file('image')->store('uploads','public');
         $this->title = 'Информация';
         $this->content = view(env('THEME').'.admin.information_content')->with(['title'=>$this->title,'path'=>$path])->render(); 

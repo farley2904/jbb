@@ -21,9 +21,13 @@
 	<!-- Your custom styles (optional) -->
 	<link href="{{ asset('mdb/css/style.css') }}" rel="stylesheet">
 
+	<link href="{{ asset('css/colorbox.css') }}" rel="stylesheet">
+
 	<script type="text/javascript" src="{{ asset('mdb/js/jquery-3.3.1.min.js') }}"></script>
 
-	<script type="text/javascript" src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>   
+	<script type="text/javascript" src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
+
+	<script type="text/javascript" src="{{ asset('js/jquery.colorbox-min.js') }}"></script>   
 
     <script>
         window.Laravel = {!! json_encode([
@@ -110,6 +114,8 @@
 	<script type="text/javascript" src="{{ asset('mdb/js/mdb.min.js') }}"></script>
 
 	<script src="{{ asset('js/bootstrap-filestyle.min.js') }}"></script>
+
+	<script type="text/javascript" src="/packages/barryvdh/elfinder/js/standalonepopup.min.js"></script>
 
 </body>
 </html>

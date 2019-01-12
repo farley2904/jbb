@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Mail;
 
 use Jbb\Service;
+use Jbb\Article;
 
 class IndexController extends SiteController
 {
@@ -26,8 +27,8 @@ class IndexController extends SiteController
      */
     public function index()
     {   
-        $this->title = 'Главная';
-        $this->meta_desc = 'Студия красоты и дизайна бровей Just Be Beautiful.Моделирование,окрашивание,ламинирование бровей, наращивание,ламинирование, биозавивка, окрашивание ресниц; экспресс, дневной, вечерний, свадебный makeup; различные плетения и экспресс прически, грим, моделирование, окрашивание, ламинирование бровей;';
+        $this->title = 'Just Be Beautiful - главная страница';
+        $this->meta_desc = 'Студия красоты и дизайна бровей Just Be Beautiful. Моделирование, окрашивание, ламинирование бровей, наращивание, ламинирование, биозавивка, окрашивание ресниц; экспресс, дневной, вечерний, свадебный makeup; различные плетения и экспресс прически, грим, моделирование, окрашивание, ламинирование бровей;';
         
 
         $services = Service::where('main', 1)->get();  

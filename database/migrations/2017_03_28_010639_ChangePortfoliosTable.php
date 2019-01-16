@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class ChangePortfoliosTable extends Migration
 {
@@ -16,7 +16,7 @@ class ChangePortfoliosTable extends Migration
         Schema::table('portfolios', function (Blueprint $table) {
             //
 
-            $table->string('filter_alias'); 
+            $table->string('filter_alias');
             $table->foreign('filter_alias')->references('alias')->on('filters');
         });
     }

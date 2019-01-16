@@ -2,9 +2,9 @@
 
 namespace Jbb\Policies;
 
-use Jbb\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Jbb\Article;
+use Jbb\User;
 
 class ArticlePolicy
 {
@@ -35,6 +35,4 @@ class ArticlePolicy
         return $user->canDo('DELETE_ARTICLES');
         // return ($user->canDo('DELETE_ARTICLES') && $user->id == $article->user_id); //удалить может только тот кто добавил
     }
-
-
 }

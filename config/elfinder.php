@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -39,8 +39,8 @@ return array(
     */
 
     'route' => [
-        'prefix' => 'elfinder',
-        'middleware' => null//'replace-this-with-your-middleware', //Set to null to disable middleware filter
+        'prefix'     => 'elfinder',
+        'middleware' => null, //'replace-this-with-your-middleware', //Set to null to disable middleware filter
     ],
 
     /*
@@ -76,8 +76,8 @@ return array(
     |
     */
 
-    'options' => array(),
-    
+    'options' => [],
+
     /*
     |--------------------------------------------------------------------------
     | Root Options
@@ -87,8 +87,8 @@ return array(
     | See https://github.com/Studio-42/elFinder/wiki/Connector-configuration-options-2.1#root-options
     |
     */
-    'root_options' => array(
+    'root_options' => [
 
-    ),
+    ],
 
-);
+];

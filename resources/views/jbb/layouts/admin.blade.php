@@ -11,7 +11,7 @@
     <title>{{ $title or config('app.name', 'JBB') }}</title>
 
 
-    <link rel="icon" href="{{ asset(env('THEME')) }}/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset(env('THEME')) }}/images/favicon.ico" type="image/x-icon">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<!-- Bootstrap core CSS -->

@@ -33,18 +33,6 @@ Route::get('login','Auth\LoginController@showLoginForm');
 Route::post('login',['uses'=>'Auth\LoginController@login','as' => 'login']);
 Route::match(['get', 'post'],'logout',['uses'=>'Auth\LoginController@logout','as'=>'logout']);
 
-Route::get('create', function() {
-    // $services = Jbb\Service::all();
-    // foreach ($services as $service) {
-    //     $service_tr = new Jbb\ServiceTranslation;
-    //     $service_tr->id = $service->id;
-    //     $service_tr->name = $service->name;
-    //     $service_tr->locale = 'ru';
-    //     $service_tr->service_id = $service->id;
-    //     $service_tr->save();
-    // }
-});
-
 //admin
 Route::group(['prefix'=>'admin','middleware' => 'auth','as'=>'admin.'],function(){
 
@@ -101,3 +89,14 @@ Route::get('clear-cache', function() {
     return redirect()->back();
 });
 
+// Route::get('create', function() {
+    // $services = Jbb\Service::all();
+    // foreach ($services as $service) {
+    //     $service_tr = new Jbb\ServiceTranslation;
+    //     $service_tr->id = $service->id;
+    //     $service_tr->name = $service->name;
+    //     $service_tr->locale = 'ru';
+    //     $service_tr->service_id = $service->id;
+    //     $service_tr->save();
+    // }
+// });

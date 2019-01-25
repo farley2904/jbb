@@ -10,6 +10,7 @@
 @endsection
 
 @section ('header')
+	{!! $logo !!}
 	{!! $header !!}
 @endsection
 

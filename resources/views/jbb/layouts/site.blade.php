@@ -6,7 +6,8 @@
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0"/>
 <meta name="description" content="{{ $meta_desc or ''}}"/>
 <link rel="canonical" href="{{ URL::current() }}"/>
-<link rel="icon" href="{{ asset(env('THEME')) }}/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="{{ asset(env('THEME')) }}/images/favicon.ico" type="image/x-icon">
+{{-- <!-- <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"> --> --}}
 <link rel="stylesheet" href="{{ asset(env('THEME')) }}/css/style.css" />
 <link rel="stylesheet" href="{{ asset(env('THEME')) }}/css/slider.css" />
 <script src="{{ asset(env('THEME')) }}/js/jquery.min.js"></script>

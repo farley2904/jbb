@@ -16,19 +16,16 @@ class UserRequest extends FormRequest
         return \Auth::user()->canDo('EDIT_USERS');
     }
 
-   
     protected function getValidatorInstance()
     {
         $validator = parent::getValidatorInstance();
-    
-        $validator->sometimes('password', 'required|min:6|confirmed', function($input)
-        {
-            
-            if(!empty($input->password) || ((empty($input->password) && $this->route()->getName() !== 'admin.users.update'))) {
-                return TRUE;
+
+        $validator->sometimes('password', 'required|min:6|confirmed', function ($input) {
+            if (!empty($input->password) || ((empty($input->password) && $this->route()->getName() !== 'admin.users.update'))) {
+                return true;
             }
-            
-            return FALSE;
+
+            return false;
         });
         // dd($validator);
         return $validator;
@@ -40,15 +37,15 @@ class UserRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {   
+    {
         $id = (isset($this->route()->parameter('users')->id)) ? $this->route()->parameter('users')->id : '';
 
         return [
-            'name' => 'required|max:255',
-            'login' => 'required|max:255',
-            'role_id' => 'required|integer',
-            'email' => 'required|email|max:255:unique:users,email,'.$id,
-            'password' => 'nullable'
+            'name'     => 'required|max:255',
+            'login'    => 'required|max:255',
+            'role_id'  => 'required|integer',
+            'email'    => 'required|email|max:255:unique:users,email,'.$id,
+            'password' => 'nullable',
         ];
     }
 }

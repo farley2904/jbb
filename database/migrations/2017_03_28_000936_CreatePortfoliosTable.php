@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreatePortfoliosTable extends Migration
 {
@@ -16,11 +16,11 @@ class CreatePortfoliosTable extends Migration
         Schema::create('portfolios', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('title',255);
+            $table->string('title', 255);
             $table->text('text');
 
-            $table->string('customer',150);
-            $table->string('alias',150)->unique();
+            $table->string('customer', 150);
+            $table->string('alias', 150)->unique();
 
             $table->string('img');
 

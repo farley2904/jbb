@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class ServiceTranslationsTable extends Migration
 {
@@ -21,10 +21,9 @@ class ServiceTranslationsTable extends Migration
             $table->string('name');
             // $table->text('text');
 
-            $table->unique(['service_id','locale']);
+            $table->unique(['service_id', 'locale']);
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
         });
-
     }
 
     /**

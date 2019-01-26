@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateFiltersTable extends Migration
 {
@@ -16,8 +16,8 @@ class CreateFiltersTable extends Migration
         Schema::create('filters', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('title',255);
-            $table->string('alias',150)->unique();
+            $table->string('title', 255);
+            $table->string('alias', 150)->unique();
 
             $table->timestamps();
         });

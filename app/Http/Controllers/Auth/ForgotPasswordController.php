@@ -2,8 +2,8 @@
 
 namespace Jbb\Http\Controllers\Auth;
 
-use Jbb\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use Jbb\Http\Controllers\Controller;
 
 class ForgotPasswordController extends Controller
 {

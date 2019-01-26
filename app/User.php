@@ -2,8 +2,8 @@
 
 namespace Jbb;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -27,37 +27,37 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function articles() {
+    public function articles()
+    {
         return $this->hasMany('Jbb\Article'); //один ко многим
     }
 
-      public function roles() {
-        return $this->belongsToMany('Jbb\Role','role_user'); //многие ко многим
+    public function roles()
+    {
+        return $this->belongsToMany('Jbb\Role', 'role_user'); //многие ко многим
     }
 
-        //  'string'  array('VIEW_ADMIN','ADD_ARTICLES')
+    //  'string'  array('VIEW_ADMIN','ADD_ARTICLES')
     //
-    public function canDo($permission, $require = FALSE) {
-        if(is_array($permission)) {
-            foreach($permission as $permName) {
-                
+    public function canDo($permission, $require = false)
+    {
+        if (is_array($permission)) {
+            foreach ($permission as $permName) {
                 $permName = $this->canDo($permName);
-                if($permName && !$require) {
-                    return TRUE;
+                if ($permName && !$require) {
+                    return true;
+                } elseif (!$permName && $require) {
+                    return false;
                 }
-                else if(!$permName  && $require) {
-                    return FALSE;
-                }               
             }
-            
+
             return  $require;
-        }
-        else {
-            foreach($this->roles as $role) {
-                foreach($role->permissions as $perm) {
+        } else {
+            foreach ($this->roles as $role) {
+                foreach ($role->permissions as $perm) {
                     //foo*    foobar
-                    if(str_is($permission,$perm->name)) {
-                        return TRUE;
+                    if (str_is($permission, $perm->name)) {
+                        return true;
                     }
                 }
             }
@@ -77,6 +77,7 @@ class User extends Authenticatable
                     return false;
                 }
             }
+
             return $require;
         } else {
             foreach ($this->roles as $role) {
@@ -88,6 +89,4 @@ class User extends Authenticatable
 
         return false;
     }
-
-    
 }

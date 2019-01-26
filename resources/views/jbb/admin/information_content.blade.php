@@ -1,4 +1,4 @@
-{{-- <h4 class="card-title">{{$title}}</h4> --}}
+<h4 class="card-title">{{$title}}</h4>
 
 <div class="row">
 	<div class="col-md-6 ">

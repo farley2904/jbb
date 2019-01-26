@@ -182,9 +182,6 @@ return [
 
         Barryvdh\Debugbar\ServiceProvider::class,
 
-
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-
         Collective\Html\HtmlServiceProvider::class,
 
         //image.intervention.com

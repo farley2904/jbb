@@ -14,16 +14,16 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,//посреддник для режима обслуживания
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \Jbb\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \Jbb\Http\Middleware\LocaleMiddleware::class,
+        \Jbb\Http\Middleware\LocaleMiddleware::class,//посрелник для локали
     ];
 
     /**
      * The application's route middleware groups.
-     *
+     * можно определить несколько посредников под одним именем
      * @var array
      */
     protected $middlewareGroups = [

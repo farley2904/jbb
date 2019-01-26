@@ -2,8 +2,6 @@
 
 return [
 
-
     'about' => 'Hello',
-    
 
 ];

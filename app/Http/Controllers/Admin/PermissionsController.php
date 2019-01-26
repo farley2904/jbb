@@ -2,15 +2,13 @@
 
 namespace Jbb\Http\Controllers\Admin;
 
+use Gate;
 use Illuminate\Http\Request;
-use Jbb\Http\Controllers\Admin\AdminController;
 use Jbb\Repositories\PermissionsRepository;
 use Jbb\Repositories\RolesRepository;
-use Gate;
 
 class PermissionsController extends AdminController
-{   
-
+{
     protected $per_rep;
     protected $rol_rep;
 
@@ -19,12 +17,11 @@ class PermissionsController extends AdminController
         parent::__construct();
 
         $this->middleware(function ($request, $next) {
-
-            if(Gate::denies('EDIT_USERS')) {
+            if (Gate::denies('EDIT_USERS')) {
                 abort(403);
             }
-            
-            return $next($request);  
+
+            return $next($request);
         });
 
         $this->per_rep = $per_rep;
@@ -44,17 +41,21 @@ class PermissionsController extends AdminController
         $permissions = $this->getPermissions();
 
         $this->content = view(env('THEME').'.admin.permissions_content')->with(['roles' => $roles, 'permissions' => $permissions]);
+
         return $this->renderOutput();
     }
 
     public function getRoles()
     {
         $roles = $this->rol_rep->get();
+
         return $roles;
     }
+
     public function getPermissions()
     {
         $permissions = $this->per_rep->get();
+
         return $permissions;
     }
 
@@ -71,7 +72,8 @@ class PermissionsController extends AdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -82,7 +84,8 @@ class PermissionsController extends AdminController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -93,7 +96,8 @@ class PermissionsController extends AdminController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -104,8 +108,9 @@ class PermissionsController extends AdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -116,7 +121,8 @@ class PermissionsController extends AdminController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

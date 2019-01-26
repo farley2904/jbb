@@ -9,15 +9,17 @@ class DebugBarMiddleware
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {   
-        if(!\Auth::check() || \Auth::user()->id !== 1) {
+    {
+        if (!\Auth::check() || \Auth::user()->id !== 1) {
             \Debugbar::disable();
         }
+
         return $next($request);
     }
 }

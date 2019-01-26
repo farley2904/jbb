@@ -27,7 +27,8 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
+     * @param \Exception $exception
+     *
      * @return void
      */
     public function report(Exception $exception)
@@ -38,35 +39,38 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param \Illuminate\Http\Request $request
+     * @param \Exception               $exception
+     *
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
-    {   
-        if($this->isHttpException($exception)) {
+    {
+        if ($this->isHttpException($exception)) {
             $statusCode = $exception->getStatusCode();
-            
-            switch($statusCode) {
-                case '404' :
 
-                $obj = new \Jbb\Http\Controllers\SiteController(new \Jbb\Repositories\MenusRepository(new \Jbb\Menu), new \Jbb\Repositories\SliderRepository(new \Jbb\Slider));
-                
-                $navigation = view(env('THEME').'.navigation')->with('menu',$obj->getMenu())->render();
+            switch ($statusCode) {
+                case '404':
+
+                $obj = new \Jbb\Http\Controllers\SiteController(new \Jbb\Repositories\MenusRepository(new \Jbb\Menu()), new \Jbb\Repositories\SliderRepository(new \Jbb\Slider()));
+
+                $navigation = view(env('THEME').'.navigation')->with('menu', $obj->getMenu())->render();
                 //принудительное логирование ошибки 404 и запись в лог
-                \Log::alert('Page not found - '. $request->url());
+                \Log::alert('Page not found - '.$request->url());
 
                 return response()->view(env('THEME').'.404', ['title' => 'Страница не найдена', 'navigation' => $navigation]);
             }
-        } 
+        }
+
         return parent::render($request, $exception);
     }
 
     /**
      * Convert an authentication exception into an unauthenticated response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Illuminate\Auth\AuthenticationException  $exception
+     * @param \Illuminate\Http\Request                 $request
+     * @param \Illuminate\Auth\AuthenticationException $exception
+     *
      * @return \Illuminate\Http\Response
      */
     protected function unauthenticated($request, AuthenticationException $exception)

@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateArticlesTable extends Migration
 {
@@ -15,10 +15,10 @@ class CreateArticlesTable extends Migration
     {
         Schema::create('articles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title',255);
+            $table->string('title', 255);
             $table->text('text');
             $table->text('desc');
-            $table->string('alias',150)->unique(); //унікальне
+            $table->string('alias', 150)->unique(); //унікальне
             $table->string('img');
             $table->timestamps();
         });

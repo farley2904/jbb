@@ -2,32 +2,30 @@
 
 namespace Jbb\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use Jbb\Http\Controllers\Controller;
 use Gate;
+use Jbb\Http\Requests\ServiceRequest;
 use Jbb\Service;
 use Jbb\ServiceCategory;
-use Jbb\Http\Requests\ServiceRequest;
+
 // use DB;
 
 class ServicesController extends AdminController
-{	
-
-	public function __construct()
+{
+    public function __construct()
     {
-    	parent::__construct();
+        parent::__construct();
 
         $this->middleware(function ($request, $next) {
-
-            if(Gate::denies('VIEW_ADMIN_SERVICES')) {
+            if (Gate::denies('VIEW_ADMIN_SERVICES')) {
                 abort(403);
             }
 
-            return $next($request);  
+            return $next($request);
         });
 
-    	$this->template = env('THEME').'.admin.services';
+        $this->template = env('THEME').'.admin.services';
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,16 +33,14 @@ class ServicesController extends AdminController
      */
     public function index()
     {
-    	
         $this->title = 'Услуги и цены';
-                
 
-        $services = Service::select(['id','price','service_category_id'])->orderBy('id','desc')->get();
-        $categories = ServiceCategory::select(['id','name'])->get();
+        $services = Service::select(['id', 'price', 'service_category_id'])->orderBy('id', 'desc')->get();
+        $categories = ServiceCategory::select(['id', 'name'])->get();
         $services->load('serviceCategory');
-        $this->content = view(env('THEME').'.admin.services_content')->with(['services'=>$services,'categories'=>$categories])->render();
-    	return $this->renderOutput();
+        $this->content = view(env('THEME').'.admin.services_content')->with(['services'=>$services, 'categories'=>$categories])->render();
 
+        return $this->renderOutput();
     }
 
     /**
@@ -58,36 +54,37 @@ class ServicesController extends AdminController
         //   if(Gate::denies('save', new Article)) {
         //     abort(403);
         // }
-		
+
         $this->title = 'Добавить новый сервис';
 
-        $categories = ServiceCategory::select(['id','name'])->get();
+        $categories = ServiceCategory::select(['id', 'name'])->get();
 
-        $lists = array();
+        $lists = [];
 
         foreach ($categories as $category) {
-                $lists[$category->id] = $category->name;
+            $lists[$category->id] = $category->name;
         }
 
-        $this->content = view(env('THEME').'.admin.services_create_content')->with('categories',$lists)->render();
-        return $this->renderOutput();
+        $this->content = view(env('THEME').'.admin.services_create_content')->with('categories', $lists)->render();
 
+        return $this->renderOutput();
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(ServiceRequest $request)
     {
-    	$services = Service::all();
+        $services = Service::all();
 
-    	$service = new Service;
+        $service = new Service();
 
-    	$service->id = $services->count()+1;
-    	
+        $service->id = $services->count() + 1;
+
         $service->name = $request->name;
 
         \App::setLocale('ua');
@@ -110,33 +107,35 @@ class ServicesController extends AdminController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-       //echo $id;
+        //echo $id;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Service $service)
-    {	
-    	$categories = ServiceCategory::select(['id','name'])->get();
+    {
+        $categories = ServiceCategory::select(['id', 'name'])->get();
 
-        $lists = array();
+        $lists = [];
 
         foreach ($categories as $category) {
             $lists[$category->id] = $category->name;
         }
 
-		$this->title = 'Редактирование материала -'.$service->name;
+        $this->title = 'Редактирование материала -'.$service->name;
 
-		$this->content = view(env('THEME').'.admin.services_create_content')->with(['categories'=>$lists, 'service'=>$service ])->render();
+        $this->content = view(env('THEME').'.admin.services_create_content')->with(['categories'=>$lists, 'service'=>$service])->render();
 
         return $this->renderOutput();
     }
@@ -144,8 +143,9 @@ class ServicesController extends AdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(ServiceRequest $request, Service $service)
@@ -160,10 +160,9 @@ class ServicesController extends AdminController
 
         $service->service_category_id = $request->service_category_id;
 
-
-        if ($request->main !=null) {
+        if ($request->main != null) {
             $service->main = true;
-        }else{
+        } else {
             $service->main = false;
         }
 
@@ -175,17 +174,16 @@ class ServicesController extends AdminController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $service = Service::find($id);
 
-		$service->delete();
+        $service->delete();
 
-		return redirect('admin/services')->with(['status' => 'Сервис успешно удален']);
-
-
+        return redirect('admin/services')->with(['status' => 'Сервис успешно удален']);
     }
 }

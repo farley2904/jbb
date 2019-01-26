@@ -2,12 +2,12 @@
 
 namespace Jbb\Providers;
 
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 use Jbb\Article;
-use Jbb\User;
 use Jbb\Policies\ArticlePolicy;
 use Jbb\Policies\UserPolicy;
+use Jbb\User;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -19,7 +19,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         // 'Jbb\Model' => 'Jbb\Policies\ModelPolicy',
         Article::class => ArticlePolicy::class, //политика безопастности для модели Article
-        User::class => UserPolicy::class //политика безопастности для модели Article
+        User::class    => UserPolicy::class, //политика безопастности для модели Article
     ];
 
     /**
@@ -32,23 +32,23 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('VIEW_ADMIN', function ($user) {
-            return $user->canDo('VIEW_ADMIN', FALSE);// canDo возврвщает истину если у пользоветеля есть соответствующее право
-        });//true/false - все правила либо одно из заданых правил 
+            return $user->canDo('VIEW_ADMIN', false); // canDo возврвщает истину если у пользоветеля есть соответствующее право
+        }); //true/false - все правила либо одно из заданых правил
         Gate::define('VIEW_ADMIN_ARTICLES', function ($user) {
-            return $user->canDo('VIEW_ADMIN_ARTICLES', FALSE);
+            return $user->canDo('VIEW_ADMIN_ARTICLES', false);
         });
         Gate::define('EDIT_USERS', function ($user) {
-            return $user->canDo('EDIT_USERS', FALSE);
+            return $user->canDo('EDIT_USERS', false);
         });
         Gate::define('VIEW_ADMIN_MENU', function ($user) {
-            return $user->canDo('VIEW_ADMIN_MENU', FALSE);
+            return $user->canDo('VIEW_ADMIN_MENU', false);
         });
-         Gate::define('VIEW_ADMIN_SERVICES', function ($user) {
-            return $user->canDo('VIEW_ADMIN_SERVICES', FALSE);
+        Gate::define('VIEW_ADMIN_SERVICES', function ($user) {
+            return $user->canDo('VIEW_ADMIN_SERVICES', false);
         });
 
         Gate::define('VIEW_ADMIN_INFORMATION', function ($user) {
-            return $user->canDo('VIEW_ADMIN_INFORMATION', FALSE);
+            return $user->canDo('VIEW_ADMIN_INFORMATION', false);
         });
     }
 }

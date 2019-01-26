@@ -7,17 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 class Article extends Model
 {
     //поля которые разрешены к массовому заполнению;
-    protected $fillable = ['title','img','alias','text','desc','category_id'];
+    protected $fillable = ['title', 'img', 'alias', 'text', 'desc', 'category_id'];
 
-    public function user() {
+    public function user() 
+    {
     	return $this->belongsTo('Jbb\User'); //принадлежит к
     }
 
-    public function category() {
+    public function category() 
+    {
     	return $this->belongsTo('Jbb\Category');
     }
 
-     public function comments() {
+     public function comments() 
+    {
     	return $this->hasMany('Jbb\Comment');
     }
 }

@@ -85,7 +85,7 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
-    'status' => 'Повідомлення відправлено',
+    'status'               => 'Повідомлення відправлено',
 
     /*
     |--------------------------------------------------------------------------
@@ -117,8 +117,8 @@ return [
 
     'attributes' => [
         'email' => 'Email',
-        'name' => 'Ім\'я',
-        'text' => 'Текст',
+        'name'  => 'Ім\'я',
+        'text'  => 'Текст',
 
     ],
 

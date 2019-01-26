@@ -2,162 +2,148 @@
 
 namespace Jbb\Repositories;
 
-use Jbb\Article;
+use Config;
 use Gate;
 use Image;
-use Config;
+use Jbb\Article;
 
-class ArticlesRepository extends Repository {
+class ArticlesRepository extends Repository
+{
+    public function __construct(Article $articles)
+    {
+        $this->model = $articles;
+    }
 
-	public function __construct(Article $articles){
-		$this->model = $articles;
-	}
+    public function one($alias, $attr = [])
+    {
+        $article = parent::one($alias, $attr);
 
-	public function one($alias,$attr = array()) {
-		$article = parent::one($alias,$attr);
-		
-		if($article && !empty($attr)) {
-			$article->load('comments');
-			$article->comments->load('user');
-		}
-		
-		return $article;
-	}
+        if ($article && !empty($attr)) {
+            $article->load('comments');
+            $article->comments->load('user');
+        }
 
-	public function addArticle($request){
-		//проверка прав на сохранение
-		if(Gate::denies('save', $this->model)){
-			abort(403);
-		}
-		//исключение полей
-		$data = $request->except('_token','image');
+        return $article;
+    }
 
-		if(empty($data)) {
-			return array('error' => 'Нет данных');
-		}
+    public function addArticle($request)
+    {
+        //проверка прав на сохранение
+        if (Gate::denies('save', $this->model)) {
+            abort(403);
+        }
+        //исключение полей
+        $data = $request->except('_token', 'image');
 
-		//если поле alias пустое
-		if(empty($data['alias'])) {
-			$data['alias'] = $this->transliterate($data['title']);
-			
-		}
-		
+        if (empty($data)) {
+            return ['error' => 'Нет данных'];
+        }
 
-		if($this->one($data['alias'],FALSE)) {
+        //если поле alias пустое
+        if (empty($data['alias'])) {
+            $data['alias'] = $this->transliterate($data['title']);
+        }
 
+        if ($this->one($data['alias'], false)) {
+            $request->merge(['alias' => $data['alias']]);
 
-			$request->merge(array('alias' => $data['alias']));	
+            $request->flash();
 
-			$request->flash();
+            return ['error' => 'Данный псевдоним уже используется'];
+        }
 
-			return ['error' => 'Данный псевдоним уже используется'];
-		}
+        // dd($request);
 
-			// dd($request);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
 
-		if ($request->hasFile('image')) {
-			
-			$image = $request->file('image');
+            if ($image->isValid()) {
+                $str = str_random(8);
 
-			if ($image->isValid()) {
+                $obj = new \stdClass(); //создаем пустой обьект
 
-				$str = str_random(8);
+                $obj->path = $str.'.jpg';
 
-				$obj = new \stdClass; //создаем пустой обьект
+                // dd($obj);
 
-				$obj->path = $str.'.jpg';
+                $img = Image::make($image);
 
-				// dd($obj);
+                $img->fit(Config::get('settings.image')['width'], Config::get('settings.image')['height'])->save(public_path().'/'.env('THEME').Config::get('settings.path').$obj->path); // /images/articles тоже лучьше хранить в настройках
 
-				$img = Image::make($image);
+                $data['img'] = $obj->path;
+            }
+        } else {
+            $data['img'] = 'default.png';
+        }
 
-				$img->fit(Config::get('settings.image')['width'], Config::get('settings.image')['height'])->save(public_path().'/'.env('THEME').Config::get('settings.path').$obj->path); // /images/articles тоже лучьше хранить в настройках
+        $this->model->fill($data);
 
-				$data['img'] = $obj->path;
+        if ($request->user()->articles()->save($this->model)) {
+            return ['status' =>'Материал успешно добавлен'];
+        }
+    }
 
-			}
-		} else {
-			$data['img'] = 'default.png';
-		}
+    public function updateArticle($request, $article)
+    {
+        //проверка прав на сохранение
+        if (Gate::denies('edit', $this->model)) {
+            abort(403);
+        }
+        //исключение полей
+        $data = $request->except('_token', 'image', '_method');
 
-		$this->model->fill($data);
+        if (empty($data)) {
+            return ['error' => 'Нет данных'];
+        }
 
-		if ($request->user()->articles()->save($this->model)) {
-			return ['status' =>'Материал успешно добавлен'];
-		}
-	}
+        //если поле alias пустое
+        if (empty($data['alias'])) {
+            $data['alias'] = $this->transliterate($data['title']);
+        }
 
+        $result = $this->one($data['alias'], false);
 
-	public function updateArticle($request, $article){
-		//проверка прав на сохранение
-		if(Gate::denies('edit', $this->model)){
-			abort(403);
-		}
-		//исключение полей
-		$data = $request->except('_token','image','_method');
+        if (isset($result->id) && ($result->id != $article->id)) {
+            $request->merge(['alias' => $data['alias']]);
 
-		if(empty($data)) {
-			return array('error' => 'Нет данных');
-		}
+            $request->flash();
 
-		//если поле alias пустое
-		if(empty($data['alias'])) {
-			$data['alias'] = $this->transliterate($data['title']);
-			
-		}
-		
+            return ['error' => 'Данный псевдоним уже используется'];
+        }
 
-		$result = $this->one($data['alias'],FALSE);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
 
-		if(isset($result->id) && ($result->id != $article->id)) {
+            if ($image->isValid()) {
+                $str = str_random(8);
+                $obj = new \stdClass(); //создаем пустой обьект
+                $obj->path = $str.'.jpg';
 
+                $img = Image::make($image);
 
-			$request->merge(array('alias' => $data['alias']));	
+                $img->save(public_path().'/'.env('THEME').Config::get('settings.path').$obj->path); // /images/articles тоже лучьше хранить в настройках
 
-			$request->flash();
+                $data['img'] = $obj->path;
+            }
+        }
 
-			return ['error' => 'Данный псевдоним уже используется'];
-		}
+        $article->fill($data);
 
-		if ($request->hasFile('image')) {
-			$image = $request->file('image');
+        if ($article->update()) {
+            return ['status' =>'Материал успешно обновлен'];
+        }
+    }
 
-			if ($image->isValid()) {
-				$str = str_random(8);
-				$obj = new \stdClass; //создаем пустой обьект
-				$obj->path = $str.'.jpg';
+    public function deleteArticle($article)
+    {
+        if (Gate::denies('destroy', $article)) {
+            abort(403);
+        }
 
-				$img = Image::make($image);
+        $article->comments()->delete(); //удаление привязаных коментариев
 
-				$img->save(public_path().'/'.env('THEME').Config::get('settings.path').$obj->path); // /images/articles тоже лучьше хранить в настройках
-
-				$data['img'] = $obj->path;
-
-			}
-		}
-
-		$article->fill($data);
-
-		if ($article->update()) {
-			return ['status' =>'Материал успешно обновлен'];
-		}
-
-	}
-
-	public function deleteArticle($article)
-	{
-		if (Gate::denies('destroy', $article)) {
-			abort(403);
-		}
-
-		$article->comments()->delete(); //удаление привязаных коментариев
-
-		if ($article->delete()) {
-			return ['status' => 'Материал успешно удален'];
-		}
-	}
-	
+        if ($article->delete()) {
+            return ['status' => 'Материал успешно удален'];
+        }
+    }
 }
-
-
-?>

@@ -11,20 +11,18 @@ class Service extends Model
     public $timestamps = false;
 
     protected $fillable = [
-       'id', 'price', 'service_category_id', 'main'
+       'id', 'price', 'service_category_id', 'main',
     ];
 
     public $translatedAttributes = ['name'];
 
- 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-
-    public function serviceCategory() {
-    	return $this->belongsTo('Jbb\ServiceCategory');
+    public function serviceCategory()
+    {
+        return $this->belongsTo('Jbb\ServiceCategory');
     }
-
 }

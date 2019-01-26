@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class SettingsTable extends Migration
 {
@@ -15,7 +15,7 @@ class SettingsTable extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->increments('settings_id');
-            $table->string('key',64);
+            $table->string('key', 64);
             $table->text('value');
             $table->timestamps();
         });

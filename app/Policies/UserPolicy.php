@@ -2,8 +2,8 @@
 
 namespace Jbb\Policies;
 
-use Jbb\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Jbb\User;
 
 class UserPolicy
 {
@@ -18,10 +18,12 @@ class UserPolicy
     {
         //
     }
+
     public function create(User $user)
     {
         return $user->can('EDIT_USERS');
     }
+
     public function edit(User $user)
     {
         return $user->can('EDIT_USERS');

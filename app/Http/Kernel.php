@@ -14,16 +14,17 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,//посреддник для режима обслуживания
+        \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class, //посреддник для режима обслуживания
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \Jbb\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \Jbb\Http\Middleware\LocaleMiddleware::class,//посрелник для локали
+        \Jbb\Http\Middleware\LocaleMiddleware::class, //посрелник для локали
     ];
 
     /**
      * The application's route middleware groups.
      * можно определить несколько посредников под одним именем
+     *
      * @var array
      */
     protected $middlewareGroups = [
@@ -53,11 +54,11 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
+        'auth'       => \Illuminate\Auth\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \Jbb\Http\Middleware\RedirectIfAuthenticated::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'bindings'   => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'can'        => \Illuminate\Auth\Middleware\Authorize::class,
+        'guest'      => \Jbb\Http\Middleware\RedirectIfAuthenticated::class,
+        'throttle'   => \Illuminate\Routing\Middleware\ThrottleRequests::class,
     ];
 }

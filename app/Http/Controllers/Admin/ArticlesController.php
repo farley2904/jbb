@@ -2,13 +2,11 @@
 
 namespace Jbb\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use Jbb\Http\Controllers\Controller;
-use Jbb\Repositories\ArticlesRepository;
 use Gate;
+use Jbb\Article;
 use Jbb\Category;
 use Jbb\Http\Requests\ArticleRequest;
-use Jbb\Article;
+use Jbb\Repositories\ArticlesRepository;
 
 class ArticlesController extends AdminController
 {
@@ -17,18 +15,16 @@ class ArticlesController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-
     public function __construct(ArticlesRepository $a_rep)
     {
         parent::__construct();
 
         $this->middleware(function ($request, $next) {
-
-            if(Gate::denies('VIEW_ADMIN_ARTICLES')) {
+            if (Gate::denies('VIEW_ADMIN_ARTICLES')) {
                 abort(403);
             }
-            
-            return $next($request);  
+
+            return $next($request);
         });
 
         $this->a_rep = $a_rep;
@@ -42,17 +38,17 @@ class ArticlesController extends AdminController
 
         $articles = $this->getArticles();
 
-        $this->content = view(env('THEME').'.admin.articles_content')->with('articles',$articles)->render(); 
+        $this->content = view(env('THEME').'.admin.articles_content')->with('articles', $articles)->render();
 
         return $this->renderOutput();
-
     }
 
-    public function getArticles($alias = FALSE){
-        $articles = $this->a_rep->get(['id','title','desc','alias','img','category_id','created_at'],TRUE);
+    public function getArticles($alias = false)
+    {
+        $articles = $this->a_rep->get(['id', 'title', 'desc', 'alias', 'img', 'category_id', 'created_at'], true);
 
-        if($articles) {
-            $articles->load('category');//связаные модели
+        if ($articles) {
+            $articles->load('category'); //связаные модели
         }
 
         return $articles;
@@ -65,22 +61,22 @@ class ArticlesController extends AdminController
      */
     public function create()
     {
-        if(Gate::denies('save', new Article)) {
+        if (Gate::denies('save', new Article())) {
             abort(403);
         }
 
         $this->title = 'Добавить новый материал';
 
         //в майбутньому створити репозиторій
-        $categories = Category::select(['title','alias','parent_id','id'])->get();
+        $categories = Category::select(['title', 'alias', 'parent_id', 'id'])->get();
 
-        $lists = array();
+        $lists = [];
 
         foreach ($categories as $category) {
-            if($category->parent_id == 0) {
-                $lists[$category->title] = array();
+            if ($category->parent_id == 0) {
+                $lists[$category->title] = [];
             } else {
-                $lists[$categories->where('id',$category->parent_id)->first()->title][$category->id] = $category->title;
+                $lists[$categories->where('id', $category->parent_id)->first()->title][$category->id] = $category->title;
             }
         }
 
@@ -94,7 +90,8 @@ class ArticlesController extends AdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(ArticleRequest $request)
@@ -108,13 +105,13 @@ class ArticlesController extends AdminController
         }
 
         return redirect('admin/articles')->with($result);
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -125,26 +122,27 @@ class ArticlesController extends AdminController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article) 
+    public function edit(Article $article)
     {
         //$article = Article::where('alias',$alias);
 
-        if (Gate::denies('edit', new Article)) {
+        if (Gate::denies('edit', new Article())) {
             abort(403);
         }
 
-        $categories = Category::select(['title','alias','parent_id','id'])->get();
+        $categories = Category::select(['title', 'alias', 'parent_id', 'id'])->get();
 
-        $lists = array();
+        $lists = [];
 
         foreach ($categories as $category) {
-            if($category->parent_id == 0) {
-                $lists[$category->title] = array();
+            if ($category->parent_id == 0) {
+                $lists[$category->title] = [];
             } else {
-                $lists[$categories->where('id',$category->parent_id)->first()->title][$category->id] = $category->title;
+                $lists[$categories->where('id', $category->parent_id)->first()->title][$category->id] = $category->title;
             }
         }
         // dd($article->img);
@@ -158,8 +156,9 @@ class ArticlesController extends AdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(ArticleRequest $request, Article $article)
@@ -171,13 +170,13 @@ class ArticlesController extends AdminController
         }
 
         return redirect('admin/articles')->with($result);
-
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Article $article)

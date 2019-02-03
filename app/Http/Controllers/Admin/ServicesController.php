@@ -83,7 +83,7 @@ class ServicesController extends AdminController
 
         $service = new Service();
 
-        $service->id = $services->count() + 1;
+        // $service->id = $services->count() + 1;
 
         $service->name = $request->name;
 

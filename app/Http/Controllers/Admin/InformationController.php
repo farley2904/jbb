@@ -4,6 +4,7 @@ namespace Jbb\Http\Controllers\Admin;
 
 use Gate;
 use Illuminate\Http\Request;
+use Jbb\Information;
 
 class InformationController extends AdminController
 {
@@ -28,9 +29,9 @@ class InformationController extends AdminController
     {
         $this->title = 'Информация';
 
-        $environment = \App::environment();
+        $information = Information::all();
 
-        //dump($environment);
+        dump($information);
 
         $this->content = view(env('THEME').'.admin.information_content')->with('title', $this->title)->render();
 
@@ -55,12 +56,38 @@ class InformationController extends AdminController
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        if ($request->hasFile('image')) {
+    { 
+
+        // dump($request->all());
+        $data = $request->except('_token');
+
+        if (empty($data)) {
+            dump('Нет данных');
         }
-        $path = $request->file('image')->store('uploads', 'public');
+
+
+
+        if ($request->has('logo_image')) {
+
+            $logo_image = $request->input('logo_image');
+        }
+
+        if ($request->has('name')) {
+
+            $name = $request->input('name');
+        }
+
+        if ($request->has('description')) {
+
+            $description = $request->input('description');
+            // dd($request->header());
+            // dd($request->server());
+        }
+
+        $request->flash();
+
         $this->title = 'Информация';
-        $this->content = view(env('THEME').'.admin.information_content')->with(['title'=>$this->title, 'path'=>$path])->render();
+        $this->content = view(env('THEME').'.admin.information_content')->with(['title'=>$this->title, 'path'=>''])->render();
 
         return $this->renderOutput();
     }
@@ -74,7 +101,7 @@ class InformationController extends AdminController
      */
     public function show($id)
     {
-        //
+        echo $id;
     }
 
     /**

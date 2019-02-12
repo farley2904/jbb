@@ -56,7 +56,7 @@ class InformationController extends AdminController
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { 
+    {
 
         // dump($request->all());
         $data = $request->except('_token');
@@ -65,20 +65,15 @@ class InformationController extends AdminController
             dump('Нет данных');
         }
 
-
-
         if ($request->has('logo_image')) {
-
             $logo_image = $request->input('logo_image');
         }
 
         if ($request->has('name')) {
-
             $name = $request->input('name');
         }
 
         if ($request->has('description')) {
-
             $description = $request->input('description');
             // dd($request->header());
             // dd($request->server());

@@ -4,7 +4,7 @@ namespace Jbb;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Information extends Model
+class Setting extends Model
 {
     protected $table = 'settings';
 }

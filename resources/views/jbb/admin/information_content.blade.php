@@ -19,20 +19,20 @@
 				<p class="h4 mb-2 mt-4">Общая</p>
 			     <!-- elfinder popup -->
 			    <div class="mb-2">
-			    	<a  href="" class="popup_selector" data-inputid="feature_image">Загрузить логотип</a>
+			    	<a  href="" class="popup_selector" data-inputid="logo_image">Загрузить логотип</a>
 			    	<img src="" alt="" >
-					<input type="text" id="feature_image" class="form-control mb-4" name="feature_image" value="{{old('feature_image')}}">
+					<input type="text" id="logo_image" class="form-control mb-4" name="logo_image" value="{{old('logo_image')}}">
 			    </div>
 
 
 			    <!-- Site name -->
-			    <label>Название</label>
+			    <label>Название:</label>
 			    <input type="text" id="" class="form-control mb-4" placeholder="Введите название сайта" name="name" value="{{old('name')}}">
 
-			    <label>Краткое описание</label>
-			    <input type="text" id="" class="form-control mb-4" placeholder="Введите краткое описание" name="description" value="{{old('description')}}">
+			    <label>Слоган:</label>
+			    <input type="text" id="" class="form-control mb-4" placeholder="Введите cлоган сайта" name="slogan" value="{{old('slogan')}}">
 
-			    <label>O Нас</label>
+			    <label>O Нас:</label>
 			    <div class="form-group">
 			        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Информация о нас" name="about_us">{{old('about_us')}}</textarea>
 			    </div>
@@ -41,13 +41,36 @@
 			    <div class="form-group">
 			        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Введите описание для поисковых систем" name="meta_description">{{old('meta_description')}}</textarea>
 			    </div>
+
+			    <label></label>
+			    <p class="h4 mb-2">Время работы</p>
+			    <label>Пн-Сб</label>
+				<div class="row">
+					<div class="col">
+						<input type="time" class="form-control" id="worktime" name="worktime">
+					</div>
+					<div class="col">
+						<input type="time" class="form-control" id="worktime" name="worktime">
+					</div>
+				</div>
 			     
+			     <label>Вс</label>
+				<div class="row mb-4">
+					<div class="col">
+						<input type="time" class="form-control" id="worktime" name="worktime">
+					</div>
+					<div class="col">
+						<input type="time" class="form-control" id="worktime" name="worktime">
+					</div>
+				</div>			     
 
 			    <p class="h4 mb-2">Контакты</p>
 			    <!-- Adress -->
+			    <label>Адресс:</label>
 			    <input type="text" id="" class="form-control mb-4" placeholder="Адресс" name="adress" value="{{old('adress')}}">
 
 			    <!-- Telephone -->
+			    <label>Телефоны:</label>
 			    <input type="text" id="" class="form-control mb-4" placeholder="Телефон 1" name="tel_1" value="{{old('tel_1')}}">
 			    <input type="text" id="" class="form-control mb-4" placeholder="Телефон 2" name="tel_2" value="{{old('tel_2')}}">
 
@@ -58,16 +81,45 @@
 			        <label class="custom-control-label" for="soc">Показать соцсети</label>
 			    </div>
 
+			    
 			  </div>
 
 			  
 			  <div class="tab-pane fade" id="ua" role="tabpanel" aria-labelledby="ua-tab">
 			  	!!!УКРАЇНСЬКА!!!
+
+
+
+
+				@foreach ($information as $setting)
+
+				@if($setting->key == 'logo_img')
+
+						</br>{{ $setting->value }}
+				@endif
+
+				@if($setting->key == 'name')
+
+						</br>{{ $setting->value }}
+				@endif
+
+				@endforeach
+
 			  	<!-- Default switch -->
 				<div class="custom-control custom-switch mb-4">
 				  <input type="checkbox" class="custom-control-input" id="customSwitches">
 				  <label class="custom-control-label" for="customSwitches"></label>
 				</div>
+				<select class="custom-select">
+				  <option selected>Open this select menu</option>
+				  <option value="1">One</option>
+				  <option value="2">Two</option>
+				  <option value="3">Three</option>
+				</select>
+
+				<label for="customRange1">Example range</label>
+				<input type="range" class="custom-range" id="customRange1">
+
 			  </div>
 			</div>
 

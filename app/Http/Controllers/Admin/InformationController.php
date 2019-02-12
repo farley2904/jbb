@@ -4,7 +4,7 @@ namespace Jbb\Http\Controllers\Admin;
 
 use Gate;
 use Illuminate\Http\Request;
-use Jbb\Information;
+use Jbb\Setting;
 
 class InformationController extends AdminController
 {
@@ -29,11 +29,15 @@ class InformationController extends AdminController
     {
         $this->title = 'Информация';
 
-        $information = Information::all();
+        $information = Setting::all();
 
-        dump($information);
+        // foreach ($information as $setting) {
 
-        $this->content = view(env('THEME').'.admin.information_content')->with('title', $this->title)->render();
+        //     $settings[$setting->key] = $setting->value;
+        // }
+        //  dump($settings);
+
+        $this->content = view(env('THEME').'.admin.information_content')->with(['title'=>$this->title,'information'=>$information])->render();
 
         return $this->renderOutput();
     }
@@ -55,9 +59,10 @@ class InformationController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Information $info)
     { 
 
+        dump($info->settings_id);
         // dump($request->all());
         $data = $request->except('_token');
 

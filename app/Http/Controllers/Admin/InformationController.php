@@ -5,6 +5,7 @@ namespace Jbb\Http\Controllers\Admin;
 use Gate;
 use Illuminate\Http\Request;
 use Jbb\Setting;
+use Cache;
 
 class InformationController extends AdminController
 {
@@ -59,7 +60,7 @@ class InformationController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,Information $info)
+    public function store(Request $request,Setting $info)
     { 
 
         dump($info->settings_id);
@@ -90,6 +91,8 @@ class InformationController extends AdminController
         }
 
         $request->flash();
+
+        Cache::flush();
 
         $this->title = 'Информация';
         $this->content = view(env('THEME').'.admin.information_content')->with(['title'=>$this->title, 'path'=>''])->render();

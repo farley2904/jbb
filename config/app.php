@@ -193,6 +193,9 @@ return [
         //elFinder filemanager
         Barryvdh\Elfinder\ElfinderServiceProvider::class,
 
+        Jbb\Providers\SettingsServiceProvider::class,
+
+
     ],
 
     /*

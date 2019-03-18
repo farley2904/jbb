@@ -4,6 +4,10 @@
 	{!! $navigation !!}
 @endsection
 
+@section ('header')
+	{!! $logo !!}
+@endsection
+
 @section ('content')	
 	{!! $content !!}
 @endsection

@@ -32,11 +32,11 @@ class InformationController extends AdminController
 
         $information = Setting::all();
 
-        // foreach ($information as $setting) {
+        foreach ($information as $setting) {
 
-        //     $settings[$setting->key] = $setting->value;
-        // }
-        //  dump($settings);
+            $settings[$setting->key] = $setting->value;
+        }
+         // dump($settings);
 
         $this->content = view(env('THEME').'.admin.information_content')->with(['title'=>$this->title,'information'=>$information])->render();
 
@@ -63,7 +63,7 @@ class InformationController extends AdminController
     public function store(Request $request,Setting $info)
     { 
 
-        dump($info->settings_id);
+        // dump($info->settings_id);
         // dump($request->all());
         $data = $request->except('_token');
 

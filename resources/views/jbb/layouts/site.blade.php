@@ -5,6 +5,7 @@
 <meta name="format-detection" content="telephone=no"/>
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0"/>
 <meta name="description" content="{{ $meta_desc or ''}}"/>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="canonical" href="{{ URL::current() }}"/>
 <link rel="shortcut icon" href="{{ asset(env('THEME')) }}/images/favicon.ico" type="image/x-icon">
 {{-- <!-- <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"> --> --}}

@@ -19,9 +19,9 @@
 				<p class="h4 mb-2 mt-4">Общая</p>
 			     <!-- elfinder popup -->
 			    <div class="mb-2">
-			    	<a  href="" class="popup_selector" data-inputid="logo_image">Загрузить логотип</a>
-			    	<img src="" alt="" >
-					<input type="text" id="logo_image" class="form-control mb-4" name="logo_image" value="{{old('logo_image')}}">
+			    	<a  href="" class="popup_selector" data-inputid="logo_image">Загрузить логотип</a><br>
+			    	<img src="{{ asset(env('THEME')) }}/{{ old('logo_image') }}" alt=""  width="100px" height="100px">
+					<input type="hidden" id="logo_image" class="form-control mb-4" name="logo_image" value="{{old('logo_image')}}">
 			    </div>
 
 
@@ -90,20 +90,21 @@
 
 
 
+			  	@if(isset($information))
+					@foreach ($information as $setting)
 
-				@foreach ($information as $setting)
+						@if($setting->key == 'logo_img')
 
-				@if($setting->key == 'logo_img')
+								</br>{{ $setting->value }}
+						@endif
 
-						</br>{{ $setting->value }}
+						@if($setting->key == 'name')
+
+								</br>{{ $setting->value }}
+						@endif
+
+					@endforeach
 				@endif
-
-				@if($setting->key == 'name')
-
-						</br>{{ $setting->value }}
-				@endif
-
-				@endforeach
 
 			  	<!-- Default switch -->
 				<div class="custom-control custom-switch mb-4">

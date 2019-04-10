@@ -15,7 +15,7 @@
 	{!! $contact_form !!}
 
 	@if (!Auth::guest())
-	{!! $slider !!}
+	{{-- {!! $slider !!} --}}
 	@endif
 @endsection
 

@@ -28,10 +28,10 @@ class SiteController extends Controller
 
     protected $bar = false;
 
-    public function __construct(MenusRepository $m_rep, SliderRepository $s_rep)
+    public function __construct(MenusRepository $m_rep) //, SliderRepository $s_rep
     {
         $this->m_rep = $m_rep;
-        $this->s_rep = $s_rep;
+        // $this->s_rep = $s_rep;
     }
 
     protected function renderOutput()
@@ -57,10 +57,10 @@ class SiteController extends Controller
         $this->vars = array_add($this->vars, 'meta_desc', $this->meta_desc);
         $this->vars = array_add($this->vars, 'title', $this->title);
 
-        $sliderItem = $this->getSlider();
+        // $sliderItem = $this->getSlider();
 
-        $slider = view(env('THEME').'.slider')->with('slider', $sliderItem)->render();
-        $this->vars = array_add($this->vars, 'slider', $slider);
+        // $slider = view(env('THEME').'.slider')->with('slider', $sliderItem)->render();
+        // $this->vars = array_add($this->vars, 'slider', $slider);
 
         $footer = view(env('THEME').'.footer')->render();
         $this->vars = array_add($this->vars, 'footer', $footer);
@@ -97,10 +97,10 @@ class SiteController extends Controller
         return $mBuilder;
     }
 
-    public function getSlider()
+/*    public function getSlider()
     {
         $slider = $this->s_rep->get(['img']);
 
         return $slider;
-    }
+    }*/
 }

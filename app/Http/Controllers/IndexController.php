@@ -8,7 +8,7 @@ class IndexController extends SiteController
 {
     public function __construct()
     {
-        parent::__construct(new \Jbb\Repositories\MenusRepository(new \Jbb\Menu()), new \Jbb\Repositories\SliderRepository(new \Jbb\Slider()));
+        parent::__construct(new \Jbb\Repositories\MenusRepository(new \Jbb\Menu())); //, new \Jbb\Repositories\SliderRepository(new \Jbb\Slider())
 
         $this->template = env('THEME').'.index';
     }

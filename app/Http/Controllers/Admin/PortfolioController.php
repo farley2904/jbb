@@ -1,10 +1,11 @@
 <?php
 
-namespace Jbb\Http\Controllers;
+namespace Jbb\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Jbb\Http\Controllers\Controller;
 
-class AdminPortfolioController extends Controller
+class PortfolioController extends Controller
 {
     /**
      * Display a listing of the resource.

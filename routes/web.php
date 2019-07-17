@@ -39,6 +39,8 @@ Route::group(['prefix'=>'admin', 'middleware' => 'auth', 'as'=>'admin.'], functi
 
     Route::resource('services', 'Admin\ServicesController');
 
+    Route::resource('portfolio', 'Admin\PortfolioController');
+
     Route::resource('users', 'Admin\UsersController');
 
     Route::resource('permissions', 'Admin\PermissionsController');

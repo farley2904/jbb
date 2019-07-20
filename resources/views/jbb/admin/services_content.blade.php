@@ -1,6 +1,6 @@
 <h3 >Услуги</h3>
 
-{!! Html::link(route('admin.services.create'),'Добавить новую услугу',['class' => 'btn btn-success btn-lg pull-right btn-add']) !!}
+{!! Html::decode(link_to_route('admin.services.create', '<i class="fa fa-plus"></i>', array(), ['class' => 'btn btn-success pull-right btn-add'])) !!}
 
 <table class="table table-striped table-hover table-responsive-sm">
 <thead>

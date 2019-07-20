@@ -2,19 +2,29 @@
 
 namespace Jbb\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use Jbb\Http\Controllers\Controller;
+// use Illuminate\Http\Request;
+// use Jbb\Http\Controllers\Controller;
 
-class PortfolioController extends Controller
-{
+class PortfolioController extends AdminController
+{   
+
+     public function __construct()
+    {
+        parent::__construct();
+
+        $this->template = env('THEME').'.admin.portfolio';
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+
+
+        $this->content = view(env('THEME').'.admin.portfolio_content')/*->with(['portfolio'=>$portfolio, 'categories'=>$categories])*/->render();
+        return $this->renderOutput();
     }
 
     /**

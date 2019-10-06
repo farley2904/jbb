@@ -84,6 +84,9 @@ class ArticlesController extends AdminController
 
         $this->content = view(env('THEME').'.admin.articles_create_content')->with('categories', $lists)->render();
 
+              // dump($this);
+
+
         return $this->renderOutput();
     }
 

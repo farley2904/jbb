@@ -1,4 +1,56 @@
- <div class="row mt-5">
+ <form action="{{ route('admin.permissions.store') }}" method="POST">
+		{{ csrf_field() }}
+		
+		<div class="short-table white">
+		
+			<table style="width:100%">
+				
+				<thead>
+					
+					<th>Привилегии</th>
+					@if(!$roles->isEmpty())
+					
+						@foreach($roles as $item)
+							<th>{{ $item->name}}</th>
+						@endforeach
+					
+					@endif
+					
+				</thead>
+				<tbody>
+					
+					@if(!$permissions->isEmpty())
+					
+						@foreach($permissions as $val)
+							<tr>
+								
+								<td>{{ $val->name }}</td>
+									@foreach($roles as $role)
+										<td>
+											@if($role->hasPermission($val->name))
+											*
+											@endif
+										</td>
+									@endforeach
+							</tr>
+						@endforeach
+					
+					@endif
+
+				</tbody>
+				
+				
+			</table>
+			
+			
+		</div>
+		
+		<input class="btn btn-success btn-add" type="submit" value="Обновить" />
+
+		
+	</form>
+
+<!--   <div class="row mt-5">
 
           <div class="form-group col-md-6">
             <form>
@@ -26,10 +78,10 @@
 
           <button type="button" class="btn btn-success btn-lg">Сохранить</button>
 
-</div>
+</div> -->
 
 
-<h1 class="m-3 ml-5">Портфолио</h1>
+<!-- <h1 class="m-3 ml-5">Портфолио</h1>
 
         <button type="button" class="btn btn-success btn-lg ml-5 mb-4">Добавить</button>
         <ol>
@@ -37,7 +89,6 @@
             <div class="list-group d-flex flex-row">
               <a href="#!" class="list-group-item list-group-item-action">
                 <img src="https://jbb.com.ua/jbb/images/thumb.png" width=50px height=55px alt="portfolio">
-                <span>-</span>
                 <button type="button" class="btn btn-warning p-2 btn-sm">Изменить</button>
                 <button type="button" class="btn btn-danger p-2 btn-sm">Удалить</button>
               </a>
@@ -88,7 +139,7 @@
               </a>
             </div>
           </li>
-        </ol>
+        </ol> -->
          <div>
     <h2>Брови</h2>
     <table class="table table-striped">
@@ -162,56 +213,3 @@
       </tbody>
     </table>
   </div>
-
-
-<form action="{{ route('admin.permissions.store') }}" method="POST">
-		{{ csrf_field() }}
-		
-		<div class="short-table white">
-		
-			<table style="width:100%">
-				
-				<thead>
-					
-					<th>Привилегии</th>
-					@if(!$roles->isEmpty())
-					
-						@foreach($roles as $item)
-							<th>{{ $item->name}}</th>
-						@endforeach
-					
-					@endif
-					
-				</thead>
-				<tbody>
-					
-					@if(!$permissions->isEmpty())
-					
-						@foreach($permissions as $val)
-							<tr>
-								
-								<td>{{ $val->name }}</td>
-									@foreach($roles as $role)
-										<td>
-											@if($role->hasPermission($val->name))
-											*
-											@endif
-										</td>
-									@endforeach
-							</tr>
-						@endforeach
-					
-					@endif
-
-				</tbody>
-				
-				
-			</table>
-			
-			
-		</div>
-		
-		<input class="btn btn-success btn-add" type="submit" value="Обновить" />
-
-		
-	</form>

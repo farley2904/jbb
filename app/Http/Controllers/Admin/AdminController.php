@@ -1,9 +1,9 @@
 <?php
 
 namespace Jbb\Http\Controllers\Admin;
-
-use Auth;
+use Jbb\Http\Controllers\Controller;
 use Menu;
+use Auth;
 
 class AdminController extends \Jbb\Http\Controllers\Controller
 {
@@ -17,7 +17,16 @@ class AdminController extends \Jbb\Http\Controllers\Controller
 
     public function __construct()
     {
-        // $this->middleware('auth');
+            $this->middleware(function ($request, $next) {
+
+            $this->user = Auth::user();
+
+            if(!$this->user) {
+                abort(403);
+            }
+
+            return $next($request);
+        });
     }
 
     public function renderOutput()
@@ -43,9 +52,9 @@ class AdminController extends \Jbb\Http\Controllers\Controller
             $menu->add('Статьи', ['route' => 'admin.articles.index', 'class' => 'nav-item'])->link->attr(['class' => 'nav-link']);
             $menu->add('Услуги и цены', ['route' => 'admin.services.index', 'class' => 'nav-item'])->link->attr(['class' => 'nav-link']);
             $menu->add('Портфолио', ['route' => 'admin.portfolio.index', 'class' => 'nav-item'])->link->attr(['class' => 'nav-link']);
-            $menu->add('Пользователи', ['route'  => 'admin.users.index', 'class' => 'nav-item'])->link->attr(['class' => 'nav-link']);
-            $menu->add('Привилегии', ['route'  => 'admin.permissions.index', 'class' => 'nav-item'])->link->attr(['class' => 'nav-link']);
-            $menu->add('Меню', ['route'  => 'admin.menus.index', 'class' => 'nav-item'])->link->attr(['class' => 'nav-link']);
+            // $menu->add('Пользователи', ['route'  => 'admin.users.index', 'class' => 'nav-item'])->link->attr(['class' => 'nav-link']);
+            // $menu->add('Привилегии', ['route'  => 'admin.permissions.index', 'class' => 'nav-item'])->link->attr(['class' => 'nav-link']);
+            // $menu->add('Меню', ['route'  => 'admin.menus.index', 'class' => 'nav-item'])->link->attr(['class' => 'nav-link']);
             $menu->add('Информация', ['route'  => 'admin.information.index', 'class' => 'nav-item'])->link->attr(['class' => 'nav-link']);
         });
     }

@@ -7,6 +7,9 @@ use Jbb\Http\Controllers\Controller;
 use Jbb\Repositories\PortfoliosRepository;
 use Image;
 use Config;
+use Jbb\Portfolio;
+use Jbb\Filter;
+
 
 class PortfolioController extends AdminController
 {   
@@ -45,7 +48,10 @@ class PortfolioController extends AdminController
 
 		$this->title = 'Добавить новое изображение';
 
-        $this->content = view(env('THEME').'.admin.portfolio_create_content')->render();
+		$filter = Filter::all();
+
+
+        $this->content = view(env('THEME').'.admin.portfolio_create_content')->with('filter', $filter)->render();
 
 
         return $this->renderOutput();
@@ -58,30 +64,27 @@ class PortfolioController extends AdminController
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {       
-            
-        // $input = $request->all();
+    {   
+    	$portfolios = Portfolio::all();
 
-        // $url = $request->url();
-        //"https://jbb.com.ua/admin/portfolio"
+        $portfolio = new Portfolio();
 
-        // $url = $request->fullUrl();
+        $this->validate($request, [
+            'title'      => 'required|max:255',
+            'image'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-        // $method = $request->method();
+        $portfolio->title = $request->title;
 
-        // $title = $request->input()
+        $portfolio->filter_alias = $request->filter;
+        $portfolio->text = '';
+        $portfolio->customer = '';
+        $portfolio->alias = '';
 
-
-
-
-
-        // dd($method);
         
-        if ($request->hasFile('file')) {
+        if ($request->hasFile('image')) {
 
-            $image = $request->file('file');
-
-            // dd($image);
+            $image = $request->file('image');
 
             if ($image->isValid()) {
 
@@ -89,25 +92,28 @@ class PortfolioController extends AdminController
 
                 $obj = new \stdClass(); //создаем пустой обьект
 
-                $obj->path = $str.'.jpg';
-
-                // dd($obj);
+				$obj->path = $str.'.jpg';
+				$obj->lg = 'lg_'.$str.'.jpg';
+				$obj->md = 'md_'.$str.'.jpg';
+				$obj->sm = 'sm_'.$str.'.jpg';
 
                 $img = Image::make($image);
 
-                $img->resize(150,100)->save(public_path().'/'.env('THEME').'/images/portfolio/'.'sm_'.$obj->path);
-                $img->resize(400,400)->save(public_path().'/'.env('THEME').'/images/portfolio/'.'md_'.$obj->path);
-                $img->resize(1000,900)->save(public_path().'/'.env('THEME').'/images/portfolio/'.'lg_'.$obj->path);
-                $img->save(public_path().'/'.env('THEME').'/images/portfolio/'.$obj->path);
+                $img->save(public_path().'/'.env('THEME').'/images/portfolios/'.$obj->path);
+                $img->fit(1000)->save(public_path().'/'.env('THEME').'/images/portfolios/'.'lg_'.$obj->path);
+                $img->fit(400)->save(public_path().'/'.env('THEME').'/images/portfolios/'.'md_'.$obj->path);
+                $img->fit(200)->save(public_path().'/'.env('THEME').'/images/portfolios/'.'sm_'.$obj->path);
 
-                return redirect()->route('admin.portfolio.index')->with(['status'=>'Изображение успешно добавлено']);
-
-                // return redirect('admin/services')->with(['status'=>'Сервис успешно добавлен']);
-            }
-            else{
+                $portfolio->img = json_encode($obj);
 
             }
+
         }
+
+        $portfolio->save();
+
+        return redirect()->route('admin.portfolio.index')->with(['status'=>'Изображение успешно добавлено']);
+
 
     }
 
@@ -153,6 +159,10 @@ class PortfolioController extends AdminController
      */
     public function destroy($id)
     {
-        //
+        $portfolio = Portfolio::find($id);
+
+        $portfolio->delete();
+
+        return redirect('admin/portfolio')->with(['status' => 'Портфолио успешно удалено']);
     }
 }

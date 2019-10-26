@@ -71,7 +71,7 @@ class PortfolioController extends AdminController
 
         $this->validate($request, [
             'title'      => 'required|max:255',
-            'image'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20480',
         ]);
 
         $portfolio->title = $request->title;
@@ -79,7 +79,6 @@ class PortfolioController extends AdminController
         $portfolio->filter_alias = $request->filter;
         $portfolio->text = '';
         $portfolio->customer = '';
-        $portfolio->alias = '';
 
         
         if ($request->hasFile('image')) {
@@ -105,6 +104,7 @@ class PortfolioController extends AdminController
                 $img->fit(200)->save(public_path().'/'.env('THEME').'/images/portfolios/'.'sm_'.$obj->path);
 
                 $portfolio->img = json_encode($obj);
+                $portfolio->alias = $str;
 
             }
 

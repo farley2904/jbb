@@ -70,11 +70,10 @@ class PortfolioController extends AdminController
         $portfolio = new Portfolio();
 
         $this->validate($request, [
-            'title'      => 'required|max:255',
-            'image'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20480',
+            // 'title'      => 'required|max:255',
+            'image'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
         ]);
 
-        $portfolio->title = $request->title;
 
         $portfolio->filter_alias = $request->filter;
         $portfolio->text = '';
@@ -104,8 +103,8 @@ class PortfolioController extends AdminController
                 $img->fit(200)->save(public_path().'/'.env('THEME').'/images/portfolios/'.'sm_'.$obj->path);
 
                 $portfolio->img = json_encode($obj);
+                $portfolio->title = $str;
                 $portfolio->alias = $str;
-
             }
 
         }
@@ -156,10 +155,38 @@ class PortfolioController extends AdminController
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+
+
+         public function destroy($id)
+        {
+            $todos = todo::find($id);
+
+            if(\File::exists(public_path('storage/images/'.$todos->image))){
+            \File::delete(public_path('storage/images/'.$todos->image));
+            }
+
+            $todos->delete();
+            session()->flash('message','Deleted Successful');
+            return redirect('todo');
+        }
      */
     public function destroy($id)
     {
         $portfolio = Portfolio::find($id);
+
+        
+
+
+        $images = json_decode($portfolio->img, true);
+
+         foreach($images as $k => $image)
+            {
+                if(\File::exists(public_path().'/'.env('THEME').'/images/portfolios/'.$image)){
+                    \File::delete(public_path().'/'.env('THEME').'/images/portfolios/'.$image);
+                }else{
+                    dd('error');
+                }
+            }
 
         $portfolio->delete();
 

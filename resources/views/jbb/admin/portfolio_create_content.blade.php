@@ -1,9 +1,9 @@
 <form action="{{ route('admin.portfolio.store') }}" method="POST" enctype="multipart/form-data">
 {{ csrf_field() }}          
-<div class="form-group">
+<!-- <div class="form-group">
     <label for="title">Введите название</label>
     <input class="form-control" id="title" placeholder="Название" name="title">
-</div> 
+</div>  -->
 <label>Категория</label>
 <select class="browser-default custom-select mb-4" name="filter">
 		@foreach($filter as $item)

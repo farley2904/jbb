@@ -58,7 +58,7 @@ class Handler extends ExceptionHandler
                 //принудительное логирование ошибки 404 и запись в лог
                 \Log::alert('Page not found - '.$request->url());
 
-                return response()->view(env('THEME').'.404', ['title' => 'Страница не найдена', 'navigation' => $navigation]);
+                return response()->view(env('THEME').'.404', ['title' => 'Страница не найдена', 'navigation' => $navigation],404);
             }
         }
 

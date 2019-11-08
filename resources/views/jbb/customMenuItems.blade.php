@@ -1,5 +1,7 @@
 @foreach($items as $item)
 
+	@if(!$item->trashed)
+
 
 	<li {{ (URL::current() == $item->url()) ? "class=active" : '' }} >
 		<a href="{{ $item->url() }}">{{ $item->title }}</a>
@@ -50,4 +52,5 @@
 		@endif
 
 	</li>
+	@endif
 @endforeach

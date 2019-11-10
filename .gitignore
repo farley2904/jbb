@@ -3,7 +3,7 @@
 /public/hot
 /public/jbb/images/portfolios/*.key
 /storage/*.key
-/storage/framework/*
+/storage/framework/**/*
 /storage/framework/sessions/*
 /storage/framework/views/*.php
 /vendor

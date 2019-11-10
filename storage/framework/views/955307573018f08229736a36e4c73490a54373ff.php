@@ -10,7 +10,6 @@
 
     <title><?php echo e(isset($title) ? $title : config('app.name', 'JBB')); ?></title>
 
-
     <link rel="shortcut icon" href="<?php echo e(asset(env('THEME'))); ?>/images/favicon.ico" type="image/x-icon">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">

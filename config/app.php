@@ -190,7 +190,7 @@ return [
 
         //Invisible reCAPTCHA
         AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
-        //Settings provider
+
         Jbb\Providers\SettingsServiceProvider::class,
 
 

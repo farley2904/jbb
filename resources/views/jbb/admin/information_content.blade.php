@@ -16,12 +16,6 @@
 			<div class="tab-content" id="langTabContent">
 				<div class="tab-pane fade show active" id="ru" role="tabpanel" aria-labelledby="ru-tab">
 					<p class="h4 mb-2 mt-4">Общая</p>
-					 <!-- elfinder popup -->
-				    <div class="mb-2">
-				    	<a  href="" class="popup_selector" data-inputid="logo_image">Загрузить логотип</a><br>
-				    	<!-- <img src="{{ asset(env('THEME')) }}/{{ old('logo_image') }}" alt=""  width="100px" height="100px"> -->
-						<input type="hidden" id="logo_image" class="form-control mb-4" name="logo_image" value="">
-				    </div>
 					<!-- Site name -->
 
 					{{-- {{dump(old('name'))}} --}}

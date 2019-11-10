@@ -3,9 +3,6 @@
 /public/hot
 /public/jbb/images/portfolios/*.key
 /storage/*.key
-/storage/framework/*.key
-/storage/framework/sessions/*.key
-/storage/framework/views/*.key
 /vendor
 /.idea
 Homestead.json

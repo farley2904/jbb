@@ -4,20 +4,34 @@
 		<h2 class="section-head wow fadeInUp">{{$title}}</h2>
 
 		@if($services_cat)
+
 			<div class="row" >
 				@foreach($services_cat as $k=>$cat)
 					<h3 >{{$cat->name}}</h3>
-					<div class=" col-lg-preffix-1 wow fadeInLeft">
-						<p>
+					<div class="service-table col-lg-preffix-1 wow fadeInUp">
+					<table>
+					  <thead>
+					    <tr>
+					      <th>Услуга</th>
+					      <th>Цена</th>
+					    </tr>
+					  </thead>
+						<tbody>
+
 						@if($cat->services)
-							@foreach($cat->services as $service)			
-								{{$service->name}} - {{$service->price}} грн.
+							@foreach($cat->services as $service)
+							    <tr>
+							      <td data-label="Услуга">{{$service->name}}</td>
+							      <td data-label="Цена">{{$service->price}} грн.</td>
+							    </tr>			
 							@endforeach
 						@endif
-						</p>
-		            </div>
+						</tbody>
+		            </table>
+		        </div>
 				@endforeach
 			</div>
+
 		@endif
 
 	</div>	

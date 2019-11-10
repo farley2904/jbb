@@ -9,7 +9,7 @@
 			<a href="{{ route('portfoliosFilter',['filter_alias' => $filter->alias]) }}">
 
 			
-				<div class="btn btn-sm btn-default{{ (URL::current() == route('portfoliosFilter',['filter_alias' => $filter->alias])) ? "-active" : '' }}">{{ $filter->title }}</div>
+				<div class="p-filter btn btn-sm btn-default{{ (URL::current() == route('portfoliosFilter',['filter_alias' => $filter->alias])) ? "-active" : '' }}">{{ $filter->title }}</div>
 			</a>
 		@endforeach
     </div>

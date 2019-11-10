@@ -33,7 +33,9 @@ class PortfolioController extends AdminController
 
         $portfolios = $this->p_rep->get();
 
-        $this->content = view(env('THEME').'.admin.portfolio_content')->with(['portfolios'=>$portfolios])->render();
+        $filter = Filter::all();
+
+        $this->content = view(env('THEME').'.admin.portfolio_content')->with(['portfolios'=>$portfolios,'filter'=>$filter])->render();
 
         return $this->renderOutput();
     }

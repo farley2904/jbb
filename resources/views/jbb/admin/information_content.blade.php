@@ -17,21 +17,29 @@
 				<div class="tab-pane fade show active" id="ru" role="tabpanel" aria-labelledby="ru-tab">
 					<p class="h4 mb-2 mt-4">Общая</p>
 					 <!-- elfinder popup -->
-<!-- 				    <div class="mb-2">
+				    <div class="mb-2">
 				    	<a  href="" class="popup_selector" data-inputid="logo_image">Загрузить логотип</a><br>
-				    	{{-- <img src="{{ asset(env('THEME')) }}/{{ old('logo_image') }}" alt=""  width="100px" height="100px"> --}}
-						{{-- <input type="hidden" id="logo_image" class="form-control mb-4" name="logo_image" value="{{old('logo_image')}}"> --}}
-				    </div> -->
+				    	<!-- <img src="{{ asset(env('THEME')) }}/{{ old('logo_image') }}" alt=""  width="100px" height="100px"> -->
+						<input type="hidden" id="logo_image" class="form-control mb-4" name="logo_image" value="">
+				    </div>
 					<!-- Site name -->
+
+					{{-- {{dump(old('name'))}} --}}
 				    <label>Название:</label>
-				    <input type="text" id="" class="form-control mb-4" placeholder="Введите название сайта" name="name" value="{{old('name')}}">
+				    <input type="text" id="" class="form-control mb-4" placeholder="Введите название сайта" name="name" value="{{(old('name'))?old('name'):config('configuration.name')}}">
 
 				    <label>Слоган:</label>
-				    <input type="text" id="" class="form-control mb-4" placeholder="Введите cлоган сайта" name="slogan" value="{{old('slogan')}}">
+				    {{-- <input type="text" id="" class="form-control mb-4" placeholder="Введите cлоган сайта" name="slogan" value="{{old('slogan')}}"> --}}
+
+
+
+				    <input type="text" id="" class="form-control mb-4" placeholder="Введите cлоган сайта" name="slogan" value="{{ (old('slogan')) ? old('slogan')  : config('configuration.slogan')}}">
+
+				    
 
 				    <label>O Нас:</label>
 				    <div class="form-group">
-				        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Информация о нас" name="about_us">{{old('about_us')}}</textarea>
+				        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Информация о нас" name="about_us">{{(old('about_us'))?old('about_us'):config('configuration.about_us')}}</textarea>
 				    </div>
 
 				   	<label>Мета-тег Description:</label>

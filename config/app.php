@@ -190,9 +190,7 @@ return [
 
         //Invisible reCAPTCHA
         AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
-        //elFinder filemanager
-        Barryvdh\Elfinder\ElfinderServiceProvider::class,
-
+        //Settings provider
         Jbb\Providers\SettingsServiceProvider::class,
 
 

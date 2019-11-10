@@ -35,7 +35,7 @@
         ]) !!};
     </script>
 </head>
-<body class="grey lightern-3">
+<body class="grey lighten-3">
 	<header>
 		<nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
 			<div class="container-fluid">

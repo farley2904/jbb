@@ -14,8 +14,8 @@
     <div class="col-sm-4 col-lg-2 col-lg-preffix-2 wow fadeInRight">
         <address class="contact-info">
             <p>{{ trans('site.social') }}</p>
-            <a id="instagram" rel="nofollow" target="_blank" href="https://www.instagram.com/jbb.loveyourself" title="instagram"></a>
-            <a id="facebook" rel="nofollow" target="_blank" href="https://www.facebook.com/jbb.loveyourself" title="facebook"></a>
+            <a id="instagram" rel="noopener" target="_blank" href="https://www.instagram.com/jbb.loveyourself" title="instagram"></a>
+            <a id="facebook" rel="noopener" target="_blank" href="https://www.facebook.com/jbb.loveyourself" title="facebook"></a>
         </address>
     </div>
 </div>

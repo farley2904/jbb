@@ -63,36 +63,25 @@ class InformationController extends AdminController
     public function store(Request $request,Setting $info)
     { 
 
-        // dump($info->settings_id);
         // dump($request->all());
         $data = $request->except('_token');
 
         if (empty($data)) {
             dump('Нет данных');
         }
+        	// dump($data);
 
 
+        foreach ($data as $key =>$value){
+        	if(isset($value)){
+        		$info->where('key',$key)->update(['value' => $value]);
 
-        if ($request->has('logo_image')) {
-
-            $logo_image = $request->input('logo_image');
-        }
-
-        if ($request->has('name')) {
-
-            $name = $request->input('name');
-        }
-
-        if ($request->has('description')) {
-
-            $description = $request->input('description');
-            // dd($request->header());
-            // dd($request->server());
+        	}
         }
 
         $request->flash();
 
-        Cache::flush();
+        Cache::forget('settings');
 
         $this->title = 'Информация';
         $this->content = view(env('THEME').'.admin.information_content')->with(['title'=>$this->title, 'path'=>''])->render();

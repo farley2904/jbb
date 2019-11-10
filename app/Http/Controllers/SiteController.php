@@ -83,7 +83,11 @@ class SiteController extends Controller
                 }
 
                 if ($item->parent == 0) {
-                    $m->add($item->title, $path)->id($item->id);
+                    if($item->trashed()){
+                        $m->add($item->title, $path)->id($item->id)->data('trashed','true');
+                    }else{
+                        $m->add($item->title, $path)->id($item->id);
+                    }
                 } else {
                     if ($m->find($item->parent)) {
                         $m->find($item->parent)->add($item->title, $item->path)->id($item->id);

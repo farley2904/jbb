@@ -114,7 +114,9 @@
 
 	<script src="{{ asset('js/bootstrap-filestyle.min.js') }}"></script>
 
-	<script type="text/javascript" src="/packages/barryvdh/elfinder/js/standalonepopup.min.js"></script>
+	<script src=" {{ asset('/vendor/laravel-filemanager/js/lfm.js') }}"></script>
+
+
 
 </body>
 </html>

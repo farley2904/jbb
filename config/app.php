@@ -183,6 +183,8 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
 
+        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
+
         //image.intervention.com
         Intervention\Image\ImageServiceProvider::class,
         //Laravel-Translatable

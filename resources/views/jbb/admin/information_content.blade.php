@@ -16,6 +16,19 @@
 			<div class="tab-content" id="langTabContent">
 				<div class="tab-pane fade show active" id="ru" role="tabpanel" aria-labelledby="ru-tab">
 					<p class="h4 mb-2 mt-4">Общая</p>
+				    <label>Логотип:</label>
+
+			
+
+				<div class="input-group">
+				   <span class="input-group-btn">
+				     <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+				       <i class="fa fa-picture-o"></i>
+				     </a>
+				   </span>
+				   <input id="thumbnail" class="form-control" type="hidden" name="filepath" style="margin: 0.6em 0">
+				 </div>
+				 <img id="holder" style="margin-top:15px;max-height:100px;"><br>
 					<!-- Site name -->
 
 					{{-- {{dump(old('name'))}} --}}
@@ -41,7 +54,7 @@
 				        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Введите описание для поисковых систем" name="meta_description">{{old('meta_description')}}</textarea>
 				    </div>
 
-				    <label></label>
+<!-- 				    <label></label>
 				    <p class="h4 mb-2">Время работы</p>
 				    <label>Пн-Сб</label>
 					<div class="row">
@@ -61,7 +74,7 @@
 						<div class="col">
 							<input type="time" class="form-control" id="worktime" name="worktime">
 						</div>
-					</div>			     
+					</div>	 -->		     
 
 				    <p class="h4 mb-2">Контакты</p>
 				    <!-- Adress -->
@@ -121,3 +134,8 @@
 
 	</div>
 </div>
+<script>
+ $( document ).ready(function() {
+ 	$('#lfm').filemanager('image');
+});
+</script>

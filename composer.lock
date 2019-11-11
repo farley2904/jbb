@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c9ef1d8c4bd798e7186f19dfb56753d7",
+    "content-hash": "788ab6c00ca1a19eb44e0ac106ba37f8",
     "packages": [
         {
             "name": "albertcht/invisible-recaptcha",
@@ -3162,38 +3162,37 @@
         },
         {
             "name": "unisharp/laravel-filemanager",
-            "version": "dev-master",
+            "version": "v1.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/UniSharp/laravel-filemanager.git",
-                "reference": "78aeffe12087b1ba43cdbd5e48385bb0e5221b0e"
+                "reference": "aaf2764f26eb8dcc9356bea1e25010333c2e61f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/UniSharp/laravel-filemanager/zipball/78aeffe12087b1ba43cdbd5e48385bb0e5221b0e",
-                "reference": "78aeffe12087b1ba43cdbd5e48385bb0e5221b0e",
+                "url": "https://api.github.com/repos/UniSharp/laravel-filemanager/zipball/aaf2764f26eb8dcc9356bea1e25010333c2e61f4",
+                "reference": "aaf2764f26eb8dcc9356bea1e25010333c2e61f4",
                 "shasum": ""
             },
             "require": {
                 "ext-exif": "*",
                 "ext-fileinfo": "*",
-                "illuminate/config": "5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || 6.*.*",
-                "illuminate/container": "5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || 6.*.*",
-                "illuminate/filesystem": "5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || 6.*.*",
-                "illuminate/http": "5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || 6.*.*",
-                "illuminate/support": "5.4.* || 5.5.* || 5.6.* || 5.7.* || 5.8.* || 6.*.*",
+                "illuminate/support": ">=4.2.0",
                 "intervention/image": "2.*",
                 "php": ">=5.4.0"
             },
             "require-dev": {
-                "mockery/mockery": "^0.9.9",
-                "phpunit/phpunit": "^6.2",
-                "squizlabs/php_codesniffer": "^3.1"
+                "orchestra/testbench": "~3.0",
+                "phpspec/phpspec": "~2.1",
+                "phpunit/phpunit": "~4.8"
             },
             "suggest": {
                 "ext-gd": "to use GD library based image processing.",
                 "ext-imagick": "to use Imagick based image processing."
             },
+            "bin": [
+                "bin/debug"
+            ],
             "type": "library",
             "extra": {
                 "laravel": {
@@ -3219,10 +3218,10 @@
                 },
                 {
                     "name": "UniSharp Ltd.",
-                    "email": "opensource@unisharp.com"
+                    "email": "unisharp-service@unisharp.com"
                 }
             ],
-            "description": "A file upload/editor intended for use with Laravel 6 and CKEditor / TinyMCE",
+            "description": "A file upload/editor intended for use with Laravel 5 and CKEditor / TinyMCE",
             "keywords": [
                 "CKEditor",
                 "file",
@@ -3233,7 +3232,7 @@
                 "tinymce",
                 "upload"
             ],
-            "time": "2019-10-18T17:11:21+00:00"
+            "time": "2018-07-05T11:36:08+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -4772,9 +4771,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "unisharp/laravel-filemanager": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -11,8 +11,6 @@
 @section ('content')
 <section>
 	<div class="container">
-
-{{-- <h1 class="section-head-left">{!! $title !!}</h1> --}}
 	{!! $content !!}
 
 	</div>

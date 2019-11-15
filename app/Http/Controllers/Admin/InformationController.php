@@ -73,10 +73,20 @@ class InformationController extends AdminController
 
 
         foreach ($data as $key =>$value){
-        	if(isset($value)){
+        	// if(isset($value)){
+        	// 	if($key === 'logo_img'){
+        	// 		$value = basename($value);  
+        	// 	}
+         //        if($key === 'header_bg'){
+         //            $value = basename($value);  
+         //        }
+                // }
+            if(!isset($value)){
+                $value = '';
+            }	
         		$info->where('key',$key)->update(['value' => $value]);
 
-        	}
+        	
         }
 
         $request->flash();

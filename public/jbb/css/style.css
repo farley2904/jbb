@@ -12704,9 +12704,10 @@ a.icon-primary:hover
 }
 .rd-navbar-static .rd-navbar-nav>li>a:before,.rd-navbar-fullwidth .rd-navbar-nav>li>a:before
 {
-	border-bottom: 1px solid;
+	/*border-bottom: 1px solid;*/
 	color: #a7abad;
-	content: counter(li,decimal-leading-zero);
+	content: '';
+	/*content: counter(li,decimal-leading-zero);*/
 	counter-increment: li;
 	display: inline-block;
 	margin-right: 4px;
@@ -15522,8 +15523,8 @@ img.mfp-img
 }
 .page-header:before
 {
-	background: url("../images/header-bg.png") no-repeat center;
-	background-size: cover;
+	/*background: url("../images/header-bg.png") no-repeat center;*/
+	/*background-size: cover;*/
 }
 @media (min-width: 768px)
 {

@@ -1,4 +1,4 @@
-<section class="well-md text-center" >
+<section id="contacts" class="well-md text-center" >
 	<div class="container">
 		<div class="row text-sm-left">
 			<div class="col-sm-6 wow fadeInUp">
@@ -11,9 +11,9 @@
 							<div id="google-map" class="rd-google-map__model" data-zoom="14" data-x="30.506748" data-y="50.452182"></div>
 							<ul class="rd-google-map__locations">
 								<li data-x="30.506748" data-y="50.452182">
-								<p>Киев, ул. Олеся Гончара, 24б</p>
-								<span>+38 097 8614120</span><br>
-								<span>+38 097 5437548</span>
+						            <p><?php echo e(config('configuration.adress')); ?></p>
+						            <span><?php echo e(config('configuration.tel_1')); ?></span><br>
+						            <span><?php echo e(config('configuration.tel_2')); ?></span>
 								</li>
 							</ul>
 						</div>

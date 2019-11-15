@@ -1,13 +1,13 @@
 
 
-<a href="#contact" class="btn btn-md btn-default wow fadeInRight"><?php echo e(trans('site.online')); ?></a>
+<a href="#contact" id="m" class="btn btn-md btn-default wow fadeInRight"><?php echo e(trans('site.online')); ?></a>
 
 <div class="row">
     <div class="col-sm-4 col-lg-2 col-lg-preffix-3 col-sm-preffix-2 wow fadeInLeft">
         <address class="contact-info">
-            <p>Киев, ул. Олеся Гончара, 24б</p>
-            <span>+38 097 8614120</span>
-            <span>+38 097 5437548</span> 
+            <p><?php echo e(config('configuration.adress')); ?></p>
+            <span><?php echo e(config('configuration.tel_1')); ?></span>
+            <span><?php echo e(config('configuration.tel_2')); ?></span>
         </address>
     </div>
     

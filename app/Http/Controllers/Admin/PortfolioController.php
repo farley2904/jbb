@@ -73,7 +73,7 @@ class PortfolioController extends AdminController
 
         $this->validate($request, [
             // 'title'      => 'required|max:255',
-            'image'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+            'image'       => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:20480', //|max:1024
         ]);
 
 
@@ -96,6 +96,8 @@ class PortfolioController extends AdminController
 				$obj->lg = 'lg_'.$str.'.jpg';
 				$obj->md = 'md_'.$str.'.jpg';
 				$obj->sm = 'sm_'.$str.'.jpg';
+
+                // ini_set('memory_limit','256M');
 
                 $img = Image::make($image);
 

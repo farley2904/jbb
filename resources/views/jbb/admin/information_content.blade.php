@@ -4,6 +4,30 @@
 		<form class="text-left border border-light p-4" method="post" action="{{route('admin.information.store')}}">
 			{{ csrf_field() }}
 
+			 <label>Логотип:</label>
+
+				<div class="input-group mb-4">
+				   <span class="input-group-btn">
+				     <a id="lfm" data-input="thumbnail" data-preview="holder" class="border d-block">
+				 		<img src="{{asset((old('logo_img'))?old('logo_img'):config('configuration.logo_img'))}}" width="100" height="100" id="holder">
+				 		<!-- <img id="holder" style="margin-top:15px;max-height:100px;"> -->
+				     </a>
+				   </span>
+				   <input id="thumbnail" class="form-control" type="hidden" value="{{(old('logo_img')?old('logo_img'):config('configuration.logo_img'))}}" name="logo_img">
+				 </div>
+
+				<label>Фон баннера:</label>
+
+				<div class="input-group mb-4">
+				   <span class="input-group-btn">
+				     <a id="lfm2" data-input="thumbnail2" data-preview="holder2" class="border d-block">
+				 		<img src="{{asset((old('header_bg'))?old('header_bg'):config('configuration.header_bg'))}}" width="100" height="100" id="holder2">
+				 		<!-- <img id="holder" style="margin-top:15px;max-height:100px;"> -->
+				     </a>
+				   </span>
+				   <input id="thumbnail2" class="form-control" type="hidden" value="{{(old('header_bg')?old('header_bg'):config('configuration.header_bg'))}}" name="header_bg">
+				 </div>
+
 			<ul class="nav nav-tabs" id="langTab" role="tablist">
 			  <li class="nav-item">
 			    <a class="nav-link active" id="ru-tab" data-toggle="tab" href="#ru" role="tab" aria-controls="ru" aria-selected="true">ru</a>
@@ -15,23 +39,9 @@
 
 			<div class="tab-content" id="langTabContent">
 				<div class="tab-pane fade show active" id="ru" role="tabpanel" aria-labelledby="ru-tab">
-					<p class="h4 mb-2 mt-4">Общая</p>
-				    <label>Логотип:</label>
-
-			
-
-				<div class="input-group">
-				   <span class="input-group-btn">
-				     <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-				       <i class="fa fa-picture-o"></i>
-				     </a>
-				   </span>
-				   <input id="thumbnail" class="form-control" type="hidden" name="filepath" style="margin: 0.6em 0">
-				 </div>
-				 <img id="holder" style="margin-top:15px;max-height:100px;"><br>
+				   
 					<!-- Site name -->
 
-					{{-- {{dump(old('name'))}} --}}
 				    <label>Название:</label>
 				    <input type="text" id="" class="form-control mb-4" placeholder="Введите название сайта" name="name" value="{{(old('name'))?old('name'):config('configuration.name')}}">
 
@@ -46,12 +56,12 @@
 
 				    <label>O Нас:</label>
 				    <div class="form-group">
-				        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Информация о нас" name="about_us">{{(old('about_us'))?old('about_us'):config('configuration.about_us')}}</textarea>
+				        <textarea class="form-control rounded-0" id="editor" rows="3" placeholder="Информация о нас" name="about_us">{{(old('about_us'))?old('about_us'):config('configuration.about_us')}}</textarea>
 				    </div>
 
-				   	<label>Мета-тег Description:</label>
+				   	<label>Мета-тег Description (для поисковых систем):</label>
 				    <div class="form-group">
-				        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Введите описание для поисковых систем" name="meta_description">{{old('meta_description')}}</textarea>
+				        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Введите описание для поисковых систем" name="meta_description">{{(old('meta_description'))?old('meta_description'):config('configuration.meta_description')}}</textarea>
 				    </div>
 
 <!-- 				    <label></label>
@@ -79,12 +89,12 @@
 				    <p class="h4 mb-2">Контакты</p>
 				    <!-- Adress -->
 				    <label>Адресс:</label>
-				    <input type="text" id="" class="form-control mb-4" placeholder="Адресс" name="adress" value="{{old('adress')}}">
+				    <input type="text" id="" class="form-control mb-4" placeholder="Адресс" name="adress" value="{{(old('adress'))?old('adress'):config('configuration.adress')}}">
 
 				    <!-- Telephone -->
 				    <label>Телефоны:</label>
-				    <input type="text" id="" class="form-control mb-4" placeholder="Телефон 1" name="tel_1" value="{{old('tel_1')}}">
-				    <input type="text" id="" class="form-control mb-4" placeholder="Телефон 2" name="tel_2" value="{{old('tel_2')}}">
+				    <input type="text" id="" class="form-control mb-4" placeholder="Телефон 1" name="tel_1" value="{{(old('tel_1'))?old('tel_1'):config('configuration.tel_1')}}">
+				    <input type="text" id="" class="form-control mb-4" placeholder="Телефон 2" name="tel_2" value="{{(old('tel_2'))?old('tel_2'):config('configuration.tel_2')}}">
 
 				    <!-- Social -->
 				    <!-- <label>Соцсети</label> -->
@@ -135,7 +145,10 @@
 	</div>
 </div>
 <script>
+
  $( document ).ready(function() {
  	$('#lfm').filemanager('image');
+ 	$('#lfm2').filemanager('image');
+	CKEDITOR.replace('editor');
 });
 </script>

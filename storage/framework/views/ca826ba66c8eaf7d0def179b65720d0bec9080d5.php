@@ -6,5 +6,5 @@
 
 <div class="rd-navbar-brand wow fadeInUp ">
     <a href="<?php echo e(url('/')); ?>" class="rd-navbar-brand__name heading-2"><?php echo e(config('configuration.name')); ?></a>
-    <p class="rd-navbar-brand__slogan"><?php echo e(config('configuration.slogan')); ?></p>
+    <p class="rd-navbar-brand__slogan"><?php echo e((App::isLocale('ru'))?config('configuration.slogan'):config('configuration.slogan_ua')); ?></p>
 </div>

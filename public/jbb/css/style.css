@@ -15535,7 +15535,7 @@ img.mfp-img
 }
 .page-header:after
 {
-	background: rgba(255,255,255,0.8);
+	background: rgba(255,255,255,0);
 }
 @media (min-width: 768px)
 {

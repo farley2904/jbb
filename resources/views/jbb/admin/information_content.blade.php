@@ -64,7 +64,7 @@
 				        <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Введите описание для поисковых систем" name="meta_description">{{(old('meta_description'))?old('meta_description'):config('configuration.meta_description')}}</textarea>
 				    </div>
 
-<!-- 				    <label></label>
+				    <label></label>
 				    <p class="h4 mb-2">Время работы</p>
 				    <label>Пн-Сб</label>
 					<div class="row">
@@ -84,7 +84,7 @@
 						<div class="col">
 							<input type="time" class="form-control" id="worktime" name="worktime">
 						</div>
-					</div>	 -->		     
+					</div>			     
 
 				    <p class="h4 mb-2">Контакты</p>
 				    <!-- Adress -->

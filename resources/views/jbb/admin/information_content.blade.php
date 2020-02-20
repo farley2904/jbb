@@ -28,6 +28,8 @@
 				   <input id="thumbnail2" class="form-control" type="hidden" value="{{(old('header_bg')?old('header_bg'):config('configuration.header_bg'))}}" name="header_bg">
 				 </div>
 
+
+
 			<ul class="nav nav-tabs" id="langTab" role="tablist">
 			  <li class="nav-item">
 			    <a class="nav-link active" id="ru-tab" data-toggle="tab" href="#ru" role="tab" aria-controls="ru" aria-selected="true">ru</a>
@@ -58,6 +60,18 @@
 				    <div class="form-group">
 				        <textarea class="form-control rounded-0" id="editor" rows="3" placeholder="Информация о нас" name="about_us">{{(old('about_us'))?old('about_us'):config('configuration.about_us')}}</textarea>
 				    </div>
+
+				    <label>Изображение:</label>
+
+					<div class="input-group mb-4">
+					   <span class="input-group-btn">
+					     <a id="lfm3" data-input="thumbnail3" data-preview="holder3" class="border d-block">
+					 		<img src="{{asset((old('about_us_img'))?old('about_us_img'):config('configuration.about_us_img'))}}" width="100" height="100" id="holder3">
+					 		<!-- <img id="holder" style="margin-top:15px;max-height:100px;"> -->
+					     </a>
+					   </span>
+					   <input id="thumbnail3" class="form-control" type="hidden" value="{{(old('about_us_img')?old('about_us_img'):config('configuration.about_us_img'))}}" name="about_us_img">
+					 </div>
 
 				   	<label>Мета-тег Description (для поисковых систем):</label>
 				    <div class="form-group">
@@ -149,6 +163,7 @@
  $( document ).ready(function() {
  	$('#lfm').filemanager('image');
  	$('#lfm2').filemanager('image');
+ 	$('#lfm3').filemanager('image');
 	CKEDITOR.replace('editor');
 });
 </script>

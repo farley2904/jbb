@@ -60,8 +60,14 @@ class MenusController extends AdminController
 
         return Menu::make('forMenuPart', function ($m) use ($menu) {
             foreach ($menu as $item) {
+
+
                 if ($item->parent == 0) {
+                    if($item->trashed()){
+                    $m->add($item->title, $item->path)->id($item->id)->data('trashed','true');
+                    }else{
                     $m->add($item->title, $item->path)->id($item->id);
+                }
                 } else {
                     if ($m->find($item->parent)) {
                         $m->find($item->parent)->add($item->title, $item->path)->id($item->id);
@@ -100,9 +106,12 @@ class MenusController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(\Jbb\Menu $menu)
     {
-        //
+
+        // $menu->save();
+// 
+        // return redirect('admin/')->with(['status'=>'Вкл']);
     }
 
     /**
@@ -127,7 +136,12 @@ class MenusController extends AdminController
      */
     public function update(Request $request, $id)
     {
-        //
+        $menu = \Jbb\Menu::onlyTrashed()->find($id);
+
+        $menu->restore();
+        $result = ['status'=>'Ссылка Востановлена'];
+        return back()->with($result);
+
     }
 
     /**
@@ -137,8 +151,11 @@ class MenusController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(\Jbb\Menu $menu)
     {
-        //
+        if($menu->delete()) {
+            $result = ['status'=>'Ссылка удалена'];
+            return back()->with($result);
+        }
     }
 }

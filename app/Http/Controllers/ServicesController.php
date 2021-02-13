@@ -23,6 +23,8 @@ class ServicesController extends SiteController
         $this->keywords = 'Услуги и цены';
         $this->meta_desc = 'Услуги и цены';
 
+        $title = $this->title;
+
         $services = false;
 
         $services_cat = ServiceCategory::select(['id', 'name'])->get();
@@ -36,7 +38,7 @@ class ServicesController extends SiteController
         //     };
         // }
 
-        $content = view(env('THEME').'.services_content')->with('services_cat', $services_cat)->render();
+        $content = view(env('THEME').'.services_content')->with(['title' => $title, 'services_cat' => $services_cat])->render();
 
         $this->vars = array_add($this->vars, 'content', $content);
 

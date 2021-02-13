@@ -16,9 +16,7 @@
 <div class="col-sm-preffix-1 col-sm-5 col-md-4  wow fadeInRight">
 <div class="line-right">
 {{-- <h2>{{ trans('site.about') }}</h2> --}}
-<p class="wow fadeInUp" data-wow-delay="0.1s">Студия красоты и дизайна бровей Just Be Beautiful рада приветствовать Вас,our princesses! 
-Наша студия стремится к качественным услугам и исключительному обслуживанию клиентов в спокойной дружеской атмосфере.</p>
-<p class="wow fadeInUp" data-wow-delay="0.2s">Приходите и попробуйте! Убедитесь, что Вы находитесь в правильном месте. Не упустите свой шанс выглядеть лучше!</p>
+<p class="wow fadeInUp" data-wow-delay="0.1s">{!!config('configuration.about_us')!!}</p>
 <a href="{{ url('about_us') }}" class="link wow fadeInUp" data-wow-delay="0.3s">Узнать больше</a>
 </div>
 </div>

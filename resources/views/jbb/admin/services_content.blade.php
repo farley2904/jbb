@@ -1,8 +1,10 @@
 <h3 >Услуги</h3>
-
-{!! Html::link(route('admin.services.create'),'Добавить новую услугу',['class' => 'btn btn-success btn-lg pull-right btn-add']) !!}
-
-<table class="table table-striped table-hover table-responsive-sm">
+<div class="row">
+<div class="col">
+{!! Html::decode(link_to_route('admin.services.create', '<i class="fa fa-plus"></i>', array(), ['class' => 'btn btn-success pull-right btn-add'])) !!}
+</div>
+</div>
+<table class="table table-striped table-hover table-responsive-md">
 <thead>
 	
 	<th>id</th>
@@ -12,27 +14,27 @@
 
 </thead>
 @if($services)
-
-@foreach($services as $k=>$service)
 <tbody>
+@foreach($services as $k=>$service)
 <tr>
-	<td>{{ $service->id }}</td>
+	<th scope="row">{{ $service->id }}</th>
 	<td>{{ $service->name }}</td>
 	<td>{{ $service->serviceCategory->name }}</td>
 	<td>{{ $service->price }} грн.</td>
-	<td>	{!! Html::link(route('admin.services.edit',['services'=>$service->id]),'Изменить',['class'=>'btn btn-warning btn-block center-block']) !!}
+	<td>
+		<a href="{{route('admin.services.edit',['services'=>$service->id])}}" class="btn btn-warning" id="btn-link" role="button"><i class="fa fa-edit"></i></a>
 	</td>
 	<td>
 		{!! Form::open(['url' => route('admin.services.destroy',['services'=>$service->id]),'method'=>'POST']) !!}
 
 		{{ method_field('DELETE') }}
 
-		{!! Form::button('Удалить', ['class' => 'btn btn-danger btn-block center-block','type'=>'submit']) !!}
+		{!! Form::button('<i class="fa fa-remove"></i>', ['class' => 'btn btn-danger','type'=>'submit']) !!}
 
 		{!! Form::close() !!}
 	</td>
 </tr>
-</tbody>
 @endforeach
+</tbody>
 @endif
 </table>

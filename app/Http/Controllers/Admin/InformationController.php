@@ -4,7 +4,8 @@ namespace Jbb\Http\Controllers\Admin;
 
 use Gate;
 use Illuminate\Http\Request;
-use Jbb\Information;
+use Jbb\Setting;
+use Cache;
 
 class InformationController extends AdminController
 {
@@ -29,11 +30,15 @@ class InformationController extends AdminController
     {
         $this->title = 'Информация';
 
-        $information = Information::all();
+        $information = Setting::all();
 
-        dump($information);
+        foreach ($information as $setting) {
 
-        $this->content = view(env('THEME').'.admin.information_content')->with('title', $this->title)->render();
+            $settings[$setting->key] = $setting->value;
+        }
+         // dump($settings);
+
+        $this->content = view(env('THEME').'.admin.information_content')->with(['title'=>$this->title,'information'=>$information])->render();
 
         return $this->renderOutput();
     }
@@ -55,9 +60,8 @@ class InformationController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-
+    public function store(Request $request,Setting $info)
+    { 
         // dump($request->all());
         $data = $request->except('_token');
 
@@ -77,9 +81,27 @@ class InformationController extends AdminController
             $description = $request->input('description');
             // dd($request->header());
             // dd($request->server());
+        	// dump($data);
+
+
+        foreach ($data as $key =>$value){
+        	// if(isset($value)){
+        	// 	if($key === 'logo_img'){
+        	// 		$value = basename($value);  
+        	// 	}
+         //        if($key === 'header_bg'){
+         //            $value = basename($value);  
+         //        }
+                // }
+            if(!isset($value)){
+                $value = '';
+            }	
+        		$info->where('key',$key)->update(['value' => $value]);
         }
 
         $request->flash();
+
+        Cache::forget('settings');
 
         $this->title = 'Информация';
         $this->content = view(env('THEME').'.admin.information_content')->with(['title'=>$this->title, 'path'=>''])->render();

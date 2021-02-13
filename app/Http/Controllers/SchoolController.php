@@ -50,11 +50,11 @@ class SchoolController extends SiteController
     public function show($alias = false)
     {
 
-        // $this->title = $alias;
 
         $article = $this->a_rep->one($alias);
 
-        // dd($school);
+        
+        $this->title = $article->title;
 
         $content = view(env('THEME').'.article_content')->with('article', $article)->render();
 

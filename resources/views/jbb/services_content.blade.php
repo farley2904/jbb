@@ -1,25 +1,39 @@
 <section class="well-md text-center">
 	<div class="container">
-		<h1 class="section-head wow fadeInUp">Услуги и цены</h1>
+
+		<h2 class="section-head wow fadeInUp">{{$title}}</h2>
+
 		@if($services_cat)
-			@foreach($services_cat as $k=>$cat)
-				<h2 class="wow fadeInLeft">{{$cat->name}}</h2>
-				@if($cat->services)
-					@foreach($cat->services as $service)
-						<div class="row text-sm-left">
-							<div class="col-sm-10 wow fadeInUp">	
-								<h4>{{$service->name}}</h4>	
-							</div>
-							<div class="col-sm-5 col-md-2 wow fadeInRight">
-								<div class="line-right">
-									<p class="heading-4 offset-1">{{$service->price}} грн.</p>
-								</div>
-							</div>
-						</div>
-					@endforeach
-				@endif
-			@endforeach
+
+			<div class="row" >
+				@foreach($services_cat as $k=>$cat)
+					<h3 >{{$cat->name}}</h3>
+					<div class="service-table col-lg-preffix-1 wow fadeInUp">
+					<table>
+					  <thead>
+					    <tr>
+					      <th>Услуга</th>
+					      <th>Цена</th>
+					    </tr>
+					  </thead>
+						<tbody>
+
+						@if($cat->services)
+							@foreach($cat->services as $service)
+							    <tr>
+							      <td data-label="Услуга">{{$service->name}}</td>
+							      <td data-label="Цена">{{$service->price}} грн.</td>
+							    </tr>			
+							@endforeach
+						@endif
+						</tbody>
+		            </table>
+		        </div>
+				@endforeach
+			</div>
+
 		@endif
+
 	</div>	
 </section>
 

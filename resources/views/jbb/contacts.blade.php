@@ -6,7 +6,7 @@
 
 
 @section ('slider')
-	{!! $slider !!}
+	{{-- {!! $slider !!} --}}
 @endsection
 
 @section ('header')

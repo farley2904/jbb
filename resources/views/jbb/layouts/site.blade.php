@@ -4,13 +4,20 @@
 <title>{{ $title or config('app.name', 'Jbb') }}</title>
 <meta name="format-detection" content="telephone=no"/>
 <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0"/>
-<meta name="description" content="{{ $meta_desc or ''}}"/>
+<meta name="description" content="{{ (config('configuration.meta_description')) }}"/>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="canonical" href="{{ URL::current() }}"/>
 <link rel="shortcut icon" href="{{ asset(env('THEME')) }}/images/favicon.ico" type="image/x-icon">
 {{-- <!-- <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"> --> --}}
 <link rel="stylesheet" href="{{ asset(env('THEME')) }}/css/style.css" />
 <link rel="stylesheet" href="{{ asset(env('THEME')) }}/css/slider.css" />
 <script src="{{ asset(env('THEME')) }}/js/jquery.min.js"></script>
+
+<style>
+    .page-header:before {
+        background:url("{{asset(config('configuration.header_bg'))}}") no-repeat center/cover;
+    }
+</style>
 </head>
     <body>
         <div class="page">
@@ -64,6 +71,16 @@
             <script src="{{ asset(env('THEME')) }}/js/core.min.js"></script>
             <script src="{{ asset(env('THEME')) }}/js/script.js"></script>
             <script src="{{ asset(env('THEME')) }}/js/slider.js"></script>
+            <script type="text/javascript">
+             $(document).ready(function(){
+                $("#m").on("click", function (event) {
+                    event.preventDefault();
+                    var id  = $(this).attr('href'),
+                        top = $(id).offset().top;
+                    $('body,html').animate({scrollTop: top}, 3000);
+                });
+            });
+            </script>
 
     </body>
 </html>

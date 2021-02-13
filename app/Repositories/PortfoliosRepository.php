@@ -10,4 +10,9 @@ class PortfoliosRepository extends Repository
     {
         $this->model = $portfolios;
     }
+
+    public function addPortfolio($request)
+    {
+        
+    }
 }

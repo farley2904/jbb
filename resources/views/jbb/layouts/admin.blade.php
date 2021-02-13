@@ -10,7 +10,6 @@
 
     <title>{{ $title or config('app.name', 'JBB') }}</title>
 
-
     <link rel="shortcut icon" href="{{ asset(env('THEME')) }}/images/favicon.ico" type="image/x-icon">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -35,7 +34,7 @@
         ]) !!};
     </script>
 </head>
-<body class="grey lightern-3">
+<body class="grey lighten-3">
 	<header>
 		<nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
 			<div class="container-fluid">
@@ -115,7 +114,9 @@
 
 	<script src="{{ asset('js/bootstrap-filestyle.min.js') }}"></script>
 
-	<script type="text/javascript" src="/packages/barryvdh/elfinder/js/standalonepopup.min.js"></script>
+	<script src=" {{ asset('/vendor/laravel-filemanager/js/lfm.js') }}"></script>
+
+
 
 </body>
 </html>

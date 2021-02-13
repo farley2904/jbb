@@ -183,6 +183,8 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
 
+        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
+
         //image.intervention.com
         Intervention\Image\ImageServiceProvider::class,
         //Laravel-Translatable
@@ -190,8 +192,9 @@ return [
 
         //Invisible reCAPTCHA
         AlbertCht\InvisibleReCaptcha\InvisibleReCaptchaServiceProvider::class,
-        //elFinder filemanager
-        Barryvdh\Elfinder\ElfinderServiceProvider::class,
+
+        Jbb\Providers\SettingsServiceProvider::class,
+
 
     ],
 

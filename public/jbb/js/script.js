@@ -2,6 +2,13 @@ function include(scriptUrl) {
     document.write('<script src="' + scriptUrl + '"></script>');//async
 }
 
+// function include(src) {
+//     var s = document.createElement('script');
+
+//     s.src = src;
+//     document.body.appendChild(s);
+//   }
+
 function lazyInit(element, func) {
     var $win = jQuery(window),
         wh = $win.height();
@@ -127,9 +134,9 @@ function isIE() {
             var head = document.getElementsByTagName('head')[0],
                 insertBefore = head.insertBefore;
             head.insertBefore = function(newElement, referenceElement) {
-                if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') != -1 || newElement.innerHTML.indexOf('gm-style') != -1) {
-                    return;
-                }
+                // if (newElement.href && newElement.href.indexOf('//fonts.googleapis.com/css?family=Roboto') != -1 || newElement.innerHTML.indexOf('gm-style') != -1) {
+                //     return;
+                // }
                 insertBefore.call(head, newElement, referenceElement);
             };
             lazyInit(o, function() {

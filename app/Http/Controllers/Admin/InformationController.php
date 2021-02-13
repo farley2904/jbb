@@ -62,13 +62,25 @@ class InformationController extends AdminController
      */
     public function store(Request $request,Setting $info)
     { 
-
         // dump($request->all());
         $data = $request->except('_token');
 
         if (empty($data)) {
             dump('Нет данных');
         }
+
+        if ($request->has('logo_image')) {
+            $logo_image = $request->input('logo_image');
+        }
+
+        if ($request->has('name')) {
+            $name = $request->input('name');
+        }
+
+        if ($request->has('description')) {
+            $description = $request->input('description');
+            // dd($request->header());
+            // dd($request->server());
         	// dump($data);
 
 
@@ -85,8 +97,6 @@ class InformationController extends AdminController
                 $value = '';
             }	
         		$info->where('key',$key)->update(['value' => $value]);
-
-        	
         }
 
         $request->flash();

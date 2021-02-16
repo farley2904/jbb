@@ -31,7 +31,7 @@ class PortfolioController extends AdminController
     {   
 
 
-        $portfolios = $this->p_rep->get();
+        $portfolios = $this->p_rep->get('*',true);
 
         $filter = Filter::all();
 
